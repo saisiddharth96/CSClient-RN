@@ -1,15 +1,20 @@
 /**
  * @flow
  */
-import {Component} from 'react';
-import {View, Text} from 'react-native';
+'use strict';
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import CustomStore from './stores/custom-store';
+import RootContainer from './containers/root-container';
+
+const store = CustomStore();
 
 export default class CSClient extends Component {
-  static render() {
+  render() {
     return (
-      <View>
-        <Text>Homepage</Text>
-      </View>
+      <Provider store={store}>
+        <RootContainer />
+      </Provider>
     );
   }
 }

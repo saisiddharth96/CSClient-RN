@@ -1,0 +1,17 @@
+{
+  // Common.
+  "share": "Share",
+
+  // Home.
+  "comment": {
+    "one": "1 comment",
+    "other": "{{count}} comments",
+    "zero": "0 comment"
+  },
+
+  // Login.
+  "login_header_title": "Login",
+  "login_button_label": "Login",
+  "login_username_placeholder": "Username",
+  "login_password_placeholder": "Password"
+}

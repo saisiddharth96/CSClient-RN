@@ -1,0 +1,1 @@
+"D:\Projects\Android\SDK\tools\emulator.exe" -avd Galaxy_Nexus_API_23 -netdelay none -netspeed full

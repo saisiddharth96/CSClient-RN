@@ -1,0 +1,6 @@
+ext {
+    onesignal_app_id = 'APP_ID'
+    onesignal_app_id_debug = 'APP_ID_DEBUG'
+    onesignal_google_project_number = 'PJ_NUMBER'
+    google_server_key = 'SERVER_KEY'
+}
