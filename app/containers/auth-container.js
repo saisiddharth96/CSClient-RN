@@ -71,7 +71,7 @@ class AuthContainer extends Component {
             </Button>
           </Left>
           <Body>
-            <Title style={{ color: '#fff', backgroundColor: 'transparent' }}>
+            <Title>
               {I18n.t('login_header_title')}
             </Title>
           </Body>

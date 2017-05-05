@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import { View } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import {
   Body,
   Button,
@@ -37,17 +37,15 @@ const HomeContainer = props => {
 
   return (
     <Container>
-      <Header
-        style={{ backgroundColor: '#EF5350' }}
-        iosBarStyle={'light-content'}
-      >
+      <Header iosBarStyle={'light-content'}>
+        <StatusBar backgroundColor="#d32f2f" barStyle="light-content" />
         <Left>
           <Button title={''} transparent onPress={() => openDrawer()}>
-            <Icon style={{ color: '#fff' }} name="menu" />
+            <Icon name="menu" />
           </Button>
         </Left>
         <Body>
-          <Title style={{ color: '#fff', backgroundColor: 'transparent' }}>
+          <Title>
             Clip-sub
           </Title>
         </Body>
