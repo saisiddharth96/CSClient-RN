@@ -44,7 +44,7 @@ const ItemPostCard = props => {
   const {
     dispatch,
     title,
-    authorName,
+    author,
     image,
     excerpt,
     commentCount,
@@ -79,7 +79,7 @@ const ItemPostCard = props => {
             source={{ uri: 'https://unsplash.it/80/80?random' }}
           />
           <Text style={styles.authorName}>
-            {authorName}
+            {author.name}
           </Text>
         </View>
       </TouchableOpacity>
@@ -111,8 +111,6 @@ ItemPostCard.defaultProps = {
   commentCount: 0,
   slug: '',
   id: 0,
-  authorName: '',
-  authorId: 0,
   thumbnailImage: {},
 };
 
@@ -122,8 +120,6 @@ ItemPostCard.propTypes = {
   commentCount: PropTypes.number.isRequired,
   slug: PropTypes.string,
   id: PropTypes.number.isRequired,
-  authorName: PropTypes.string.isRequired,
-  authorId: PropTypes.number.isRequired,
   thumbnailImage: PropTypes.object.isRequired,
 };
 

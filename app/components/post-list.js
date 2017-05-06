@@ -47,16 +47,23 @@ export default class PostList extends Component {
     return (
       <ItemPostCard
         id={item.id || ''}
+        type={item.type}
+        slug={item.slug}
+        status={item.status}
         title={he.unescape(item.title)}
         excerpt={item.excerpt}
+        content={item.content}
+        categories={item.categories}
+        date={item.date}
+        modified={item.modified}
+        tags={item.tags}
         image={
           imageLink
             ? imageLink
             : 'https://clip-sub.com/wp-content/uploads/2017/04/59097934-600x300.jpg'
         }
         commentCount={item.comment_count}
-        authorId={item.author.id || ''}
-        authorName={item.author.name}
+        author={item.author}
         url={item.url}
         {...this.props}
       />

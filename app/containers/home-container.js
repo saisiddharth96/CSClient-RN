@@ -15,6 +15,7 @@ import {
 } from 'native-base';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
+import OneSignal from 'react-native-onesignal';
 import PostList from '../components/post-list';
 import CategoryList from '../components/category-list';
 import { switchHomeTab } from '../actions/actions-navigation';
@@ -49,7 +50,11 @@ const HomeContainer = props => {
             Clip-sub
           </Title>
         </Body>
-        <Right />
+        <Right>
+          <Button transparent onPress={() => OneSignal.setSubscription(true)}>
+            <Icon name="notifications" />
+          </Button>
+        </Right>
       </Header>
       {renderHomeContent()}
       <Footer>
