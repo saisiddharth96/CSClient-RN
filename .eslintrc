@@ -112,6 +112,7 @@
       }
     ],
     "react-native/no-unused-styles": 2,
-    "react-native/split-platform-components": 2
+    "react-native/split-platform-components": 2,
+    "jsx-a11y/img-has-alt": "off",
   }
 }

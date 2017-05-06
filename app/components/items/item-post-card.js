@@ -3,7 +3,7 @@
  */
 'use strict';
 import React, { PropTypes } from 'react';
-import { Image, TouchableOpacity, Platform } from 'react-native';
+import { Image, TouchableOpacity, Platform, Share } from 'react-native';
 import {
   Body,
   Button,
@@ -41,7 +41,29 @@ import { navigate } from '../../actions/actions-navigation';
  */
 
 const ItemPostCard = props => {
-  const { dispatch, title, authorName, image, excerpt, commentCount } = props;
+  const {
+    dispatch,
+    title,
+    authorName,
+    image,
+    excerpt,
+    commentCount,
+    url,
+  } = props;
+  const sharePost = () => {
+    const content = {
+      message: url,
+      title: 'Clip-sub share',
+      url: url,
+    };
+
+    const options = {
+      tintColor: '#fff',
+      dialogTitle: 'Doko;',
+    };
+
+    Share.share(content, options);
+  };
 
   return (
     <Card>
@@ -74,7 +96,7 @@ const ItemPostCard = props => {
           <Icon name="chatbubbles" />
           <Text>{I18n.t('comment', { count: commentCount })}</Text>
         </Button>
-        <Button transparent>
+        <Button transparent onPress={() => sharePost()}>
           <Icon name="md-share" />
           <Text>{I18n.t('share')}</Text>
         </Button>

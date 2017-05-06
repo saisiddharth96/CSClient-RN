@@ -57,6 +57,7 @@ export default class PostList extends Component {
         commentCount={item.comment_count}
         authorId={item.author.id || ''}
         authorName={item.author.name}
+        url={item.url}
         {...this.props}
       />
     );

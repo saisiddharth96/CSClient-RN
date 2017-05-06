@@ -1,3 +1,7 @@
+/**
+ * @flow
+ */
+'use strict';
 import React, { Component, PropTypes } from 'react';
 import {
   Body,
@@ -11,6 +15,7 @@ import {
   Title,
 } from 'native-base';
 import {
+  BackHandler,
   Platform,
   StatusBar,
   Image,
@@ -20,6 +25,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
+import FlipCard from 'react-native-flip-card';
 import LoginForm from '../components/authentication/login-form';
 import I18n from '../localizations/I18n';
 
@@ -35,10 +41,20 @@ class AuthContainer extends Component {
     headerLeft: <Button title={''} transparent><Icon name="menu" /></Button>,
   };
 
-  constructor(props) {
-    super(props);
-    //<Image style={{flex: 1}} source={{uri: 'https://cdn.awwni.me/w28n.jpg'}}>
-    //<View style={{position: 'absolute', width: 2000, height: 2000, backgroundColor: '#000', opacity: 0.6}}/>
+  componentDidMount() {
+    const { goBack } = this.props;
+    BackHandler.addEventListener('hardwareBackPress', () => goBack());
+  }
+
+  componentWillUnmount() {
+    const { goBack } = this.props;
+    BackHandler.removeEventListener('hardwareBackPress', () => goBack());
+  }
+
+  navigateBack() {
+    const { goBack } = this.props;
+    goBack();
+    return true;
   }
 
   render() {
@@ -78,7 +94,15 @@ class AuthContainer extends Component {
           <Right />
         </Header>
         <Content>
-          <LoginForm {...this.props} />
+          <FlipCard
+            friction={14}
+            clickable
+            style={{ borderWidth: 0 }}
+            flipHorizontal
+            flipVertical={false}
+          >
+            <LoginForm {...this.props} />
+          </FlipCard>
           <Text
             style={{
               color: '#fff',
@@ -111,6 +135,7 @@ const mapDispatchToProps = dispatch => {
     goBack: () => {
       Keyboard.dismiss();
       dispatch(NavigationActions.back());
+      return true;
     },
     dispatch,
   };

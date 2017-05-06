@@ -6,6 +6,7 @@ import { StackNavigator } from 'react-navigation';
 import AuthScreen from '../containers/auth-container';
 import PreferencesScreen from '../containers/preferences-container';
 import ProfileScreen from '../containers/profile-container';
+import ContentScreen from '../containers/content-container';
 import HomeDrawerNavigator from './drawer-navigator';
 
 const routeConfig = {
@@ -13,6 +14,7 @@ const routeConfig = {
   HomeDrawer: { screen: HomeDrawerNavigator },
   Preferences: { screen: PreferencesScreen },
   Profile: { screen: ProfileScreen },
+  Content: { screen: ContentScreen },
 };
 
 const stackNavigatorConfig = {
@@ -21,6 +23,7 @@ const stackNavigatorConfig = {
   headerMode: 'none',
   navigationOptions: {
     headerVisible: false,
+    gesturesEnabled: false,
   },
 };
 
