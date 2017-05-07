@@ -43,15 +43,7 @@ import { navigate } from '../../actions/actions-navigation';
  */
 
 const ItemPostCard = props => {
-  const {
-    id,
-    title,
-    author,
-    content,
-    excerpt,
-    comment_count,
-    url,
-  } = props.post;
+  const { title, author, content, excerpt, comment_count, url } = props.post;
   const { dispatch } = props;
   const sharePost = () => {
     const content = {
@@ -75,7 +67,7 @@ const ItemPostCard = props => {
     <Card>
       <CardItem header>
         <Left>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title}>{he.unescape(title)}</Text>
         </Left>
       </CardItem>
       <TouchableOpacity>

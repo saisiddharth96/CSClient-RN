@@ -3,11 +3,17 @@
  */
 'use strict';
 import React, { Component, PropTypes } from 'react';
-import { Keyboard, StatusBar, BackHandler, WebView } from 'react-native';
+import {
+  Keyboard,
+  View,
+  StatusBar,
+  BackHandler,
+  Image,
+  FlatList,
+} from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import HTMLView from 'react-native-htmlview';
-import parse5 from 'parse5';
 import HTMLParser from 'fast-html-parser';
 import he from 'he';
 import {
@@ -20,6 +26,7 @@ import {
   Text,
 } from 'native-base';
 import ItemComment from '../components/items/item-comment';
+import CommentBox from '../components/comment-box';
 
 class ContentContainer extends Component {
   static propTypes = {
@@ -36,12 +43,18 @@ class ContentContainer extends Component {
     BackHandler.removeEventListener('hardwareBackPress', () => goBack());
   }
 
+  renderListItem = item => <ItemComment {...item} />;
+
   render() {
     const { goBack } = this.props;
-    const params = this.props.navigation.state.params;
-    const { content } = this.props.navigation.state.params;
-    const node = parse5.parse(content);
-    console.log('node', node);
+    let { content, excerpt, comments } = this.props.navigation.state.params;
+
+    const itemNode = HTMLParser.parse(he.unescape(content));
+    const imageLink = itemNode.querySelector('img').attributes['data-lazy-src'];
+
+    let prefix =
+      '<style>img{display: inline;height: auto;max-width: 100%;} p {font-family:"Tangerine", "Sans-serif",  "Serif" font-size: 48px} </style>';
+    content = prefix.concat(content);
 
     return (
       <Container>
@@ -62,8 +75,29 @@ class ContentContainer extends Component {
         </Header>
         <StatusBar backgroundColor={'#fff'} />
         <Content style={{ backgroundColor: '#fff' }}>
-          <WebView javaScriptEnabled={false} scalesPageToFit={false} style={{ height: 300 }} source={{ html: he.unescape(content) }} />
-          <ItemComment />
+          <View style={{ marginVertical: 26 }}>
+            <Image
+              source={{ uri: imageLink }}
+              style={{
+                flex: 1,
+                width: undefined,
+                height: 160,
+                resizeMode: 'contain',
+              }}
+            />
+          </View>
+          <HTMLView
+            style={{ paddingHorizontal: 12, marginBottom: 10 }}
+            value={excerpt.trim()}
+          />
+
+          <CommentBox />
+
+          <FlatList
+            data={comments}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) => this.renderListItem(item)}
+          />
         </Content>
       </Container>
     );

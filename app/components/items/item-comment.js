@@ -6,26 +6,15 @@ import HTMLView from 'react-native-htmlview';
 import moment from 'moment';
 
 const ItemComment = props => {
+  let { name, parent, date, content } = props;
+  const displayDate = moment(date).startOf('day').fromNow();
+  content = content.replace(/(\r\n|\n|\r)/gm, '').trim();
+
   return (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-      }}
-    >
+    <View style={styles.container}>
       <Image
         source={{ uri: 'https://lorempixel.com/100/100/' }}
-        style={{
-          width: 60,
-          height: 60,
-          borderRadius: 30,
-          borderWidth: 0.7,
-          borderColor: '#ff2a63',
-          marginRight: 4,
-          marginLeft: 6,
-          padding: 10,
-        }}
+        style={styles.avatar}
       />
       <View
         style={{
@@ -51,17 +40,18 @@ const ItemComment = props => {
             marginTop: 4,
           }}
         >
-          Comment Author
+          {name}
         </Text>
-        <Text style={{ marginLeft: 8, fontSize: 8, color: '#a0a0a0' }}>
-          Date
+        <Text style={{ marginLeft: 8, fontSize: 10, color: '#a0a0a0' }}>
+          {displayDate}
         </Text>
         <HTMLView
           style={{
             marginHorizontal: 6,
             marginVertical: 4,
           }}
-          value={'ddddd'}
+          value={content}
+          stylesheet={styles.commentCSS}
         />
         <View
           style={{
@@ -98,3 +88,27 @@ const ItemComment = props => {
 };
 
 export default ItemComment;
+
+const styles = {
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  avatar: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    borderWidth: 0.7,
+    borderColor: '#ff2a63',
+    marginRight: 4,
+    marginLeft: 6,
+    padding: 10,
+  },
+  commentCSS: {
+    p: {
+      fontWeight: '100',
+      color: '#492d34',
+    },
+  },
+};

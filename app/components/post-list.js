@@ -41,28 +41,7 @@ export default class PostList extends Component {
   };
 
   renderListItem = item => <ItemPostCard post={item} {...this.props} />;
-
-  renderGridItem = item => {
-    const itemNode = HTMLParser.parse(he.unescape(item.content));
-    const imageLink = itemNode.querySelector('img').attributes['data-lazy-src'];
-
-    return (
-      <ItemPostGrid
-        id={item.id || ''}
-        title={he.unescape(item.title)}
-        excerpt={item.excerpt}
-        image={
-          imageLink
-            ? imageLink
-            : 'https://clip-sub.com/wp-content/uploads/2017/04/59097934-600x300.jpg'
-        }
-        commentCount={item.comment_count}
-        authorId={item.author.id || ''}
-        authorName={item.author.name}
-        {...this.props}
-      />
-    );
-  };
+  renderGridItem = item => <ItemPostGrid post={item} {...this.props} />;
 
   renderPostMenuBar = () => <PostMenuBar {...this.props} />;
 
