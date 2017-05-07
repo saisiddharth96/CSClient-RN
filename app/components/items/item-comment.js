@@ -40,6 +40,7 @@ const ItemComment = props => {
           shadowColor: '#EF5350',
           shadowOpacity: 0.2,
           overflow: 'visible',
+          elevation: 3,
         }}
       >
         <Text

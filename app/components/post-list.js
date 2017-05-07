@@ -40,35 +40,7 @@ export default class PostList extends Component {
     if (status !== 'loading') dispatch(getPosts(currentPage + 1));
   };
 
-  renderListItem = item => {
-    const itemNode = HTMLParser.parse(he.unescape(item.content));
-    const imageLink = itemNode.querySelector('img').attributes['data-lazy-src'];
-
-    return (
-      <ItemPostCard
-        id={item.id || ''}
-        type={item.type}
-        slug={item.slug}
-        status={item.status}
-        title={he.unescape(item.title)}
-        excerpt={item.excerpt}
-        content={item.content}
-        categories={item.categories}
-        date={item.date}
-        modified={item.modified}
-        tags={item.tags}
-        image={
-          imageLink
-            ? imageLink
-            : 'https://clip-sub.com/wp-content/uploads/2017/04/59097934-600x300.jpg'
-        }
-        commentCount={item.comment_count}
-        author={item.author}
-        url={item.url}
-        {...this.props}
-      />
-    );
-  };
+  renderListItem = item => <ItemPostCard post={item} {...this.props} />;
 
   renderGridItem = item => {
     const itemNode = HTMLParser.parse(he.unescape(item.content));

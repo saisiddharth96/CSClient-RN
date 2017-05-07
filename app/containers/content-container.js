@@ -3,9 +3,13 @@
  */
 'use strict';
 import React, { Component, PropTypes } from 'react';
-import { Keyboard } from 'react-native';
+import { Keyboard, StatusBar, BackHandler, WebView } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
+import HTMLView from 'react-native-htmlview';
+import parse5 from 'parse5';
+import HTMLParser from 'fast-html-parser';
+import he from 'he';
 import {
   Container,
   Content,
@@ -22,7 +26,23 @@ class ContentContainer extends Component {
     dispatch: PropTypes.func,
   };
 
+  componentDidMount() {
+    const { goBack } = this.props;
+    BackHandler.addEventListener('hardwareBackPress', () => goBack());
+  }
+
+  componentWillUnmount() {
+    const { goBack } = this.props;
+    BackHandler.removeEventListener('hardwareBackPress', () => goBack());
+  }
+
   render() {
+    const { goBack } = this.props;
+    const params = this.props.navigation.state.params;
+    const { content } = this.props.navigation.state.params;
+    const node = parse5.parse(content);
+    console.log('node', node);
+
     return (
       <Container>
         <Header
@@ -34,13 +54,15 @@ class ContentContainer extends Component {
           }}
         >
           <Left>
-            <Button transparent>
+            <Button transparent onPress={() => goBack()}>
               <Icon style={{ color: '#EF5350' }} name="arrow-back" />
               <Text style={{ color: '#EF5350', marginLeft: 12 }}>Back</Text>
             </Button>
           </Left>
         </Header>
+        <StatusBar backgroundColor={'#fff'} />
         <Content style={{ backgroundColor: '#fff' }}>
+          <WebView javaScriptEnabled={false} scalesPageToFit={false} style={{ height: 300 }} source={{ html: he.unescape(content) }} />
           <ItemComment />
         </Content>
       </Container>
@@ -60,7 +82,7 @@ const mapDispatchToProps = dispatch => {
   return {
     goBack: () => {
       Keyboard.dismiss();
-      dispatch(NavigationActions.back());
+      return dispatch(NavigationActions.back());
     },
     dispatch,
   };

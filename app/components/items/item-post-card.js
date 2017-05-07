@@ -16,6 +16,8 @@ import {
   View,
 } from 'native-base';
 import HTMLView from 'react-native-htmlview';
+import HTMLParser from 'fast-html-parser';
+import he from 'he';
 import I18n from '../../localizations/I18n';
 import { navigate } from '../../actions/actions-navigation';
 
@@ -42,14 +44,15 @@ import { navigate } from '../../actions/actions-navigation';
 
 const ItemPostCard = props => {
   const {
-    dispatch,
+    id,
     title,
     author,
-    image,
+    content,
     excerpt,
-    commentCount,
+    comment_count,
     url,
-  } = props;
+  } = props.post;
+  const { dispatch } = props;
   const sharePost = () => {
     const content = {
       message: url,
@@ -64,6 +67,9 @@ const ItemPostCard = props => {
 
     Share.share(content, options);
   };
+
+  const itemNode = HTMLParser.parse(he.unescape(content));
+  const imageLink = itemNode.querySelector('img').attributes['data-lazy-src'];
 
   return (
     <Card>
@@ -85,16 +91,19 @@ const ItemPostCard = props => {
       </TouchableOpacity>
       <CardItem cardBody>
         <Body>
-          <Image source={{ uri: image }} style={styles.thumbnailImage} />
+          <Image source={{ uri: imageLink }} style={styles.thumbnailImage} />
         </Body>
       </CardItem>
       <CardItem>
         <HTMLView value={excerpt.trim()} />
       </CardItem>
       <CardItem style={styles.cardBottom}>
-        <Button transparent onPress={() => dispatch(navigate('Profile'))}>
+        <Button
+          transparent
+          onPress={() => dispatch(navigate('Content', props.post))}
+        >
           <Icon name="chatbubbles" />
-          <Text>{I18n.t('comment', { count: commentCount })}</Text>
+          <Text>{I18n.t('comment', { count: comment_count })}</Text>
         </Button>
         <Button transparent onPress={() => sharePost()}>
           <Icon name="md-share" />

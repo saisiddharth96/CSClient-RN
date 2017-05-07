@@ -167,8 +167,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   goBack: () => {
-    dispatch(NavigationActions.back());
-    return true;
+    return dispatch(NavigationActions.back());
   },
   dispatch,
 });
