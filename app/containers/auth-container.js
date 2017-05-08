@@ -26,6 +26,7 @@ import {
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import FlipCard from 'react-native-flip-card';
+import ShakeEvent from 'react-native-shake-event';
 import LoginForm from '../components/authentication/login-form';
 import RegisterForm from '../components/authentication/register-form';
 import I18n from '../localizations/I18n';
@@ -42,14 +43,24 @@ class AuthContainer extends Component {
     headerLeft: <Button title={''} transparent><Icon name="menu" /></Button>,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isFlipped: false,
+    };
+  }
+
   componentDidMount() {
     const { goBack } = this.props;
     BackHandler.addEventListener('hardwareBackPress', () => goBack());
+    ShakeEvent.addEventListener('shake', () => {
+      this.setState({ isFlipped: !this.state.isFlipped });
+    });
   }
 
   componentWillUnmount() {
-    const { goBack } = this.props;
-    BackHandler.removeEventListener('hardwareBackPress', () => goBack());
+    BackHandler.removeEventListener('hardwareBackPress');
+    ShakeEvent.removeEventListener('shake');
   }
 
   navigateBack() {
@@ -96,6 +107,7 @@ class AuthContainer extends Component {
         </Header>
         <Content>
           <FlipCard
+            flip={this.state.isFlipped}
             friction={14}
             clickable
             style={{ borderWidth: 0 }}
@@ -105,16 +117,6 @@ class AuthContainer extends Component {
             <LoginForm {...this.props} />
             <RegisterForm {...this.props} />
           </FlipCard>
-          <Text
-            style={{
-              color: '#fff',
-              fontSize: 12,
-              textAlign: 'center',
-              marginVertical: 16,
-            }}
-          >
-            This is the same login account you use on the website
-          </Text>
         </Content>
       </Container>
     );

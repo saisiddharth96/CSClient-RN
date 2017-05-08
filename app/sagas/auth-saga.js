@@ -8,6 +8,7 @@ import { getNonce } from "../actions/actions-core";
 import { setLoading } from "../actions/actions-misc";
 import API, { Controllers, Methods, DataStatus } from "../services/API";
 import DataService from "../services/data-service";
+
 const api = API.create();
 
 export function* login(action) {
@@ -19,6 +20,8 @@ export function* login(action) {
       DataService.storeUserData(result.data).done();
       yield put(setLoading(false));
       console.log('END');
+    } else {
+      console.log(result);
     }
   } catch (error) {
     console.log(error);

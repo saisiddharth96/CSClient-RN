@@ -2,12 +2,14 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { Button, Icon } from 'native-base';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
+import SpinKit from 'react-native-spinkit';
 import { requestLogin } from '../../actions/actions-user';
 import I18n from '../../localizations/I18n';
 
 const onSubmit = (values, dispatch) => {
   const { username, password } = values;
+  console.log(values);
   dispatch(requestLogin(username, password));
 };
 
@@ -56,6 +58,13 @@ class LoginForm extends Component {
 
   render() {
     const { handleSubmit, submitting } = this.props;
+    const loginLabel = (
+      <View>
+        <Icon active name="ios-person" style={{ color: '#fff' }} />
+        <Text style={{ color: '#fff' }}>{I18n.t('login_button_label')}</Text>
+      </View>
+    );
+
     return (
       <View style={[this.props.style, styles.formContainer]}>
         <Field name={'username'} component={usernameField} />
@@ -70,9 +79,18 @@ class LoginForm extends Component {
           onPress={handleSubmit(onSubmit)}
           submitting={submitting}
         >
-          <Icon active name="ios-person" style={{ color: '#fff' }} />
-          <Text style={{ color: '#fff' }}>{I18n.t('login_button_label')}</Text>
+          <SpinKit type="Wave" size={26} color={'#ffffff'} />
         </Button>
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 12,
+              textAlign: 'center',
+              marginVertical: 16,
+            }}
+          >
+            Wanna register? Shake the device or tap here
+          </Text>
       </View>
     );
   }
