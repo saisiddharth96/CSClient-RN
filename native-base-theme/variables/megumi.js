@@ -213,10 +213,10 @@ export default {
 
 
     // List
-  listBorderColor: '#c9c9c9',
-  listDividerBg: '#f4f4f4',
-  listItemHeight: 45,
-  listBtnUnderlayColor: '#DDD',
+  listBorderColor: '#fff', // #c9c9c9
+  listDividerBg: '#f4f4f4', // #f4f4f4
+  listItemHeight: 100,
+  listBtnUnderlayColor: '#ffe8ed',
 
     // Card
   cardBorderColor: '#ccc',
@@ -295,7 +295,7 @@ export default {
   inputGroupRoundedBorderRadius: 30,
 
   /**
-   * Screen-specific variables:
+   * Screen-specific variables. Used to theming custom components.
    */
   
 };

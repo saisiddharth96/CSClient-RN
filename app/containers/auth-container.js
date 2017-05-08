@@ -27,6 +27,7 @@ import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import FlipCard from 'react-native-flip-card';
 import LoginForm from '../components/authentication/login-form';
+import RegisterForm from '../components/authentication/register-form';
 import I18n from '../localizations/I18n';
 
 class AuthContainer extends Component {
@@ -102,6 +103,7 @@ class AuthContainer extends Component {
             flipVertical={false}
           >
             <LoginForm {...this.props} />
+            <RegisterForm {...this.props} />
           </FlipCard>
           <Text
             style={{

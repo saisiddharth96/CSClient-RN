@@ -54,10 +54,6 @@ class LoginForm extends Component {
     isLoading: false,
   };
 
-  componentWillUpdate(nextProps) {
-    console.log(nextProps);
-  }
-
   render() {
     const { handleSubmit, submitting } = this.props;
     return (

@@ -18,7 +18,7 @@ const routeConfig = {
 };
 
 const stackNavigatorConfig = {
-  initialRouteName: 'HomeDrawer',
+  initialRouteName: 'Auth',
   mode: 'card',
   headerMode: 'none',
   navigationOptions: {

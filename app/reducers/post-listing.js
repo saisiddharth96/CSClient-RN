@@ -10,11 +10,6 @@ const INITIAL_STATE = {
 
 export const posts = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case Types.GET_POSTS:
-      return {
-        ...state,
-        status: 'loading',
-      };
     case Types.RECEIVE_RECENT_POSTS:
       return {
         ...state,

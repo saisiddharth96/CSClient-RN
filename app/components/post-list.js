@@ -79,9 +79,7 @@ export default class PostList extends Component {
   }
 
   render() {
-    console.log('sss', this.props.status);
     const { status, postItems } = this.props;
-    
     return (
       <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#fff' }}>
         {this.renderPostMenuBar()}
