@@ -68,7 +68,7 @@ const CustomDrawerContent = props => {
 
 const drawerStyle = {
   drawerMenuContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: '#fff9f9',
     flex: 1,
   },
   drawerHeader: {

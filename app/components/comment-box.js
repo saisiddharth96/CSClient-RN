@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import { Icon, Button } from 'native-base';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, DrawerLayoutAndroid } from 'react-native';
 
 const CommentBox = props => {
   return (

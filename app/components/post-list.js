@@ -3,10 +3,8 @@
  */
 'use strict';
 import React, { Component, PropTypes } from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, Text } from 'react-native';
 import { Spinner } from 'native-base';
-import HTMLParser from 'fast-html-parser';
-import he from 'he';
 import { getPosts, clearPosts } from '../actions/actions-core';
 import { PostMenuBar } from './post-menu-bar';
 import { ItemPostCard } from './items/item-post-card';
@@ -81,8 +79,9 @@ export default class PostList extends Component {
   }
 
   render() {
+    console.log('sss', this.props.status);
     const { status, postItems } = this.props;
-
+    
     return (
       <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#fff' }}>
         {this.renderPostMenuBar()}

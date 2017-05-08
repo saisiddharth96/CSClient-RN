@@ -293,4 +293,9 @@ export default {
 
     // New Variable
   inputGroupRoundedBorderRadius: 30,
+
+  /**
+   * Screen-specific variables:
+   */
+  
 };
