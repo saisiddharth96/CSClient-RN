@@ -29,6 +29,7 @@ import ShakeEvent from 'react-native-shake-event';
 import LoginForm from '../components/authentication/login-form';
 import RegisterForm from '../components/authentication/register-form';
 import I18n from '../localizations/I18n';
+import { requestLogin } from '../actions/actions-user';
 
 class AuthContainer extends Component {
   static propTypes = {
@@ -69,8 +70,7 @@ class AuthContainer extends Component {
   }
 
   render() {
-    const { goBack, form } = this.props;
-    console.log(form);
+    const { goBack, attemptLogin } = this.props;
 
     return (
       <Container style={styles.container}>
@@ -114,7 +114,10 @@ class AuthContainer extends Component {
             flipHorizontal
             flipVertical={false}
           >
-            <LoginForm onSubmit={values => console.log(values)} />
+            <LoginForm
+              onSubmit={values =>
+                attemptLogin(values.username, values.password)}
+            />
             <RegisterForm />
           </FlipCard>
         </Content>
@@ -127,11 +130,10 @@ const mapStateToProps = state => {
   // Make sure to not pass "form" prop to the component which override the original one.
   // Info: https://github.com/erikras/redux-form/issues/827
   // TL;DR: Don't pass {...state}, only use what you want
-  const { nav, common, form } = state;
+  const { nav, common } = state;
   return {
     nav,
     common,
-    form,
   };
 };
 
@@ -142,7 +144,9 @@ const mapDispatchToProps = dispatch => {
       dispatch(NavigationActions.back());
       return true;
     },
-    dispatch,
+    attemptLogin: (username, password) => {
+      dispatch(requestLogin(username, password));
+    },
   };
 };
 

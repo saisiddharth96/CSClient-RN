@@ -2,13 +2,12 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { Button, Icon } from 'native-base';
-import { Field, reduxForm, stopSubmit } from 'redux-form';
+import { Field, reduxForm, stopSubmit, submit } from 'redux-form';
 //import { createFormAction } from 'redux-form-saga';
 import SpinKit from 'react-native-spinkit';
 import { requestLogin } from '../../actions/actions-user';
 import I18n from '../../localizations/I18n';
 
-const typePrefix = 'login/form';
 //const formAction = createFormAction(typePrefix);
 
 const onSubmit = (values, dispatch) => {
@@ -18,8 +17,15 @@ const onSubmit = (values, dispatch) => {
 };
 
 const usernameField = ({ input, placeholder, meta, ...inputProps }) => {
+  const { invalid, touched } = meta;
   return (
-    <View style={styles.inputWrapper}>
+    <View
+      style={[
+        styles.inputWrapper,
+        invalid && touched ? styles.inputWrapperError : null,
+      ]}
+    >
+      <Icon name="person" style={styles.icon} />
       <TextInput
         {...inputProps}
         name={'username'}
@@ -28,17 +34,24 @@ const usernameField = ({ input, placeholder, meta, ...inputProps }) => {
         onBlur={input.onBlur}
         selectionColor={'#ffefef'}
         placeholder={I18n.t('login_username_placeholder')}
-        placeholderTextColor={'#FFF'}
+        placeholderTextColor={[styles.placeholderTextColor]}
         underlineColorAndroid={'transparent'}
-        style={styles.inputError}
+        style={styles.input}
       />
     </View>
   );
 };
 
 const passwordField = ({ input, placeholder, meta, ...inputProps }) => {
+  const { invalid, touched } = meta;
   return (
-    <View style={styles.inputWrapper}>
+    <View
+      style={[
+        styles.inputWrapper,
+        invalid && touched ? styles.inputWrapperError : null,
+      ]}
+    >
+      <Icon name="lock" style={styles.icon} />
       <TextInput
         {...inputProps}
         name={'password'}
@@ -47,12 +60,23 @@ const passwordField = ({ input, placeholder, meta, ...inputProps }) => {
         onBlur={input.onBlur}
         secureTextEntry
         placeholder={I18n.t('login_password_placeholder')}
-        placeholderTextColor={'#FFF'}
+        placeholderTextColor={[styles.placeholderTextColor]}
         underlineColorAndroid={'transparent'}
         style={styles.input}
       />
     </View>
   );
+};
+
+const validate = values => {
+  const errors = {};
+  if (!values.username) {
+    errors.username = 'Required';
+  }
+  if (!values.password) {
+    errors.password = 'Required';
+  }
+  return errors;
 };
 
 class LoginForm extends Component {
@@ -63,9 +87,11 @@ class LoginForm extends Component {
   render() {
     const { handleSubmit, submitting } = this.props;
     const loginLabel = (
-      <View>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <Icon active name="ios-person" style={{ color: '#fff' }} />
-        <Text style={{ color: '#fff' }}>{I18n.t('login_button_label')}</Text>
+        <Text style={{ color: '#fff' }}>
+          {I18n.t('login_button_label')}
+        </Text>
       </View>
     );
 
@@ -81,9 +107,10 @@ class LoginForm extends Component {
           light
           title={''}
           onPress={handleSubmit}
-          submitting={submitting}
+          disabled={submitting}
         >
-          <SpinKit type="Wave" size={26} color={'#ffffff'} />
+          {loginLabel}
+          {/*<SpinKit type="Wave" size={26} color={'#ffffff'} />*/}
         </Button>
         <Text
           style={{
@@ -100,36 +127,47 @@ class LoginForm extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = {
   formContainer: {
     borderRadius: 10,
-    borderWidth: 0.5,
+    borderWidth: 0,
     borderColor: '#fff',
-    paddingTop: 32,
+    paddingTop: 26,
     paddingBottom: 18,
-    marginHorizontal: 40,
+    marginHorizontal: 26,
     marginTop: 50,
     padding: 12,
     alignSelf: 'stretch',
   },
   inputWrapper: {
-    opacity: 0.6,
-    marginBottom: 26,
+    alignItems: 'center',
+    flexWrap: 'nowrap',
+    flexDirection: 'row',
+    marginBottom: 12,
+    paddingHorizontal: 12,
+    borderRadius: 21,
+    borderWidth: 0.6,
+    borderColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: 'rgba(0,0,0,0.3)',
+  },
+  inputWrapperError: {
+    borderColor: '#EF5350',
   },
   input: {
-    height: 40,
-    color: '#fff',
+    height: 42,
+    flexGrow: 3,
+    color: '#dbc5e0',
+    fontSize: 14,
+    marginLeft: 8,
     alignSelf: 'stretch',
-    borderBottomWidth: 0.6,
-    borderBottomColor: '#eee',
+    borderBottomWidth: 0,
+    borderBottomColor: '#eee', // error: #ff4e4e
   },
-  inputError: {
-    height: 40,
-    color: '#fff',
-    alignSelf: 'stretch',
-    borderBottomWidth: 0.6,
-    borderBottomColor: '#ff4e4e',
+  icon: {
+    fontSize: 20,
+    color: '#f2c9f9',
   },
-});
+  placeholderTextColor: 'rgba(255, 239, 239, 0.4)',
+};
 
-export default reduxForm({ form: 'login' })(LoginForm);
+export default reduxForm({ form: 'login', validate })(LoginForm);
