@@ -29,7 +29,7 @@ const Methods = {
   },
 };
 
-const create = (baseURL = 'https://clip-sub.com/api/') => {
+const create = (baseURL = 'https://doko.aniviet.com/blog/api/') => {
   const api = apisauce.create({
     baseURL,
     headers: {
@@ -37,7 +37,7 @@ const create = (baseURL = 'https://clip-sub.com/api/') => {
       Accept: 'application/json; charset=UTF-8',
       'Cache-Control': 'no-cache',
     },
-    timeout: 10000,
+    timeout: 5000,
   });
 
   if (__DEV__ && console.tron) {

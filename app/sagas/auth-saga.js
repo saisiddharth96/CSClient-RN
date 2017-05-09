@@ -19,7 +19,7 @@ export function* login(action) {
     if (result.data.status === DataStatus.OK) {
       DataService.storeUserData(result.data).done();
       yield put(setLoading(false));
-      console.log('END');
+      console.log(result.data);
     } else {
       console.log(result);
     }

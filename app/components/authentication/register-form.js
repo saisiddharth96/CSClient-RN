@@ -1,7 +1,7 @@
 'use strict';
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
-import { Button, Icon } from 'native-base';
+import { connectStyle, Button, Icon } from 'native-base';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { requestLogin } from '../../actions/actions-user';
 import I18n from '../../localizations/I18n';
@@ -60,8 +60,6 @@ const passwordField = ({ input, meta, ...inputProps }) => {
 };
 
 const emailField = ({ input, type, meta, ...inputProps }) => {
-  console.log(meta, inputProps);
-  console.log('sss', type);
   return (
     <View style={styles.inputWrapper}>
       <Icon name="mail" style={styles.icon} />
@@ -107,8 +105,7 @@ class RegisterForm extends Component {
   };
 
   render() {
-    const { handleSubmit, submitting, pristine, error } = this.props;
-    //console.log(this.props);
+    const { handleSubmit, submitting } = this.props;
 
     return (
       <View style={[this.props.style, styles.formContainer]}>
@@ -178,4 +175,5 @@ const styles = {
   placeholderTextColor: 'rgba(255, 239, 239, 0.4)',
 };
 
-export default reduxForm({ form: 'register', validate })(RegisterForm);
+RegisterForm = reduxForm({ form: 'register', validate })(RegisterForm);
+export default connectStyle('megumi.RegisterForm')(RegisterForm);

@@ -297,5 +297,4 @@ export default {
   /**
    * Screen-specific variables. Used to theming custom components.
    */
-  
 };

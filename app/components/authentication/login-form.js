@@ -2,15 +2,19 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { Button, Icon } from 'native-base';
-import { Field, reduxForm, SubmissionError } from 'redux-form';
+import { Field, reduxForm, stopSubmit } from 'redux-form';
+//import { createFormAction } from 'redux-form-saga';
 import SpinKit from 'react-native-spinkit';
 import { requestLogin } from '../../actions/actions-user';
 import I18n from '../../localizations/I18n';
 
+const typePrefix = 'login/form';
+//const formAction = createFormAction(typePrefix);
+
 const onSubmit = (values, dispatch) => {
   const { username, password } = values;
   console.log(values);
-  dispatch(requestLogin(username, password));
+  //dispatch(requestLogin(username, password));
 };
 
 const usernameField = ({ input, placeholder, meta, ...inputProps }) => {
@@ -76,21 +80,21 @@ class LoginForm extends Component {
           outline
           light
           title={''}
-          onPress={handleSubmit(onSubmit)}
+          onPress={handleSubmit}
           submitting={submitting}
         >
           <SpinKit type="Wave" size={26} color={'#ffffff'} />
         </Button>
-          <Text
-            style={{
-              color: '#fff',
-              fontSize: 12,
-              textAlign: 'center',
-              marginVertical: 16,
-            }}
-          >
-            Wanna register? Shake the device or tap here
-          </Text>
+        <Text
+          style={{
+            color: '#fff',
+            fontSize: 12,
+            textAlign: 'center',
+            marginVertical: 16,
+          }}
+        >
+          Wanna register? Shake the device or tap here
+        </Text>
       </View>
     );
   }

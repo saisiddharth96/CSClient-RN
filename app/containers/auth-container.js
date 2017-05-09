@@ -21,7 +21,6 @@ import {
   Image,
   Dimensions,
   Keyboard,
-  Text,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
@@ -70,7 +69,8 @@ class AuthContainer extends Component {
   }
 
   render() {
-    const { goBack } = this.props;
+    const { goBack, form } = this.props;
+    console.log(form);
 
     return (
       <Container style={styles.container}>
@@ -107,15 +107,15 @@ class AuthContainer extends Component {
         </Header>
         <Content>
           <FlipCard
-            flip={this.state.isFlipped}
+            flip={false}
             friction={14}
-            clickable
+            clickable={false}
             style={{ borderWidth: 0 }}
             flipHorizontal
             flipVertical={false}
           >
-            <LoginForm {...this.props} />
-            <RegisterForm {...this.props} />
+            <LoginForm onSubmit={values => console.log(values)} />
+            <RegisterForm />
           </FlipCard>
         </Content>
       </Container>
@@ -127,10 +127,11 @@ const mapStateToProps = state => {
   // Make sure to not pass "form" prop to the component which override the original one.
   // Info: https://github.com/erikras/redux-form/issues/827
   // TL;DR: Don't pass {...state}, only use what you want
-  const { nav, common } = state;
+  const { nav, common, form } = state;
   return {
     nav,
     common,
+    form,
   };
 };
 
