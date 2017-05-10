@@ -9,4 +9,9 @@ const INITIAL_STATE = {
   nickname: null,
   registered: null,
   email: null,
+  password: null,
+};
+
+export const user = (state = INITIAL_STATE, action) => {
+
 };

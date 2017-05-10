@@ -114,10 +114,7 @@ class AuthContainer extends Component {
             flipHorizontal
             flipVertical={false}
           >
-            <LoginForm
-              onSubmit={values =>
-                attemptLogin(values.username, values.password)}
-            />
+            <LoginForm />
             <RegisterForm />
           </FlipCard>
         </Content>

@@ -1,19 +1,35 @@
 'use strict';
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import { Button, Icon } from 'native-base';
-import { Field, reduxForm, stopSubmit, submit } from 'redux-form';
-//import { createFormAction } from 'redux-form-saga';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
 import SpinKit from 'react-native-spinkit';
-import { requestLogin } from '../../actions/actions-user';
+import { generateAuthCookieSuccess } from '../../actions/actions-user';
+import API, { DataStatus } from '../../services/API';
 import I18n from '../../localizations/I18n';
 
-//const formAction = createFormAction(typePrefix);
+const api = API.create();
 
 const onSubmit = (values, dispatch) => {
   const { username, password } = values;
   console.log(values);
-  //dispatch(requestLogin(username, password));
+  return api
+    .generateAuthCookie(username, password)
+    .then(response => {
+      if (response.data.status === DataStatus.OK) {
+        alert('Login success');
+        console.log(response);
+        const { cookie, cookie_name, user } = response.data;
+        dispatch(generateAuthCookieSuccess(cookie, cookie_name, user));
+      } else if (response.data.status === DataStatus.ERROR) {
+        console.log(response);
+        throw new SubmissionError({ _error: 'Login failed!' });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      throw new SubmissionError({ _error: 'Login failed!' });
+    });
 };
 
 const usernameField = ({ input, placeholder, meta, ...inputProps }) => {
@@ -106,11 +122,13 @@ class LoginForm extends Component {
           outline
           light
           title={''}
-          onPress={handleSubmit}
+          onPress={handleSubmit(onSubmit)}
           disabled={submitting}
         >
-          {loginLabel}
-          {/*<SpinKit type="Wave" size={26} color={'#ffffff'} />*/}
+          {submitting
+            ? <SpinKit type="Wave" size={26} color={'#ffffff'} />
+            : loginLabel}
+
         </Button>
         <Text
           style={{
