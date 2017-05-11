@@ -33,7 +33,7 @@ import I18n from '../localizations/I18n';
 class AuthContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
-    fetching: PropTypes.bool,
+    mode: PropTypes.oneOf(['register, login']),
     attemptLogin: PropTypes.func,
   };
 

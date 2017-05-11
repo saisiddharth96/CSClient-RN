@@ -25,6 +25,7 @@ import {
   Icon,
   Text,
 } from 'native-base';
+import { getPost } from '../actions/actions-core';
 import ItemComment from '../components/items/item-comment';
 import CommentBox from '../components/comment-box';
 
@@ -34,7 +35,9 @@ class ContentContainer extends Component {
   };
 
   componentDidMount() {
-    const { goBack } = this.props;
+    const { goBack, startGetPost } = this.props;
+    const { postId } = this.props.navigation.state.params;
+    startGetPost(postId);
     BackHandler.addEventListener('hardwareBackPress', () => goBack());
   }
 
@@ -45,16 +48,47 @@ class ContentContainer extends Component {
 
   renderListItem = item => <ItemComment {...item} />;
 
+  renderContent = () => {
+    return (
+      <Content style={{ backgroundColor: '#fff' }}>
+        <View style={{ marginVertical: 26 }}>
+          <Image
+            source={{ uri: imageLink }}
+            style={{
+              flex: 1,
+              width: undefined,
+              height: 160,
+              resizeMode: 'contain',
+            }}
+          />
+        </View>
+        <HTMLView
+          style={{ paddingHorizontal: 12, marginBottom: 10 }}
+          value={excerpt.trim()}
+        />
+
+        <CommentBox />
+
+        <FlatList
+          data={comments}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => this.renderListItem(item)}
+        />
+      </Content>
+    );
+  };
+
   render() {
     const { goBack } = this.props;
-    let { content, excerpt, comments } = this.props.navigation.state.params;
+    console.log(this.props);
+    /*let { content, excerpt, comments } = this.props.post;
 
     const itemNode = HTMLParser.parse(he.unescape(content));
     const imageLink = itemNode.querySelector('img').attributes['data-lazy-src'];
 
     let prefix =
       '<style>img{display: inline;height: auto;max-width: 100%;} p {font-family:"Tangerine", "Sans-serif",  "Serif" font-size: 48px} </style>';
-    content = prefix.concat(content);
+    content = prefix.concat(content);*/
 
     return (
       <Container>
@@ -74,41 +108,16 @@ class ContentContainer extends Component {
           </Left>
         </Header>
         <StatusBar backgroundColor={'#fff'} />
-        <Content style={{ backgroundColor: '#fff' }}>
-          <View style={{ marginVertical: 26 }}>
-            <Image
-              source={{ uri: imageLink }}
-              style={{
-                flex: 1,
-                width: undefined,
-                height: 160,
-                resizeMode: 'contain',
-              }}
-            />
-          </View>
-          <HTMLView
-            style={{ paddingHorizontal: 12, marginBottom: 10 }}
-            value={excerpt.trim()}
-          />
-
-          <CommentBox />
-
-          <FlatList
-            data={comments}
-            keyExtractor={item => item.id}
-            renderItem={({ item }) => this.renderListItem(item)}
-          />
-        </Content>
       </Container>
     );
   }
 }
 
 const mapStateToProps = state => {
-  const { nav, common } = state;
+  const { nav, post } = state;
   return {
     nav,
-    common,
+    post,
   };
 };
 
@@ -118,6 +127,7 @@ const mapDispatchToProps = dispatch => {
       Keyboard.dismiss();
       return dispatch(NavigationActions.back());
     },
+    startGetPost: postId => dispatch(getPost(postId)),
     dispatch,
   };
 };

@@ -29,7 +29,7 @@ const Methods = {
   },
 };
 
-const create = (baseURL = 'https://doko.aniviet.com/blog/api/') => {
+const create = (baseURL = 'https://clip-sub.com/api/') => {
   const api = apisauce.create({
     baseURL,
     headers: {
@@ -75,6 +75,8 @@ const create = (baseURL = 'https://doko.aniviet.com/blog/api/') => {
 
   const getPageIndex = () => api.get('get_page_index');
 
+  const getPost = (postId: number) => api.get('get_post', { id: postId });
+
   return {
     getNonce,
     generateAuthCookie,
@@ -82,6 +84,7 @@ const create = (baseURL = 'https://doko.aniviet.com/blog/api/') => {
     getPosts,
     getCategoryIndex,
     getPageIndex,
+    getPost,
   };
 };
 

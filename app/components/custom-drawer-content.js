@@ -10,8 +10,6 @@ import { connect } from 'react-redux';
 import { requestLogout } from '../actions/actions-user';
 
 const CustomDrawerContent = props => {
-  console.log(props);
-
   const { logout } = props;
   const { dispatch } = props.navigation;
   const closeDrawer = NavigationActions.navigate({

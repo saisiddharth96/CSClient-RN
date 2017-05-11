@@ -35,6 +35,13 @@ export function clearPosts() {
   };
 }
 
+export function getPost(postId) {
+  return {
+    type: Types.GET_POST,
+    postId,
+  };
+}
+
 export function getPage(pageId: number) {
   return {
     type: Types.GET_PAGE,
@@ -99,19 +106,17 @@ export function receiveRecentPosts(
   };
 }
 
-export function receivePost(post, nextUrl, previousUrl) {
+export function receivePost(post: Object) {
   return {
     type: Types.RECEIVE_POST,
-    post: post,
-    nextUrl: nextUrl,
-    previousUrl: previousUrl,
+    post,
   };
 }
 
 export function receivePage(page: Object) {
   return {
     type: Types.RECEIVE_PAGE,
-    page: page,
+    page,
   };
 }
 

@@ -43,7 +43,15 @@ import { navigate } from '../../actions/actions-navigation';
  */
 
 const ItemPostCard = props => {
-  const { title, author, content, excerpt, comment_count, url } = props.post;
+  const {
+    id,
+    title,
+    author,
+    content,
+    excerpt,
+    comment_count,
+    url,
+  } = props.post;
   const { dispatch } = props;
   const sharePost = () => {
     const content = {
@@ -94,7 +102,7 @@ const ItemPostCard = props => {
       <CardItem style={styles.cardBottom}>
         <Button
           transparent
-          onPress={() => dispatch(navigate('Content', props.post))}
+          onPress={() => dispatch(navigate('Content', { postId: id }))}
         >
           <Icon name="chatbubbles" />
           <Text>{I18n.t('comment', { count: comment_count })}</Text>
