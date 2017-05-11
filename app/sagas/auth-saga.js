@@ -1,13 +1,11 @@
 /**
  * @flow
  */
-"use strict";
-import { call, put } from "redux-saga/effects";
-import { requestLogin } from "../actions/actions-user";
-import { getNonce } from "../actions/actions-core";
-import { setLoading } from "../actions/actions-misc";
-import API, { Controllers, Methods, DataStatus } from "../services/API";
-import DataService from "../services/data-service";
+'use strict';
+import { call, put } from 'redux-saga/effects';
+import { setLoading } from '../actions/actions-misc';
+import API, { DataStatus } from '../services/API';
+import DataService from '../services/data-service';
 
 const api = API.create();
 

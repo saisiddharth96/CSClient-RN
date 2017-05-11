@@ -4,6 +4,7 @@ import { View, Text, TextInput } from 'react-native';
 import { Button, Icon } from 'native-base';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import SpinKit from 'react-native-spinkit';
+import { NavigationActions } from 'react-navigation';
 import { generateAuthCookieSuccess } from '../../actions/actions-user';
 import API, { DataStatus } from '../../services/API';
 import I18n from '../../localizations/I18n';
@@ -21,6 +22,7 @@ const onSubmit = (values, dispatch) => {
         console.log(response);
         const { cookie, cookie_name, user } = response.data;
         dispatch(generateAuthCookieSuccess(cookie, cookie_name, user));
+        setTimeout(() => dispatch(NavigationActions.back()), 400);
       } else if (response.data.status === DataStatus.ERROR) {
         console.log(response);
         throw new SubmissionError({ _error: 'Login failed!' });
@@ -48,6 +50,7 @@ const usernameField = ({ input, placeholder, meta, ...inputProps }) => {
         onChangeText={input.onChange}
         value={input.value}
         onBlur={input.onBlur}
+        autoCapitalize={'none'}
         selectionColor={'#ffefef'}
         placeholder={I18n.t('login_username_placeholder')}
         placeholderTextColor={[styles.placeholderTextColor]}

@@ -29,7 +29,6 @@ import ShakeEvent from 'react-native-shake-event';
 import LoginForm from '../components/authentication/login-form';
 import RegisterForm from '../components/authentication/register-form';
 import I18n from '../localizations/I18n';
-import { requestLogin } from '../actions/actions-user';
 
 class AuthContainer extends Component {
   static propTypes = {
@@ -70,7 +69,7 @@ class AuthContainer extends Component {
   }
 
   render() {
-    const { goBack, attemptLogin } = this.props;
+    const { goBack } = this.props;
 
     return (
       <Container style={styles.container}>
@@ -140,9 +139,6 @@ const mapDispatchToProps = dispatch => {
       Keyboard.dismiss();
       dispatch(NavigationActions.back());
       return true;
-    },
-    attemptLogin: (username, password) => {
-      dispatch(requestLogin(username, password));
     },
   };
 };

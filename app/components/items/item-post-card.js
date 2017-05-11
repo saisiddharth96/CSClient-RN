@@ -61,7 +61,9 @@ const ItemPostCard = props => {
   };
 
   const itemNode = HTMLParser.parse(he.unescape(content));
-  const imageLink = itemNode.querySelector('img').attributes['data-lazy-src'];
+  const imageLink = 'https://puu.sh/pXSnj/ce88df7ec0.png';
+  // const imageLink = itemNode.querySelector('img').attributes['data-lazy-src'];
+  // By default, it parses the first image in the post.
 
   return (
     <Card>

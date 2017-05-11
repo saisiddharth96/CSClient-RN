@@ -1,14 +1,18 @@
 /**
  * @flow
  */
-"use strict";
-import { call, put } from "redux-saga/effects";
-import { receiveError, receivePosts, receiveCategoryIndex } from "../actions/actions-core";
-import API, { DataStatus } from "../services/API";
+'use strict';
+import { call, put } from 'redux-saga/effects';
+import {
+  receiveError,
+  receivePosts,
+  receiveCategoryIndex,
+} from '../actions/actions-core';
+import API, { DataStatus } from '../services/API';
 
 const api = API.create();
 
-export function* getPosts (action) {
+export function* getPosts(action) {
   const { page, query } = action;
   try {
     const result = yield call(api.getPosts, 10, page, query);
@@ -20,8 +24,8 @@ export function* getPosts (action) {
           result.data.count,
           result.data.count_total,
           result.data.pages,
-          result.data.query
-        )
+          result.data.query,
+        ),
       );
     } else {
       yield put(receiveError(result.data.error));
@@ -32,17 +36,14 @@ export function* getPosts (action) {
   }
 }
 
-export function* getCategoryIndex (action) {
+export function* getCategoryIndex(action) {
   const { parentId } = action;
 
   try {
     const result = yield call(api.getCategoryIndex, parentId);
     if (result.data.status === DataStatus.OK) {
       yield put(
-        receiveCategoryIndex(
-          result.data.categories,
-          result.data.count
-        )
+        receiveCategoryIndex(result.data.categories, result.data.count),
       );
     } else {
       yield put(receiveError(result.data.error));

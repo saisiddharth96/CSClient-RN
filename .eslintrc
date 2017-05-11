@@ -81,7 +81,6 @@
     "react/require-default-props": 0,
     "react/no-unused-prop-types": 0,
     "react/jsx-uses-var": "off",
-    "react/jsx-wrap-multilines": "error",
     "react/prefer-es6-class": "warn",
     "react/jsx-pascal-case": [
       "warn",

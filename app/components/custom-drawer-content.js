@@ -1,10 +1,18 @@
+/**
+ * @flow
+ */
 'use strict';
 import React from 'react';
 import { View, Image } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-import { connectStyle, Body, Icon, Left, ListItem, Text } from 'native-base';
+import { Body, Icon, Left, ListItem, Text } from 'native-base';
+import { connect } from 'react-redux';
+import { requestLogout } from '../actions/actions-user';
 
 const CustomDrawerContent = props => {
+  console.log(props);
+
+  const { logout } = props;
   const { dispatch } = props.navigation;
   const closeDrawer = NavigationActions.navigate({
     routeName: 'DrawerClose',
@@ -17,6 +25,28 @@ const CustomDrawerContent = props => {
     dispatch(closeDrawer);
     setTimeout(() => dispatch(navigateAction), 700);
   };
+
+  const userItem = !props.user.id
+    ? <ListItem icon onPress={() => goToScreen('Auth')}>
+        <Left>
+          <Icon name="person" style={{ color: '#AB47BC' }} />
+        </Left>
+        <Body>
+          <Text style={drawerStyle.itemText}>
+            Login / Register
+          </Text>
+        </Body>
+      </ListItem>
+    : <ListItem icon onPress={() => goToScreen('Profile')}>
+        <Left>
+          <Icon name="person" style={{ color: '#AB47BC' }} />
+        </Left>
+        <Body>
+          <Text style={drawerStyle.itemText}>
+            Profile
+          </Text>
+        </Body>
+      </ListItem>;
 
   return (
     <View style={drawerStyle.drawerMenuContainer}>
@@ -43,23 +73,23 @@ const CustomDrawerContent = props => {
         </Body>
       </ListItem>
 
-      <ListItem icon onPress={() => goToScreen('Auth')}>
-        <Left>
-          <Icon name="person" style={{ color: '#AB47BC' }} />
-        </Left>
-        <Body>
-          <Text style={drawerStyle.itemText}>
-            Login / Register
-          </Text>
-        </Body>
-      </ListItem>
+      {userItem}
 
-      <ListItem icon>
+      <ListItem icon style={{ alignSelf: 'flex-end' }}>
         <Left>
           <Icon name="ios-construct-outline" style={{ color: '#536DFE' }} />
         </Left>
         <Body>
           <Text style={drawerStyle.itemText}>Settings</Text>
+        </Body>
+      </ListItem>
+
+      <ListItem icon onPress={() => logout()}>
+        <Left>
+          <Icon name="ios-construct-outline" style={{ color: '#536DFE' }} />
+        </Left>
+        <Body>
+          <Text style={drawerStyle.itemText}>Log out</Text>
         </Body>
       </ListItem>
     </View>
@@ -70,6 +100,7 @@ const drawerStyle = {
   drawerMenuContainer: {
     backgroundColor: '#fff9f9',
     flex: 1,
+    flexDirection: 'column',
   },
   drawerHeader: {
     height: 160,
@@ -86,4 +117,19 @@ const drawerStyle = {
   },
 };
 
-export default CustomDrawerContent;
+const mapStateToProps = state => {
+  const { user } = state;
+  return {
+    user,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(requestLogout()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  CustomDrawerContent,
+);
