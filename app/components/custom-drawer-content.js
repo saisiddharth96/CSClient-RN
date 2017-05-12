@@ -7,10 +7,11 @@ import { View, Image } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { Body, Icon, Left, ListItem, Text } from 'native-base';
 import { connect } from 'react-redux';
+import md5 from 'blueimp-md5';
 import { requestLogout } from '../actions/actions-user';
 
 const CustomDrawerContent = props => {
-  const { logout } = props;
+  const { logout, user } = props;
   const { dispatch } = props.navigation;
   const closeDrawer = NavigationActions.navigate({
     routeName: 'DrawerClose',
@@ -27,7 +28,7 @@ const CustomDrawerContent = props => {
   const userItem = !props.user.id
     ? <ListItem icon onPress={() => goToScreen('Auth')}>
         <Left>
-          <Icon name="person" style={{ color: '#AB47BC' }} />
+          <Icon name="person" style={{ color: '#EF5350' }} />
         </Left>
         <Body>
           <Text style={drawerStyle.itemText}>
@@ -37,7 +38,7 @@ const CustomDrawerContent = props => {
       </ListItem>
     : <ListItem icon onPress={() => goToScreen('Profile')}>
         <Left>
-          <Icon name="person" style={{ color: '#AB47BC' }} />
+          <Icon name="person" style={{ color: '#EF5350' }} />
         </Left>
         <Body>
           <Text style={drawerStyle.itemText}>
@@ -51,20 +52,20 @@ const CustomDrawerContent = props => {
       <View style={drawerStyle.drawerHeader}>
         <View style={drawerStyle.miniProfile}>
           <Image
-            source={{ uri: 'https://cdn.awwni.me/w28n.jpg' }}
+            source={{ uri: 'https://gravatar.com/avatar/' + md5(user.email) + '?s=200' }}
             style={{ width: 90, height: 90, borderRadius: 45, zIndex: 9 }}
           />
           <Text suppressHighlighting style={{ color: '#fff' }}>
-            Sophia Emilion
+            {user.nickname ? user.nickname : ''}
           </Text>
           <Text style={{ fontSize: 10, color: '#fff' }}>
-            sophia@live.com
+            {user.email ? user.email : ''}
           </Text>
         </View>
       </View>
       <ListItem icon onPress={() => dispatch(closeDrawer)}>
         <Left>
-          <Icon name="home" style={{ color: '#C0CA33' }} />
+          <Icon name="home" style={{ color: '#EF5350' }} />
         </Left>
         <Body>
           <Text style={drawerStyle.itemText}>Home</Text>
@@ -75,7 +76,7 @@ const CustomDrawerContent = props => {
 
       <ListItem icon style={{ alignSelf: 'flex-end' }}>
         <Left>
-          <Icon name="ios-construct-outline" style={{ color: '#536DFE' }} />
+          <Icon name="ios-construct-outline" style={{ color: '#EF5350' }} />
         </Left>
         <Body>
           <Text style={drawerStyle.itemText}>Settings</Text>
@@ -84,7 +85,7 @@ const CustomDrawerContent = props => {
 
       <ListItem icon onPress={() => logout()}>
         <Left>
-          <Icon name="ios-construct-outline" style={{ color: '#536DFE' }} />
+          <Icon name="ios-exit-outline" style={{ color: '#EF5350' }} />
         </Left>
         <Body>
           <Text style={drawerStyle.itemText}>Log out</Text>
@@ -98,6 +99,7 @@ const drawerStyle = {
   drawerMenuContainer: {
     backgroundColor: '#fff9f9',
     flex: 1,
+    alignSelf: 'stretch',
     flexDirection: 'column',
   },
   drawerHeader: {

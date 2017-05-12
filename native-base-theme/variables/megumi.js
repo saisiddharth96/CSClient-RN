@@ -1,5 +1,4 @@
 import color from 'color';
-
 import { Platform, Dimensions, PixelRatio } from 'react-native';
 
 const deviceHeight = Dimensions.get('window').height;
@@ -112,7 +111,7 @@ export default {
 
 
       // Color
-  brandPrimary: '#2874F0',
+  brandPrimary: '#EF5350', // Pink: #EF5350 // Default: #2874F0
   brandInfo: '#62B1F6',
   brandSuccess: '#5cb85c',
   brandDanger: '#d9534f',
@@ -259,7 +258,7 @@ export default {
 
 
     // Text
-  textColor: '#000',
+  textColor: '#EF5350',
   inverseTextColor: '#fff',
   noteFontSize: 14,
 
@@ -275,7 +274,7 @@ export default {
 
 
     // Other
-  borderRadiusBase: (platform === 'ios') ? 5 : 2,
+  borderRadiusBase: (platform === 'ios') ? 0 : 2,
   borderWidth: (1/PixelRatio.getPixelSizeForLayoutSize(1)),
   contentPadding: 10,
 

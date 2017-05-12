@@ -69,8 +69,8 @@ const ItemPostCard = props => {
   };
 
   const itemNode = HTMLParser.parse(he.unescape(content));
-  const imageLink = 'https://puu.sh/pXSnj/ce88df7ec0.png';
-  // const imageLink = itemNode.querySelector('img').attributes['data-lazy-src'];
+  //const imageLink = 'https://puu.sh/pXSnj/ce88df7ec0.png';
+  const imageLink = itemNode.querySelector('img').attributes['data-lazy-src'];
   // By default, it parses the first image in the post.
 
   return (
@@ -102,12 +102,13 @@ const ItemPostCard = props => {
       <CardItem style={styles.cardBottom}>
         <Button
           transparent
+          small
           onPress={() => dispatch(navigate('Content', { postId: id }))}
         >
           <Icon name="chatbubbles" />
           <Text>{I18n.t('comment', { count: comment_count })}</Text>
         </Button>
-        <Button transparent onPress={() => sharePost()}>
+        <Button transparent small onPress={() => sharePost()}>
           <Icon name="md-share" />
           <Text>{I18n.t('share')}</Text>
         </Button>

@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 0.5,
     borderColor: '#EF5350',
-    paddingTop: 24,
+    paddingTop: 12,
     paddingBottom: 18,
     marginHorizontal: 20,
     marginTop: 50,
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ff4e4e',
   },
   input: {
-    height: 40,
+    height: 30,
     color: '#EF5350',
     alignSelf: 'stretch',
     padding: 4,

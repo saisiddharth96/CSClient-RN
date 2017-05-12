@@ -20,6 +20,7 @@
     "git-hook": "npm run lint -s && npm test -s"
   },
   "dependencies": {
+    "blueimp-md5": "^2.7.0",
     "fast-html-parser": "^1.0.1",
     "fuse.js": "^3.0.2",
     "he": "^1.1.1",

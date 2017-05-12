@@ -74,7 +74,7 @@ const ItemComment = props => {
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Icon
                 style={{ color: '#ff2a63', fontSize: 22 }}
-                name="ios-basketball"
+                name="send"
               />
               <Text style={{ marginLeft: 4, fontSize: 10, color: '#ff2a63' }}>
                 Reply

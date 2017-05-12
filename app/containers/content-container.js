@@ -24,6 +24,7 @@ import {
   Button,
   Icon,
   Text,
+  Spinner,
 } from 'native-base';
 import { getPost } from '../actions/actions-core';
 import ItemComment from '../components/items/item-comment';
@@ -49,6 +50,15 @@ class ContentContainer extends Component {
   renderListItem = item => <ItemComment {...item} />;
 
   renderContent = () => {
+    let { content, excerpt, comments } = this.props.post;
+
+    const itemNode = HTMLParser.parse(he.unescape(content));
+    const imageLink = itemNode.querySelector('img').attributes['data-lazy-src'];
+
+    let prefix =
+      '<style>img{display: inline;height: auto;max-width: 100%;} p {font-family:"Tangerine", "Sans-serif",  "Serif" font-size: 48px} </style>';
+    content = prefix.concat(content);
+
     return (
       <Content style={{ backgroundColor: '#fff' }}>
         <View style={{ marginVertical: 26 }}>
@@ -67,31 +77,25 @@ class ContentContainer extends Component {
           value={excerpt.trim()}
         />
 
-        <CommentBox />
-
         <FlatList
           data={comments}
           keyExtractor={item => item.id}
           renderItem={({ item }) => this.renderListItem(item)}
         />
+
+        <CommentBox />
+
       </Content>
     );
   };
 
   render() {
     const { goBack } = this.props;
+    const { id } = this.props.post;
     console.log(this.props);
-    /*let { content, excerpt, comments } = this.props.post;
-
-    const itemNode = HTMLParser.parse(he.unescape(content));
-    const imageLink = itemNode.querySelector('img').attributes['data-lazy-src'];
-
-    let prefix =
-      '<style>img{display: inline;height: auto;max-width: 100%;} p {font-family:"Tangerine", "Sans-serif",  "Serif" font-size: 48px} </style>';
-    content = prefix.concat(content);*/
 
     return (
-      <Container>
+      <Container style={{ backgroundColor: '#fff' }}>
         <Header
           iosBarStyle={'dark-content'}
           style={{
@@ -108,6 +112,9 @@ class ContentContainer extends Component {
           </Left>
         </Header>
         <StatusBar backgroundColor={'#fff'} />
+
+        {id !== null ? this.renderContent() : <Spinner color="red" />}
+
       </Container>
     );
   }
