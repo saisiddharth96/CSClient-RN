@@ -22,13 +22,10 @@ export const PostMenuBar = props => {
         <Icon name="ios-close-circle" style={styles.searchBoxIcon} />
       </View>
       <TouchableOpacity style={styles.iconWrapper}>
-        <Icon name="ios-list-outline" style={styles.iconOutside} />
+        <Icon name="ios-images-outline" style={styles.iconOutside} />
       </TouchableOpacity>
       <TouchableOpacity style={styles.iconWrapper}>
         <Icon name="grid" style={styles.iconOutside} />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.iconWrapper}>
-        <Icon name="ios-images-outline" style={styles.iconOutside} />
       </TouchableOpacity>
     </View>
   );

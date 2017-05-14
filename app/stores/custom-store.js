@@ -5,6 +5,7 @@
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import { autoRehydrate, persistStore } from 'redux-persist';
 import rootReducer from '../reducers';
 import rootSaga from '../sagas';
 
@@ -14,7 +15,7 @@ export default function CustomStore(initialState) {
   const store = createStore(
     rootReducer,
     initialState,
-    compose(applyMiddleware(sagaMiddleware)),
+    compose(applyMiddleware(sagaMiddleware), autoRehydrate()),
   );
   sagaMiddleware.run(rootSaga);
   return store;

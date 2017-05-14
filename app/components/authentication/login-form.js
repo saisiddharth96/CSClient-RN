@@ -141,7 +141,7 @@ class LoginForm extends Component {
             marginVertical: 16,
           }}
         >
-          Wanna register? Shake the device or tap here
+          Wanna register? \N Shake the device or tap here
         </Text>
       </View>
     );
