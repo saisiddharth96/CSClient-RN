@@ -3,6 +3,7 @@
  */
 'use strict';
 
+import { AsyncStorage } from 'react-native';
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { autoRehydrate, persistStore } from 'redux-persist';
@@ -18,5 +19,10 @@ export default function CustomStore(initialState) {
     compose(applyMiddleware(sagaMiddleware), autoRehydrate()),
   );
   sagaMiddleware.run(rootSaga);
+  persistStore(
+    store,
+    { blacklist: ['nav', 'posts', 'categories', 'post'], storage: AsyncStorage },
+    () => console.log('Persist completed'),
+  );
   return store;
 }

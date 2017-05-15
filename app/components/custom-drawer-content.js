@@ -126,7 +126,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    logout: () => dispatch(requestLogout()),
+    logout: () => {
+      dispatch(NavigationActions.navigate({ routeName: 'DrawerClose' }));
+      return dispatch(requestLogout());
+    },
   };
 };
 

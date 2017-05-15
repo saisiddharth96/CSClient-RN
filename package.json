@@ -69,7 +69,7 @@
     "babel-preset-stage-1": "^6.24.1",
     "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^14.1.0",
+    "eslint-config-airbnb": "^15.0.0",
     "eslint-config-prettier": "^2.1.0",
     "eslint-plugin-flowtype": "^2.33.0",
     "eslint-plugin-import": "^2.2.0",

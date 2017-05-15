@@ -83,7 +83,9 @@ export default class PostList extends Component {
     return (
       <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#fff' }}>
         {this.renderPostMenuBar()}
-        {status === 'loaded' ? this.renderPostList(postItems) : <Spinner />}
+        {status === 'loaded'
+          ? this.renderPostList(postItems)
+          : <Spinner color="red" />}
       </View>
     );
   }

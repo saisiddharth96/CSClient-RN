@@ -46,7 +46,6 @@ export function validateAuthCookie(cookie) {
 }
 
 export function requestLogout() {
-  console.log('jaja');
   return {
     type: Types.LOG_OUT,
   };
