@@ -18,12 +18,14 @@ export default class CategoryList extends Component {
   }
 
   renderItem = item => {
+    const { dispatch } = this.props;
     return (
       <ItemCategory
         id={item.id}
         title={item.title}
         postCount={item.post_count}
         parentId={item.parent}
+        dispatch={dispatch}
       />
     );
   };
@@ -44,7 +46,8 @@ export default class CategoryList extends Component {
         initialNumToRender={15}
         style={{ alignSelf: 'stretch' }}
         renderHeader={this.renderCategorySearchBar}
-        renderFooter={() => (status === 'loaded' ? null : <Spinner />)}
+        renderFooter={() =>
+          status === 'loaded' ? null : <Spinner color="red" />}
       />
     );
   }

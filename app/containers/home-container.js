@@ -21,12 +21,12 @@ import CategoryList from '../components/category-list';
 import { switchHomeTab } from '../actions/actions-navigation';
 
 const HomeContainer = props => {
-  const { openDrawer, activeTabIndex, dispatch } = props;
+  const { openDrawer, home, dispatch } = props;
 
   const renderHomeContent = () => {
-    switch (activeTabIndex) {
+    switch (home.activeTabIndex) {
       case 1:
-        return <PostList {...props.posts} dispatch={props.dispatch} />;
+        return <PostList {...props.posts} args={home.args} dispatch={props.dispatch} />;
       case 2:
         return <CategoryList {...props.categories} dispatch={props.dispatch} />;
       case 3:
@@ -60,25 +60,25 @@ const HomeContainer = props => {
       <Footer>
         <FooterTab>
           <Button
-            active={activeTabIndex === 1}
+            active={home.activeTabIndex === 1}
             onPress={() => dispatch(switchHomeTab(1))}
           >
             <Icon name="home" />
           </Button>
           <Button
-            active={activeTabIndex === 2}
+            active={home.activeTabIndex === 2}
             onPress={() => dispatch(switchHomeTab(2))}
           >
             <Icon name="list" />
           </Button>
           <Button
-            active={activeTabIndex === 3}
+            active={home.activeTabIndex === 3}
             onPress={() => dispatch(switchHomeTab(3))}
           >
             <Icon active name="navigate" />
           </Button>
           <Button
-            active={activeTabIndex === 4}
+            active={home.activeTabIndex === 4}
             onPress={() => dispatch(switchHomeTab(4))}
           >
             <Icon name="person" />
@@ -96,11 +96,12 @@ const HomeContainer = props => {
  * The result of mapStateToProps must be a plain object, which will be merged into component's props.
  */
 const mapStateToProps = state => {
-  const { posts, categories, activeTabIndex } = state;
+  const { posts, categories, home } = state;
+  console.log(state);
   return {
+    home,
     posts,
     categories,
-    activeTabIndex,
   };
 };
 

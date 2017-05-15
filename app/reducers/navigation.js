@@ -39,10 +39,13 @@ export const nav = (state, action) => {
   }
 };
 
-export const activeTabIndex = (state = 1, action) => {
+export const home = (state = { activeTabIndex: 1 }, action) => {
   switch (action.type) {
   case Types.SWITCH_HOME_TAB:
-    return action.tabIndex;
+    return {
+      activeTabIndex: action.tabIndex,
+      args: action.args,
+    };
   default:
     return state;
   }

@@ -1,5 +1,6 @@
 {
   // Common.
+  "app_name": "Clip-sub",
   "share": "Share",
 
   // Home.
@@ -19,5 +20,8 @@
   "register_username_placeholder": "Username (3+ chars)",
   "register_password_placeholder": "Password (6+ chars)",
   "register_email_placeholder": "Email",
-  "register_button_label": "Register"
+  "register_button_label": "Register",
+
+  // Drawer.
+  "logout_prompt": "You will be logged out, are you sure?"
 }

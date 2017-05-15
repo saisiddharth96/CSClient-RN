@@ -21,7 +21,10 @@ export default function CustomStore(initialState) {
   sagaMiddleware.run(rootSaga);
   persistStore(
     store,
-    { blacklist: ['nav', 'posts', 'categories', 'post'], storage: AsyncStorage },
+    {
+      blacklist: ['nav', 'posts', 'categories', 'post', 'home'],
+      storage: AsyncStorage,
+    },
     () => console.log('Persist completed'),
   );
   return store;

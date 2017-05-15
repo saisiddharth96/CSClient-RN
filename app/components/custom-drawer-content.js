@@ -3,7 +3,7 @@
  */
 'use strict';
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, Alert } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { Body, Icon, Left, ListItem, Text } from 'native-base';
 import { connect } from 'react-redux';
@@ -23,6 +23,24 @@ const CustomDrawerContent = props => {
     });
     dispatch(closeDrawer);
     setTimeout(() => dispatch(navigateAction), 700);
+  };
+
+  const onPressLogout = () => {
+    Alert.alert(
+      'Clip-sub',
+      'You will be logged out, are you sure?',
+      [
+        { text: 'OK', onPress: () => logout() },
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+      ],
+      { cancelable: false },
+    );
+
+    dispatch(NavigationActions.navigate({ routeName: 'DrawerClose' }));
   };
 
   const userItem = !props.user.id
@@ -52,7 +70,9 @@ const CustomDrawerContent = props => {
       <View style={drawerStyle.drawerHeader}>
         <View style={drawerStyle.miniProfile}>
           <Image
-            source={{ uri: 'https://gravatar.com/avatar/' + md5(user.email) + '?s=200' }}
+            source={{
+              uri: 'https://gravatar.com/avatar/' + md5(user.email) + '?s=200',
+            }}
             style={{ width: 90, height: 90, borderRadius: 45, zIndex: 9 }}
           />
           <Text suppressHighlighting style={{ color: '#fff' }}>
@@ -79,11 +99,11 @@ const CustomDrawerContent = props => {
           <Icon name="ios-construct-outline" style={{ color: '#EF5350' }} />
         </Left>
         <Body>
-          <Text style={drawerStyle.itemText}>Settings</Text>
+          <Text style={drawerStyle.itemText}>Settings (soon)</Text>
         </Body>
       </ListItem>
 
-      <ListItem icon onPress={() => logout()}>
+      <ListItem icon onPress={() => onPressLogout()}>
         <Left>
           <Icon name="ios-exit-outline" style={{ color: '#EF5350' }} />
         </Left>
@@ -127,7 +147,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     logout: () => {
-      dispatch(NavigationActions.navigate({ routeName: 'DrawerClose' }));
       return dispatch(requestLogout());
     },
   };
