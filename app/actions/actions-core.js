@@ -42,6 +42,12 @@ export function getPost(postId) {
   };
 }
 
+export function clearPost() {
+  return {
+    type: Types.CLEAR_POST,
+  };
+}
+
 export function getPage(pageId: number) {
   return {
     type: Types.GET_PAGE,

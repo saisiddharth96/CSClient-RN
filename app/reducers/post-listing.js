@@ -27,7 +27,7 @@ export const posts = (state = INITIAL_STATE, action) => {
     case Types.CLEAR_POSTS:
       return {
         ...state,
-        status: 'loaded',
+        status: 'loading',
         currentPage: 1,
         postItems: [],
       };

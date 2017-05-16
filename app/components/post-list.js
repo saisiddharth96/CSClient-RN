@@ -3,7 +3,7 @@
  */
 'use strict';
 import React, { Component, PropTypes } from 'react';
-import { View, FlatList, Text } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { Spinner } from 'native-base';
 import { getPosts, clearPosts } from '../actions/actions-core';
 import { PostMenuBar } from './post-menu-bar';
@@ -24,8 +24,9 @@ export default class PostList extends Component {
   };
 
   componentDidMount() {
-    const { dispatch, currentPage } = this.props;
-    dispatch(getPosts(currentPage));
+    const { dispatch, currentPage, args } = this.props;
+    if (!args) return dispatch(getPosts(currentPage));
+    if (args.cat) return dispatch(getPosts(currentPage, 15, { cat: args.cat }));
   }
 
   componentWillUnmount() {
@@ -34,8 +35,12 @@ export default class PostList extends Component {
   }
 
   onEndReached = () => {
-    const { dispatch, status, currentPage } = this.props;
-    if (status !== 'loading') dispatch(getPosts(currentPage + 1));
+    const { dispatch, status, currentPage, args } = this.props;
+    if (status !== 'loading') {
+      if (!args) return dispatch(getPosts(currentPage + 1, 15));
+      if (args.cat)
+        return dispatch(getPosts(currentPage + 1, 15, { cat: args.cat }));
+    }
   };
 
   renderListItem = item => <ItemPostCard post={item} {...this.props} />;
@@ -79,7 +84,7 @@ export default class PostList extends Component {
   }
 
   render() {
-    const { status, postItems } = this.props;
+    const { status, postItems, args } = this.props;
     return (
       <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#fff' }}>
         {this.renderPostMenuBar()}

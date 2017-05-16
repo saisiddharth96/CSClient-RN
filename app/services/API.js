@@ -67,8 +67,8 @@ const create = (baseURL = 'https://clip-sub.com/api/') => {
       post_type: postType,
     });
 
-  const getPosts = (count: number, page: number, ...query) =>
-    api.get('get_posts', { count: count, page: page, query });
+  const getPosts = (count: number, page: number, query) =>
+    api.get('get_posts', { count: count, page: page, json: 1, ...query });
 
   const getCategoryIndex = (parentId: number) =>
     api.get('get_category_index', { parent: parentId });

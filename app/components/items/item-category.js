@@ -22,7 +22,7 @@ const ItemCategory = props => {
       activeOpacity={0.3}
       underlayColor={'#f4f8ff'}
       style={styles.itemContainer}
-      onPress={() => dispatch(switchHomeTab(1, { categoryId: id }))}
+      onPress={() => dispatch(switchHomeTab(1, { cat: id }))}
     >
       <View elevation={3} style={styles.item}>
         <Text style={styles.text}>{title}</Text>

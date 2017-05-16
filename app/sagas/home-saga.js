@@ -13,9 +13,11 @@ import API, { DataStatus } from '../services/API';
 const api = API.create();
 
 export function* getPosts(action) {
-  const { page, query } = action;
+  const { page, count, ...query } = action;
+  delete query.type;
   try {
     const result = yield call(api.getPosts, 10, page, query);
+    console.log(result);
     if (result.data.status === DataStatus.OK) {
       yield put(
         receivePosts(

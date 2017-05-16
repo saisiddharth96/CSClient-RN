@@ -26,7 +26,7 @@ import {
   Text,
   Spinner,
 } from 'native-base';
-import { getPost } from '../actions/actions-core';
+import { getPost, clearPost } from '../actions/actions-core';
 import ItemComment from '../components/items/item-comment';
 import CommentBox from '../components/comment-box';
 
@@ -43,7 +43,8 @@ class ContentContainer extends Component {
   }
 
   componentWillUnmount() {
-    const { goBack } = this.props;
+    const { goBack, dispatch } = this.props;
+    dispatch(clearPost());
     BackHandler.removeEventListener('hardwareBackPress', () => goBack());
   }
 

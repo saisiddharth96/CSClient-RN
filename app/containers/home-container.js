@@ -97,7 +97,6 @@ const HomeContainer = props => {
  */
 const mapStateToProps = state => {
   const { posts, categories, home } = state;
-  console.log(state);
   return {
     home,
     posts,

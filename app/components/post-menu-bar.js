@@ -5,9 +5,16 @@
 import React, { PropTypes } from 'react';
 import { TextInput, TouchableOpacity, View } from 'react-native';
 import { Icon } from 'native-base';
+import { clearPosts } from '../actions/actions-core';
+import { switchHomeTab } from '../actions/actions-navigation';
 
 export const PostMenuBar = props => {
   const { dispatch } = props;
+
+  const onSubmitSearch = keyword => {
+    dispatch(clearPosts());
+    dispatch(switchHomeTab(1, { s: keyword }));
+  };
 
   return (
     <View elevation={1} style={styles.container}>
@@ -18,6 +25,7 @@ export const PostMenuBar = props => {
           returnKeyType={'search'}
           multiline={false}
           style={styles.searchBoxInput}
+          onSubmitEditing={event => onSubmitSearch(event.nativeEvent.text)}
         />
         <Icon name="ios-close-circle" style={styles.searchBoxIcon} />
       </View>

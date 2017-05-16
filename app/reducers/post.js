@@ -52,6 +52,8 @@ export const post = (state = INITIAL_STATE, action) => {
         title,
         url,
       };
+    case Types.CLEAR_POST:
+      return INITIAL_STATE;
     default:
       return state;
   }
