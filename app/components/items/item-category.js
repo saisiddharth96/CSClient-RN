@@ -5,6 +5,7 @@
 import React from 'react';
 import { TouchableHighlight, View, Text } from 'react-native';
 import { switchHomeTab } from '../../actions/actions-navigation';
+import { setPostsArgs } from '../../actions/actions-core';
 
 /**
   "id": 574,
@@ -17,12 +18,17 @@ import { switchHomeTab } from '../../actions/actions-navigation';
 const ItemCategory = props => {
   const { id, title, slug, parent, postCount, dispatch } = props;
 
+  const onPressCategory = (id: number) => {
+    dispatch(setPostsArgs({ cat: id }));
+    dispatch(switchHomeTab(1));
+  };
+
   return (
     <TouchableHighlight
       activeOpacity={0.3}
       underlayColor={'#f4f8ff'}
       style={styles.itemContainer}
-      onPress={() => dispatch(switchHomeTab(1, { cat: id }))}
+      onPress={() => onPressCategory(id)}
     >
       <View elevation={3} style={styles.item}>
         <Text style={styles.text}>{title}</Text>

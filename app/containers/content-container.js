@@ -93,7 +93,6 @@ class ContentContainer extends Component {
   render() {
     const { goBack } = this.props;
     const { id } = this.props.post;
-    console.log(this.props);
 
     return (
       <Container style={{ backgroundColor: '#fff' }}>

@@ -53,7 +53,7 @@ export default class CategoryList extends Component {
   }
 
   render() {
-    const { status, categoryItems } = this.props;
+    const { categoryItems } = this.props;
 
     return (
       <View

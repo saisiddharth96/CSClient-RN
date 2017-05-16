@@ -25,8 +25,9 @@ export default class PostList extends Component {
 
   componentDidMount() {
     const { dispatch, currentPage, args } = this.props;
+    console.log('3333', args);
     if (!args) return dispatch(getPosts(currentPage));
-    if (args.cat) return dispatch(getPosts(currentPage, 15, { cat: args.cat }));
+    if (args.cat) return dispatch(getPosts(currentPage, { cat: args.cat }));
   }
 
   componentWillUnmount() {
@@ -36,10 +37,11 @@ export default class PostList extends Component {
 
   onEndReached = () => {
     const { dispatch, status, currentPage, args } = this.props;
+    console.log('4444', args);
     if (status !== 'loading') {
-      if (!args) return dispatch(getPosts(currentPage + 1, 15));
+      if (!args) return dispatch(getPosts(currentPage + 1));
       if (args.cat)
-        return dispatch(getPosts(currentPage + 1, 15, { cat: args.cat }));
+        return dispatch(getPosts(currentPage + 1, { cat: args.cat }));
     }
   };
 
@@ -84,7 +86,7 @@ export default class PostList extends Component {
   }
 
   render() {
-    const { status, postItems, args } = this.props;
+    const { status, postItems } = this.props;
     return (
       <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#fff' }}>
         {this.renderPostMenuBar()}

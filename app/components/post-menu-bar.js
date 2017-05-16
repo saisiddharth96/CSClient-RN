@@ -5,7 +5,7 @@
 import React, { PropTypes } from 'react';
 import { TextInput, TouchableOpacity, View } from 'react-native';
 import { Icon } from 'native-base';
-import { clearPosts } from '../actions/actions-core';
+import { clearPosts, getPosts } from '../actions/actions-core';
 import { switchHomeTab } from '../actions/actions-navigation';
 
 export const PostMenuBar = props => {
@@ -13,7 +13,8 @@ export const PostMenuBar = props => {
 
   const onSubmitSearch = keyword => {
     dispatch(clearPosts());
-    dispatch(switchHomeTab(1, { s: keyword }));
+    dispatch(switchHomeTab(1));
+    dispatch(getPosts(1, 10, { s: keyword }));
   };
 
   return (

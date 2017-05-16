@@ -12,26 +12,25 @@ export function getNonce(controller, method) {
   };
 }
 
-export function getPosts(page, count, args = {}) {
+export function getPosts(page, args) {
   return {
     type: Types.GET_POSTS,
     page: page,
-    count: count,
-    ...args,
-  };
-}
-
-export function getRecentPosts(page: number, count: ?number) {
-  return {
-    type: Types.GET_RECENT_POSTS,
-    page: page,
-    count: count,
+    args,
   };
 }
 
 export function clearPosts() {
   return {
     type: Types.CLEAR_POSTS,
+  };
+}
+
+export function setPostsArgs(args) {
+  console.log('1111', args);
+  return {
+    type: Types.SET_POSTS_ARGS,
+    args,
   };
 }
 
@@ -82,7 +81,6 @@ export function receivePosts(
   count: number,
   countTotal: number,
   pages: number,
-  query: ?Object,
 ) {
   return {
     type: Types.RECEIVE_POSTS,
@@ -91,7 +89,6 @@ export function receivePosts(
     count: count,
     countTotal: countTotal,
     pages: pages,
-    query: query,
   };
 }
 

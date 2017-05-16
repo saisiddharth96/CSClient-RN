@@ -23,6 +23,7 @@ const Types = {
   RELOAD_POSTS: 'RELOAD_POSTS',
   CLEAR_POSTS: 'CLEAR_POSTS',
   CLEAR_POST: 'CLEAR_POST',
+  SET_POSTS_ARGS: 'SET_POSTS_ARGS',
 };
 
 export default Types;

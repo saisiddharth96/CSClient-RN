@@ -60,15 +60,8 @@ const create = (baseURL = 'https://clip-sub.com/api/') => {
     return api.post('user/generate_auth_cookie', data);
   };
 
-  const getRecentPosts = (count: number, page: number, postType: string) =>
-    api.get('get_recent_posts', {
-      count: count,
-      page: page,
-      post_type: postType,
-    });
-
-  const getPosts = (count: number, page: number, query) =>
-    api.get('get_posts', { count: count, page: page, json: 1, ...query });
+  const getPosts = (page: number, args) =>
+    api.get('get_posts', { page: page, json: 1, ...args });
 
   const getCategoryIndex = (parentId: number) =>
     api.get('get_category_index', { parent: parentId });
@@ -80,7 +73,6 @@ const create = (baseURL = 'https://clip-sub.com/api/') => {
   return {
     getNonce,
     generateAuthCookie,
-    getRecentPosts,
     getPosts,
     getCategoryIndex,
     getPageIndex,

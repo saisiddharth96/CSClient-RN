@@ -44,7 +44,6 @@ export const home = (state = { activeTabIndex: 1 }, action) => {
   case Types.SWITCH_HOME_TAB:
     return {
       activeTabIndex: action.tabIndex,
-      args: action.args,
     };
   default:
     return state;

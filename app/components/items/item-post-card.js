@@ -69,8 +69,8 @@ const ItemPostCard = props => {
   };
 
   const itemNode = HTMLParser.parse(he.unescape(content));
-  // const imageLink = 'https://lorempixel.com/400/200/';
-  const imageLink = itemNode.querySelector('img').attributes['data-lazy-src'];
+  const imageLink = 'https://lorempixel.com/400/200/';
+  //const imageLink = itemNode.querySelector('img').attributes['data-lazy-src'];
   // By default, it parses the first image in the post.
 
   return (

@@ -26,7 +26,7 @@ const HomeContainer = props => {
   const renderHomeContent = () => {
     switch (home.activeTabIndex) {
       case 1:
-        return <PostList {...props.posts} args={home.args} dispatch={props.dispatch} />;
+        return <PostList {...props.posts} dispatch={props.dispatch} />;
       case 2:
         return <CategoryList {...props.categories} dispatch={props.dispatch} />;
       case 3:

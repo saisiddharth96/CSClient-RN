@@ -7,11 +7,10 @@ import Types from './types-navigation';
 /**
  * args: { query: string, categoryId: number }
  */
-export function switchHomeTab(tabIndex: number, args: ?Object) {
+export function switchHomeTab(tabIndex: number) {
   return {
     type: Types.SWITCH_HOME_TAB,
     tabIndex,
-    args,
   };
 }
 
