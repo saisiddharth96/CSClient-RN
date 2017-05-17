@@ -4,7 +4,9 @@
 'use strict';
 import React, { Component, PropTypes } from 'react';
 import { View, FlatList } from 'react-native';
-import { Spinner } from 'native-base';
+import { Spinner, List } from 'native-base';
+import uuidV4 from 'uuid/v4';
+import uuidV1 from 'uuid/v1';
 import { getPosts, clearPosts } from '../actions/actions-core';
 import { PostMenuBar } from './post-menu-bar';
 import { ItemPostCard } from './items/item-post-card';
@@ -50,22 +52,31 @@ export default class PostList extends Component {
 
   renderPostList(posts) {
     return (
+      <List
+        dataArray={posts}
+        renderRow={item => this.renderListItem(item)}
+        onEndReached={this.onEndReached}
+        onEndReachedThreshold={1}
+        renderFooter={this.renderLoadingIndicator}
+      />
+    );
+    /*return (
       <FlatList
         data={posts}
-        keyExtractor={item => item.id}
+        keyExtractor={item => uuidV4()}
         renderItem={({ item }) => this.renderListItem(item)}
         onEndReached={this.onEndReached}
         onEndReachedThreshold={1}
         ListFooterComponent={this.renderLoadingIndicator}
       />
-    );
+    );*/
   }
 
   renderPostGrid(posts) {
     return (
       <FlatList
         data={posts}
-        keyExtractor={item => item.id}
+        keyExtractor={item => uuidV1() /*item.id*/}
         renderItem={({ item }) => this.renderGridItem(item)}
         onEndReached={this.onEndReached}
         onEndReachedThreshold={1}
@@ -88,7 +99,9 @@ export default class PostList extends Component {
       <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#fff' }}>
         {this.renderPostMenuBar()}
         {status === 'loaded' && postItems.length > 0
-          ? viewMode === 'grid' ? this.renderPostGrid(postItems) : null
+          ? viewMode === 'grid'
+              ? this.renderPostGrid(postItems)
+              : this.renderPostList(postItems)
           : <Spinner color="red" />}
       </View>
     );
