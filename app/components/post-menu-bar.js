@@ -7,6 +7,7 @@ import { TextInput, TouchableOpacity, View } from 'react-native';
 import { Icon } from 'native-base';
 import { clearPosts, getPosts } from '../actions/actions-core';
 import { switchHomeTab } from '../actions/actions-navigation';
+import { setViewMode } from '../actions/actions-misc';
 
 export const PostMenuBar = props => {
   const { dispatch } = props;
@@ -30,10 +31,16 @@ export const PostMenuBar = props => {
         />
         <Icon name="ios-close-circle" style={styles.searchBoxIcon} />
       </View>
-      <TouchableOpacity style={styles.iconWrapper}>
+      <TouchableOpacity
+        style={styles.iconWrapper}
+        onPress={() => dispatch(setViewMode('list'))}
+      >
         <Icon name="ios-images-outline" style={styles.iconOutside} />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.iconWrapper}>
+      <TouchableOpacity
+        style={styles.iconWrapper}
+        onPress={() => dispatch(setViewMode('grid'))}
+      >
         <Icon name="grid" style={styles.iconOutside} />
       </TouchableOpacity>
     </View>

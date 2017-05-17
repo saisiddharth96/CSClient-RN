@@ -1,7 +1,7 @@
 'use strict';
 
 const Types = {
-  SET_LOADING: "SET_LOADING",
+  SET_VIEW_MODE: 'SET_VIEW_MODE',
 };
 
 export default Types;

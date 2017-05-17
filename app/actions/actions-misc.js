@@ -3,11 +3,15 @@
  */
 'use strict';
 
-import Types from "./types-misc";
+import Types from './types-misc';
 
-export function setLoading(isLoading: boolean) {
+/**
+ * 
+ * @param {*} viewMode: One of 'list' / 'grid'
+ */
+export function setViewMode(viewMode: string) {
   return {
-    type: Types.SET_LOADING,
-    isLoading
-  }
+    type: Types.SET_VIEW_MODE,
+    viewMode,
+  };
 }

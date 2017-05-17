@@ -15,17 +15,16 @@ export default class PostList extends Component {
     currentPage: PropTypes.number.isRequired,
     postItems: PropTypes.arrayOf(PropTypes.object),
     status: PropTypes.oneOf(['loading', 'error', 'loaded']),
-    viewMode: PropTypes.oneOf(['list', 'cards', 'tiles']),
+    viewMode: PropTypes.oneOf(['list', 'grid']),
   };
 
   static defaultProps = {
     status: 'loading',
-    viewMode: 'cards',
+    viewMode: 'list',
   };
 
   componentDidMount() {
     const { dispatch, currentPage, args } = this.props;
-    console.log('3333', args);
     if (!args) return dispatch(getPosts(currentPage));
     if (args.cat) return dispatch(getPosts(currentPage, { cat: args.cat }));
   }
@@ -37,7 +36,6 @@ export default class PostList extends Component {
 
   onEndReached = () => {
     const { dispatch, status, currentPage, args } = this.props;
-    console.log('4444', args);
     if (status !== 'loading') {
       if (!args) return dispatch(getPosts(currentPage + 1));
       if (args.cat)
@@ -47,10 +45,8 @@ export default class PostList extends Component {
 
   renderListItem = item => <ItemPostCard post={item} {...this.props} />;
   renderGridItem = item => <ItemPostGrid post={item} {...this.props} />;
-
   renderPostMenuBar = () => <PostMenuBar {...this.props} />;
-
-  renderLoadingIndicator = () => <Spinner />;
+  renderLoadingIndicator = () => <Spinner color="red" />;
 
   renderPostList(posts) {
     return (
@@ -72,7 +68,7 @@ export default class PostList extends Component {
         keyExtractor={item => item.id}
         renderItem={({ item }) => this.renderGridItem(item)}
         onEndReached={this.onEndReached}
-        onEndReachedThreshold={2}
+        onEndReachedThreshold={1}
         numColumns={2}
         style={{ alignSelf: 'stretch' }}
         columnWrapperStyle={{
@@ -86,12 +82,13 @@ export default class PostList extends Component {
   }
 
   render() {
-    const { status, postItems } = this.props;
+    const { status, viewMode, postItems } = this.props;
+    console.log(this.props.viewMode);
     return (
       <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#fff' }}>
         {this.renderPostMenuBar()}
-        {status === 'loaded'
-          ? this.renderPostList(postItems)
+        {status === 'loaded' && postItems.length > 0
+          ? viewMode === 'grid' ? this.renderPostGrid(postItems) : null
           : <Spinner color="red" />}
       </View>
     );

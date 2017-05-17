@@ -78,17 +78,17 @@ export function getCategoryIndex(parentId: number) {
 export function receivePosts(
   currentPage: number,
   posts: Array<Object>,
-  count: number,
   countTotal: number,
   pages: number,
+  args: Object,
 ) {
   return {
     type: Types.RECEIVE_POSTS,
     currentPage: currentPage,
     posts: posts,
-    count: count,
     countTotal: countTotal,
     pages: pages,
+    args,
   };
 }
 

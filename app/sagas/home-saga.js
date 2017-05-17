@@ -18,7 +18,6 @@ export function* getPosts(action) {
   if (args) delete args.type;
   try {
     const result = yield call(api.getPosts, page, args);
-    console.log(result);
     if (result.data.status === DataStatus.OK) {
       yield put(
         receivePosts(

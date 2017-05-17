@@ -3,18 +3,43 @@
  */
 'use strict';
 import React from 'react';
-import { View, TouchableOpacity, Image, Platform } from 'react-native';
+import { View, TouchableOpacity, Image, Platform, Share } from 'react-native';
 import { Text, Icon } from 'native-base';
+import HTMLParser from 'fast-html-parser';
+import he from 'he';
 import I18n from '../../localizations/I18n';
 
 const ItemPostGrid = props => {
-  const { dispatch, title, authorName, image, commentCount } = props;
+  const { id, title, author, content, comment_count, url } = props.post;
+  const { dispatch } = props;
+  const sharePost = () => {
+    const content = {
+      message: url,
+      title: 'Clip-sub share',
+      url: url,
+    };
+
+    const options = {
+      tintColor: '#fff',
+      dialogTitle: 'Doko;',
+    };
+
+    Share.share(content, options);
+  };
+
+  const itemNode = HTMLParser.parse(he.unescape(content));
+  // const imageLink = 'https://lorempixel.com/400/200/';
+  const imageLink = itemNode.querySelector('img').attributes['data-lazy-src'];
+  // By default, it parses the first image in the post.
 
   return (
     <View style={styles.itemWrapper}>
-      <Image source={{ uri: image }} style={styles.thumbnailImage} />
-      <Text style={styles.title}>
-        {title}
+      <Image source={{ uri: imageLink }} style={styles.thumbnailImage} />
+      <Text
+        style={styles.title}
+        onPress={() => dispatch(navigate('Content', { postId: id }))}
+      >
+        {he.unescape(title)}
       </Text>
       <TouchableOpacity style={{ marginLeft: 12 }}>
         <View style={styles.author}>
@@ -24,7 +49,7 @@ const ItemPostGrid = props => {
             style={{ fontSize: 14, color: '#1976D2' }}
           />
           <Text style={styles.authorName}>
-            {authorName}
+            {author.name}
           </Text>
         </View>
       </TouchableOpacity>
@@ -43,12 +68,12 @@ const ItemPostGrid = props => {
               style={{ fontSize: 12, color: '#676767' }}
             />
             <Text style={{ fontSize: 9, marginLeft: 6, color: '#676767' }}>
-              {I18n.t('comment', { count: commentCount })}
+              {I18n.t('comment', { count: comment_count })}
             </Text>
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => sharePost()}>
           <View style={{ flexDirection: 'row', paddingVertical: 8 }}>
             <Icon name="md-share" style={{ fontSize: 12, color: '#676767' }} />
             <Text style={{ fontSize: 9, marginLeft: 6, color: '#676767' }}>
@@ -105,7 +130,7 @@ const styles = {
     flex: 1,
     alignSelf: 'stretch',
     height: 0.7,
-    opacity: 0.3,
+    opacity: 0,
     backgroundColor: '#4c4c4c',
     marginHorizontal: 6,
   },

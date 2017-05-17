@@ -16,7 +16,7 @@ import { setPostsArgs } from '../../actions/actions-core';
   "post_count": 2
  */
 const ItemCategory = props => {
-  const { id, title, slug, parent, postCount, dispatch } = props;
+  const { id, title, dispatch } = props;
 
   const onPressCategory = (id: number) => {
     dispatch(setPostsArgs({ cat: id }));

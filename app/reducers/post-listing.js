@@ -1,5 +1,6 @@
 'use strict';
-import Types from '../actions/types-core';
+import CoreTypes from '../actions/types-core';
+import MiscTypes from '../actions/types-misc';
 
 const INITIAL_STATE = {
   currentPage: 1,
@@ -11,7 +12,7 @@ const INITIAL_STATE = {
 
 export const posts = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case Types.RECEIVE_POSTS:
+    case CoreTypes.RECEIVE_POSTS:
       return {
         ...state,
         status: 'loaded',
@@ -19,17 +20,22 @@ export const posts = (state = INITIAL_STATE, action) => {
         postItems: state.postItems.concat(action.posts),
         args: action.args,
       };
-    case Types.CLEAR_POSTS:
+    case CoreTypes.CLEAR_POSTS:
       return {
         ...state,
         status: 'loading',
         currentPage: 1,
         postItems: [],
       };
-    case Types.SET_POSTS_ARGS:
+    case CoreTypes.SET_POSTS_ARGS:
       return {
         ...state,
         args: action.args,
+      };
+    case MiscTypes.SET_VIEW_MODE:
+      return {
+        ...state,
+        viewMode: action.viewMode,
       };
     default:
       return state;
