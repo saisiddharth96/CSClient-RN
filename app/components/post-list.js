@@ -5,8 +5,6 @@
 import React, { Component, PropTypes } from 'react';
 import { View, FlatList } from 'react-native';
 import { Spinner, List } from 'native-base';
-import uuidV4 from 'uuid/v4';
-import uuidV1 from 'uuid/v1';
 import { getPosts, clearPosts } from '../actions/actions-core';
 import { PostMenuBar } from './post-menu-bar';
 import { ItemPostCard } from './items/item-post-card';
@@ -76,7 +74,7 @@ export default class PostList extends Component {
     return (
       <FlatList
         data={posts}
-        keyExtractor={item => uuidV1() /*item.id*/}
+        keyExtractor={item => item.id}
         renderItem={({ item }) => this.renderGridItem(item)}
         onEndReached={this.onEndReached}
         onEndReachedThreshold={1}

@@ -10,7 +10,7 @@ import { switchHomeTab } from '../actions/actions-navigation';
 import { setViewMode } from '../actions/actions-misc';
 
 export const PostMenuBar = props => {
-  const { dispatch } = props;
+  const { dispatch, viewMode } = props;
 
   const onSubmitSearch = keyword => {
     dispatch(clearPosts());
@@ -33,13 +33,15 @@ export const PostMenuBar = props => {
       </View>
       <TouchableOpacity
         style={styles.iconWrapper}
-        onPress={() => dispatch(setViewMode('list'))}
+        onPress={() =>
+          viewMode !== 'list' ? dispatch(setViewMode('list')) : null}
       >
-        <Icon name="ios-images-outline" style={styles.iconOutside} />
+        <Icon active name="ios-images-outline" style={styles.iconOutside} />
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.iconWrapper}
-        onPress={() => dispatch(setViewMode('grid'))}
+        onPress={() =>
+          viewMode !== 'grid' ? dispatch(setViewMode('grid')) : null}
       >
         <Icon name="grid" style={styles.iconOutside} />
       </TouchableOpacity>
