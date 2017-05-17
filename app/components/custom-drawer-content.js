@@ -103,14 +103,16 @@ const CustomDrawerContent = props => {
         </Body>
       </ListItem>
 
-      <ListItem icon onPress={() => onPressLogout()}>
-        <Left>
-          <Icon name="ios-exit-outline" style={{ color: '#EF5350' }} />
-        </Left>
-        <Body>
-          <Text style={drawerStyle.itemText}>Log out</Text>
-        </Body>
-      </ListItem>
+      {user.id !== null
+        ? <ListItem icon onPress={() => onPressLogout()}>
+            <Left>
+              <Icon name="ios-exit-outline" style={{ color: '#EF5350' }} />
+            </Left>
+            <Body>
+              <Text style={drawerStyle.itemText}>Log out</Text>
+            </Body>
+          </ListItem>
+        : null}
     </View>
   );
 };

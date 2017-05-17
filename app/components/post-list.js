@@ -20,7 +20,7 @@ export default class PostList extends Component {
 
   static defaultProps = {
     status: 'loading',
-    viewMode: 'list',
+    viewMode: 'grid',
   };
 
   componentDidMount() {
@@ -81,7 +81,7 @@ export default class PostList extends Component {
         numColumns={2}
         style={{ alignSelf: 'stretch' }}
         columnWrapperStyle={{
-          marginTop: 5,
+          marginTop: 6,
           flexWrap: 'wrap',
           justifyContent: 'space-between',
         }}

@@ -145,7 +145,7 @@ export default {
   activeTab: (platform === 'ios') ? '#007aff' : '#fff',
   sTabBarActiveTextColor: '#007aff',
   tabBarActiveTextColor: '#fff',
-  tabActiveBgColor: (platform === 'ios') ? '#EF5350' : undefined,
+  tabActiveBgColor: (platform === 'ios') ? '#EF5350' : '#EF5350' /*undefined*/,
 
     // Tab
   tabDefaultBg: '#2874F0',
