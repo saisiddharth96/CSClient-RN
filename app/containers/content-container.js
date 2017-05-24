@@ -11,6 +11,7 @@ import {
   Image,
   FlatList,
 } from 'react-native';
+import { Tab, Tabs } from 'native-base';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import HTMLView from 'react-native-htmlview';
