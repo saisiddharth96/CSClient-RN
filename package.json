@@ -22,7 +22,7 @@
   "dependencies": {
     "blueimp-md5": "^2.7.0",
     "fast-html-parser": "^1.0.1",
-    "fuse.js": "^3.0.3",
+    "fuse.js": "^3.0.4",
     "he": "^1.1.1",
     "js-base64": "^2.1.9",
     "lodash": "^4.17.4",
