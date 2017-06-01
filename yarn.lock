@@ -4252,7 +4252,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@15.5.10, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@~15.5.7:
+prop-types@15.5.10, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8:
   version "15.5.10"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
   dependencies:
@@ -4351,15 +4351,6 @@ react-devtools-core@^2.0.8:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
-react-dom@^15.5.4:
-  version "15.5.4"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.5.4.tgz#ba0c28786fd52ed7e4f2135fe0288d462aef93da"
-  dependencies:
-    fbjs "^0.8.9"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.0"
-    prop-types "~15.5.7"
-
 react-native-animatable@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.2.0.tgz#fd279c6ee4b49161c6cc3b951ed7765b35a73467"
@@ -4451,6 +4442,10 @@ react-native-parse-html@^2.2.3:
   resolved "https://registry.yarnpkg.com/react-native-parse-html/-/react-native-parse-html-2.2.3.tgz#0d5a312ecf20645b2fa6c1f1e3bdc45007496157"
   dependencies:
     react-native-stream "^0.1.0"
+
+react-native-picker@^4.0.18:
+  version "4.0.18"
+  resolved "https://registry.yarnpkg.com/react-native-picker/-/react-native-picker-4.0.18.tgz#cd75244bb7819e29c2910171120e62be8bf690fb"
 
 react-native-popup-dialog@^0.7.29:
   version "0.7.29"
