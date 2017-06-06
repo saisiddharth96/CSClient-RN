@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "blueimp-md5": "^2.7.0",
+    "d3-force": "^1.0.6",
     "fast-html-parser": "^1.0.1",
     "fuse.js": "^3.0.4",
     "he": "^1.1.1",
@@ -30,7 +31,7 @@
     "moment": "^2.18.1",
     "native-base": "^2.1.4",
     "querystringify": "^1.0.0",
-    "react": "^16.0.0-alpha.6",
+    "react": "16.0.0-alpha.6",
     "react-native": "^0.44.2",
     "react-native-circle-button": "^1.0.8",
     "react-native-config": "^0.4.2",

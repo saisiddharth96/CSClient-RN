@@ -6,6 +6,7 @@ import { StackNavigator } from 'react-navigation';
 import AuthScreen from '../containers/auth-container';
 import PreferencesScreen from '../containers/preferences-container';
 import ProfileScreen from '../containers/profile-container';
+import TestScreen from '../containers/test-container';
 import ContentScreen from '../containers/content-container';
 import HomeDrawerNavigator from './drawer-navigator';
 
@@ -15,10 +16,11 @@ const routeConfig = {
   Preferences: { screen: PreferencesScreen },
   Profile: { screen: ProfileScreen },
   Content: { screen: ContentScreen },
+  Test: { screen: TestScreen },
 };
 
 const stackNavigatorConfig = {
-  initialRouteName: 'HomeDrawer',
+  initialRouteName: 'Test',
   mode: 'card',
   headerMode: 'none',
   navigationOptions: {
