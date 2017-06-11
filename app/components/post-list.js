@@ -98,8 +98,8 @@ export default class PostList extends Component {
         {this.renderPostMenuBar()}
         {status === 'loaded' && postItems.length > 0
           ? viewMode === 'grid'
-              ? this.renderPostGrid(postItems)
-              : this.renderPostList(postItems)
+            ? this.renderPostGrid(postItems)
+            : this.renderPostList(postItems)
           : <Spinner color="red" />}
       </View>
     );
