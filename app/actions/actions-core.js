@@ -124,7 +124,7 @@ export function receivePage(page: Object) {
 }
 
 export function receiveCategoryIndex(
-  categories: ?Array<any> = [],
+  categories: Array<any> = [],
   count: number = 0,
 ) {
   return {

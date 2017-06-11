@@ -1,10 +1,15 @@
 'use strict';
 import React from 'react';
 import { Icon, Button } from 'native-base';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
+import API, { DataStatus } from '../services/API';
 import Styles from './_styles/styles-comment-box';
 
+const api = API.create();
+
 const onSubmit = (values, dispatch) => {
+  const { nickname, email, comment } = values;
+  console.log(values);
   return;
 };
 
