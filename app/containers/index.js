@@ -9,19 +9,13 @@ import { connect } from 'react-redux';
 import { addNavigationHelpers } from 'react-navigation';
 import AppNavigator from '../navigations/app-navigator';
 
-const AppWithNavigationState = ({ dispatch, nav }) => (
-  <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
-);
+const AppWithNavigationState = ({ dispatch, nav }) =>
+  <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />;
 
 AppWithNavigationState.propTypes = {
   dispatch: PropTypes.func.isRequired,
   nav: PropTypes.object.isRequired,
 };
-
-/*const mapStateToProps = state => ({
-  nav: state.nav,
-  posts: state.posts,
-});*/
 
 const mapStateToProps = state => {
   return {

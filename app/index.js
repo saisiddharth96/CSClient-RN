@@ -8,7 +8,7 @@ import { StyleProvider } from 'native-base';
 import getTheme from '../native-base-theme/components';
 import megumi from '../native-base-theme/variables/megumi';
 import CustomStore from './stores/custom-store';
-import RootContainer from './containers/root-container';
+import RootContainer from './containers/index';
 
 const store = CustomStore();
 

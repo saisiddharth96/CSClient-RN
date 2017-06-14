@@ -1,0 +1,11 @@
+'use strict';
+
+const Types = {
+  GET_PAGE: 'GET_PAGE',
+  GET_PAGES: 'GET_PAGES',
+  CREATE_PAGE: 'CREATE_PAGE',
+  CLEAR_PAGES: 'CLEAR_PAGES',
+  CLEAR_PAGE: 'CLEAR_PAGE',
+};
+
+export default Types;

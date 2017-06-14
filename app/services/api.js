@@ -1,10 +1,11 @@
 /**
  * @flow
  */
-'use strict';
-import apisauce from 'apisauce';
 
-const RESPONSE_STATUS_OK = 200;
+'use strict';
+
+import apisauce from 'apisauce';
+import I18n from 'csclient/I18n';
 
 const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
   const api = apisauce.create({
@@ -21,9 +22,9 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
     api.addMonitor(console.tron.apisauce);
   }
 
-  /**
+  /**********************************
    * POSTS
-   */
+   **********************************/
   // List posts: Posts: http://v2.wp-api.org/reference/posts/
   const listPosts = params => {
     api.get('posts', { ...params });
@@ -49,9 +50,9 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
     api.delete('posts/' + id);
   };
 
-  /**
+  /**********************************
    * POSTS Revisions
-   */
+   **********************************/
   // List post revisions: https://developer.wordpress.org/rest-api/reference/post-revisions/#list-post-revisions
   const listPostRevisions = parentId => {
     api.get('posts/' + parentId + '/revisions');
@@ -66,4 +67,8 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
   const deletePostRevision = (parentId, id) => {
     api.delete('posts/' + parentId + '/revisions' + id);
   };
+
+  /**********************************
+   * PAGES
+   **********************************/
 };

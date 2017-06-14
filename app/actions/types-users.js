@@ -1,0 +1,12 @@
+'use strict';
+
+const Types = {
+  RETRIEVE_USER: 'RETRIEVE_USER',
+  LIST_USERS: 'LIST_USERS',
+  CREATE_USER: 'CREATE_USER',
+  UPDATE_USER: 'UPDATE_USER',
+  DELETE_USER: 'DELETE_USER',
+  LOG_OUT: 'LOG_OUT',
+};
+
+export default Types;
