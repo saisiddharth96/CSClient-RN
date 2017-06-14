@@ -1,35 +1,12 @@
+/**
+ * @flow
+ */
 'use strict';
 import apisauce from 'apisauce';
 
-const DataStatus = { OK: 'ok', ERROR: 'error' };
 const RESPONSE_STATUS_OK = 200;
-const Controllers = {
-  CORE: 'core',
-  RESPOND: 'respond',
-  WIDGETS: 'widgets',
-  POSTS: 'posts',
-  USER: 'user',
-};
 
-const Methods = {
-  CORE: {
-    INFO: 'info',
-    GET_RECENT_POSTS: 'get_recent_posts',
-    GET_POSTS: 'get_posts',
-    GET_POST: 'get_post',
-    GET_PAGE: 'get_page',
-    GET_DATE_POSTS: 'get_date_posts',
-    GET_CATEGORY_INDEX: 'get_category_index',
-    GET_PAGE_INDEX: 'get_page_index',
-    GET_NONCE: 'get_nonce',
-  },
-  USER: {
-    REGISTER: 'register',
-    GENERATE_AUTH_COOKIE: 'generate_auth_cookie',
-  },
-};
-
-const create = (baseURL = 'https://clip-sub.com/api/') => {
+const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
   const api = apisauce.create({
     baseURL,
     headers: {
@@ -44,41 +21,49 @@ const create = (baseURL = 'https://clip-sub.com/api/') => {
     api.addMonitor(console.tron.apisauce);
   }
 
-  const getNonce = (controller: string, method: string) =>
-    api.get('get_nonce', { controller, method });
-
-  // https://github.com/unshiftio/querystringify#qsstringify
-  const generateAuthCookie = (
-    username: string,
-    password: string,
-    seconds: number,
-  ) => {
-    let data = new FormData();
-    data.append('username', username);
-    data.append('password', password);
-    data.append('seconds', seconds);
-    return api.post('user/generate_auth_cookie', data);
+  /**
+   * POSTS
+   */
+  // List posts: Posts: http://v2.wp-api.org/reference/posts/
+  const listPosts = params => {
+    api.get('posts', { ...params });
   };
 
-  const getPosts = (page: number, args) =>
-    api.get('get_posts', { page: page, json: 1, ...args });
+  // Retrieve a post: https://developer.wordpress.org/rest-api/reference/posts/#retrieve-a-post
+  const retrievePost = (id, args) => {
+    api.get('posts/' + id, { ...args });
+  };
 
-  const getCategoryIndex = (parentId: number) =>
-    api.get('get_category_index', { parent: parentId });
+  // Create post: https://developer.wordpress.org/rest-api/reference/posts/#create-a-post
+  const createPost = args => {
+    api.post('posts', { ...args });
+  };
 
-  const getPageIndex = () => api.get('get_page_index');
+  // Update post: https://developer.wordpress.org/rest-api/reference/posts/#update-a-post
+  const updatePost = (id, args) => {
+    api.post('posts/' + id, { ...args });
+  };
 
-  const getPost = (postId: number) => api.get('get_post', { id: postId });
+  // Delete post: https://developer.wordpress.org/rest-api/reference/posts/#delete-a-post
+  const deletePost = id => {
+    api.delete('posts/' + id);
+  };
 
-  return {
-    getNonce,
-    generateAuthCookie,
-    getPosts,
-    getCategoryIndex,
-    getPageIndex,
-    getPost,
+  /**
+   * POSTS Revisions
+   */
+  // List post revisions: https://developer.wordpress.org/rest-api/reference/post-revisions/#list-post-revisions
+  const listPostRevisions = parentId => {
+    api.get('posts/' + parentId + '/revisions');
+  };
+
+  // Retrieve single post revision: https://developer.wordpress.org/rest-api/reference/post-revisions/#retrieve-a-post-revision
+  const retrievePostRevision = (parentId, id) => {
+    api.get('posts/' + parentId + '/revisions' + id);
+  };
+
+  // Delete a post revision: https://developer.wordpress.org/rest-api/reference/post-revisions/#delete-a-post-revision
+  const deletePostRevision = (parentId, id) => {
+    api.delete('posts/' + parentId + '/revisions' + id);
   };
 };
-
-export default { create };
-export { RESPONSE_STATUS_OK, DataStatus, Controllers, Methods };
