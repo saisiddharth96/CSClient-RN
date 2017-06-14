@@ -5,7 +5,11 @@
 'use strict';
 import Types from './types-comment';
 
-export function submitComment(nickname: string, email: string, content: string) {
+export function submitComment(
+  nickname: string,
+  email: string,
+  content: string,
+) {
   return {
     type: Types.SUBMIT_COMMENT,
     nickname,
