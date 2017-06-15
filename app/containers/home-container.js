@@ -1,4 +1,9 @@
+/**
+ * @flow
+ */
+
 'use strict';
+
 import React from 'react';
 import { View, StatusBar } from 'react-native';
 import {
@@ -14,14 +19,14 @@ import {
   Title,
 } from 'native-base';
 import { connect } from 'react-redux';
-import { NavigationActions } from 'react-navigation';
+import { bindActionCreators } from 'redux';
 import OneSignal from 'react-native-onesignal';
 import PostList from '../components/post-list';
 import CategoryList from '../components/category-list';
-import { switchHomeTab } from '../actions/actions-navigation';
+import * as navigationActions from '../actions/actions-navigation';
 
 const HomeContainer = props => {
-  const { openDrawer, home, dispatch } = props;
+  const { navigate, home, dispatch } = props;
 
   const renderHomeContent = () => {
     switch (home.activeTabIndex) {
@@ -41,7 +46,7 @@ const HomeContainer = props => {
       <Header iosBarStyle={'light-content'}>
         <StatusBar backgroundColor="#d32f2f" barStyle="light-content" />
         <Left>
-          <Button title={''} transparent onPress={() => openDrawer()}>
+          <Button title={''} transparent onPress={() => navigate('drawerOpen')}>
             <Icon name="menu" />
           </Button>
         </Left>
@@ -104,14 +109,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  openDrawer: () => {
-    const openDrawerAction = NavigationActions.navigate({
-      routeName: 'DrawerOpen',
-    });
-    dispatch(openDrawerAction);
-  },
-  dispatch,
-});
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(navigationActions, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

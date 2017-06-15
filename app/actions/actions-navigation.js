@@ -17,7 +17,7 @@ export function switchHomeTab(tabIndex: number) {
 export function navigate(screenName, params) {
   return NavigationActions.navigate({
     routeName: screenName,
-    params: { ...params },
+    params,
   });
 }
 

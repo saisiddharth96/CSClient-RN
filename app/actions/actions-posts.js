@@ -30,3 +30,9 @@ export function clearPost() {
     type: Types.CLEAR_POST,
   };
 }
+
+export function receivePosts(posts: Array) {
+  return {
+    posts,
+  };
+}
