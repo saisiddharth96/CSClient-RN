@@ -2,7 +2,7 @@
  * @flow
  */
 'use strict';
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Image, TouchableOpacity, Platform, Share } from 'react-native';
 import {
   Body,
@@ -22,7 +22,8 @@ import I18n from '../../localizations/I18n';
 
 const ItemPostCard = props => {
   const { navigate } = props;
-  const { id, author, content, title, excerpt, link } = props.post;
+  const { id, content, title, excerpt, link } = props.post;
+  const { author, replies } = props.post._embedded;
   const sharePost = () => {
     const shareContent = {
       message: link,
@@ -51,12 +52,9 @@ const ItemPostCard = props => {
       </CardItem>
       <TouchableOpacity>
         <View style={styles.author}>
-          <Thumbnail
-            small
-            source={{ uri: 'https://unsplash.it/80/80?random' }}
-          />
+          <Thumbnail small source={{ uri: author[0].avatar_urls['48'] }} />
           <Text style={styles.authorName}>
-            {author.name}
+            {author[0].name}
           </Text>
         </View>
       </TouchableOpacity>
@@ -78,7 +76,9 @@ const ItemPostCard = props => {
           onPress={() => navigate('Content', { postId: id })}
         >
           <Icon name="chatbubbles" />
-          <Text>{I18n.t('comment', { count: 9 })}</Text>
+          <Text>
+            {I18n.t('comment', { count: replies ? replies.length : 0 })}
+          </Text>
         </Button>
         <Button transparent small onPress={() => sharePost()}>
           <Icon name="md-share" />
