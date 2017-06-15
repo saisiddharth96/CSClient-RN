@@ -19,65 +19,34 @@ import HTMLView from 'react-native-htmlview';
 import HTMLParser from 'fast-html-parser';
 import he from 'he';
 import I18n from '../../localizations/I18n';
-import { navigate } from '../../actions/actions-navigation';
-
-/**
- * Basic needs for item:
- * title
- * title_plain
- * type: post
- * url
- * excerpt
- * id
- * categories: description / id / parent / post_count / slug / title
- * author: description / name / nickname / slug / id
- * comment_count
- * comment_status
- * comments
- * custom_fields: onesignal_meta_box_present / onesignal_send_notification
- * date: like 2017-02-22 00:11:14
- * modified
- * slug
- * status: publish
- * tags: description / id / post_count / slug / title
- */
 
 const ItemPostCard = props => {
-  const {
-    id,
-    title,
-    author,
-    content,
-    excerpt,
-    comment_count,
-    url,
-  } = props.post;
-  const { dispatch } = props;
+  const { navigate } = props;
+  const { id, author, content, title, excerpt, link } = props.post;
   const sharePost = () => {
-    const content = {
-      message: url,
+    const shareContent = {
+      message: link,
       title: 'Clip-sub share',
-      url: url,
+      url: link,
     };
 
     const options = {
       tintColor: '#fff',
-      dialogTitle: 'Doko;',
+      dialogTitle: 'Share this article',
     };
 
-    Share.share(content, options);
+    Share.share(shareContent, options);
   };
 
-  const itemNode = HTMLParser.parse(he.unescape(content));
-  // const imageLink = 'https://lorempixel.com/400/200/';
-  const imageLink = itemNode.querySelector('img').attributes['data-lazy-src'];
+  const itemNode = HTMLParser.parse(he.unescape(content.rendered));
+  const imageLink = itemNode.querySelector('img').attributes['data-orig-file'];
   // By default, it parses the first image in the post.
 
   return (
     <Card>
       <CardItem header>
         <Left>
-          <Text style={styles.title}>{he.unescape(title)}</Text>
+          <Text style={styles.title}>{he.unescape(title.rendered)}</Text>
         </Left>
       </CardItem>
       <TouchableOpacity>
@@ -93,20 +62,23 @@ const ItemPostCard = props => {
       </TouchableOpacity>
       <CardItem cardBody>
         <Body>
-          <Image source={{ uri: imageLink }} style={styles.thumbnailImage} />
+          <Image
+            source={{ uri: imageLink || '' }}
+            style={styles.thumbnailImage}
+          />
         </Body>
       </CardItem>
       <CardItem>
-        <HTMLView value={excerpt.trim()} />
+        <HTMLView value={he.unescape(excerpt.rendered.trim())} />
       </CardItem>
       <CardItem style={styles.cardBottom}>
         <Button
           transparent
           small
-          onPress={() => dispatch(navigate('Content', { postId: id }))}
+          onPress={() => navigate('Content', { postId: id })}
         >
           <Icon name="chatbubbles" />
-          <Text>{I18n.t('comment', { count: comment_count })}</Text>
+          <Text>{I18n.t('comment', { count: 9 })}</Text>
         </Button>
         <Button transparent small onPress={() => sharePost()}>
           <Icon name="md-share" />
@@ -115,24 +87,6 @@ const ItemPostCard = props => {
       </CardItem>
     </Card>
   );
-};
-
-ItemPostCard.defaultProps = {
-  title: '',
-  excerpt: '',
-  commentCount: 0,
-  slug: '',
-  id: 0,
-  thumbnailImage: {},
-};
-
-ItemPostCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  excerpt: PropTypes.string.isRequired,
-  commentCount: PropTypes.number.isRequired,
-  slug: PropTypes.string,
-  id: PropTypes.number.isRequired,
-  thumbnailImage: PropTypes.object.isRequired,
 };
 
 export { ItemPostCard };

@@ -42,16 +42,15 @@ export default class PostList extends PureComponent {
     }
   };
 
-  renderListItem = item => <ItemPostCard post={item} {...this.props} />;
-  renderGridItem = item => <ItemPostGrid post={item} {...this.props} />;
   renderPostMenuBar = () => <PostMenuBar {...this.props} />;
   renderLoadingIndicator = () => <Spinner color="red" />;
 
   renderPostList(posts) {
+    const { navigate } = this.props;
     return (
       <List
         dataArray={posts}
-        renderRow={item => this.renderListItem(item)}
+        renderRow={item => <ItemPostCard post={item} navigate={navigate} />}
         onEndReached={this.onEndReached}
         onEndReachedThreshold={1}
         renderFooter={this.renderLoadingIndicator}
@@ -64,7 +63,7 @@ export default class PostList extends PureComponent {
       <FlatList
         data={posts}
         keyExtractor={item => item.id}
-        renderItem={({ item }) => this.renderGridItem(item)}
+        renderItem={({ item }) => <ItemPostGrid post={item} />}
         onEndReached={this.onEndReached}
         onEndReachedThreshold={1}
         numColumns={2}
@@ -80,9 +79,7 @@ export default class PostList extends PureComponent {
   }
 
   render() {
-    const { viewMode } = this.props.config;
     const { list } = this.props.posts;
-    console.log(this.props.posts);
     return (
       <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#fff' }}>
         {this.renderPostList(list)}

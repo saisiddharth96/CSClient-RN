@@ -30,17 +30,13 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
    * POSTS
    **********************************/
   // List posts: Posts: http://v2.wp-api.org/reference/posts/
-  const listPosts = params => api.get('posts', { ...params });
+  const listPosts = params => api.get('posts', { ...params, _embed: 1 });
 
   // Retrieve a post: https://developer.wordpress.org/rest-api/reference/posts/#retrieve-a-post
-  const retrievePost = (id, args) => {
-    api.get('posts/' + id, { ...args });
-  };
+  const retrievePost = (id, args) => api.get('posts/' + id, { ...args });
 
   // Create post: https://developer.wordpress.org/rest-api/reference/posts/#create-a-post
-  const createPost = args => {
-    api.post('posts', { ...args });
-  };
+  const createPost = args => api.post('posts', { ...args });
 
   // Update post: https://developer.wordpress.org/rest-api/reference/posts/#update-a-post
   const updatePost = (id, args) => {

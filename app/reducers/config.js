@@ -13,10 +13,15 @@ const INIT_STATE = {
 
 export const config = (state = INIT_STATE, action) => {
   switch (action.type) {
-    case Types.RECEIVE_POST:
+    case Types.SET_VIEW_MODE:
       return {
         ...state,
-        ...action.post,
+        viewMode: action.viewMode,
+      };
+    case Types.SET_NOTIFICATION:
+      return {
+        ...state,
+        notifications: action.notifications,
       };
     default:
       return state;

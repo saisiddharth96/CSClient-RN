@@ -5,6 +5,7 @@ import { post, posts } from './posts';
 import { categories } from './categories';
 import { nav, home } from './navigation';
 import { user } from './user';
+import { config } from './config';
 
 const rootReducer = combineReducers({
   home, // contains tabIndex, args
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   categories,
   nav,
   user,
+  config,
   form: formReducer,
 });
 
