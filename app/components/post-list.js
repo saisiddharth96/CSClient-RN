@@ -12,7 +12,6 @@ import { ItemPostGrid } from './items/item-post-grid';
 
 export default class PostList extends PureComponent {
   static propTypes = {
-    currentPage: PropTypes.number.isRequired,
     postItems: PropTypes.arrayOf(PropTypes.object),
     status: PropTypes.oneOf(['loading', 'error', 'loaded']),
     viewMode: PropTypes.oneOf(['list', 'grid']),
@@ -24,9 +23,9 @@ export default class PostList extends PureComponent {
   };
 
   componentDidMount() {
-    const { dispatch, currentPage, args } = this.props;
-    //if (!args) return dispatch(getPosts(currentPage));
-    //if (args.cat) return dispatch(getPosts(currentPage, { cat: args.cat }));
+    const { getPosts, posts } = this.props;
+    const { page } = posts;
+    getPosts(page);
   }
 
   componentWillUnmount() {
@@ -81,16 +80,12 @@ export default class PostList extends PureComponent {
   }
 
   render() {
-    const { status, viewMode, postItems } = this.props;
-    console.log(this.props.viewMode);
+    const { viewMode } = this.props.config;
+    const { list } = this.props.posts;
+    console.log(this.props.posts);
     return (
       <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#fff' }}>
-        {this.renderPostMenuBar()}
-        {status === 'loaded' && postItems.length > 0
-          ? viewMode === 'grid'
-            ? this.renderPostGrid(postItems)
-            : this.renderPostList(postItems)
-          : <Spinner color="red" />}
+        {this.renderPostList(list)}
       </View>
     );
   }

@@ -9,43 +9,43 @@ import Types from '../actions/types-navigation';
 
 export const nav = (state, action) => {
   switch (action.type) {
-  case 'Home':
-    return AppNavigator.router.getStateForAction(
+    case 'Home':
+      return AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'HomeDrawer' }),
         state,
       );
-  case 'Authentication':
-    return AppNavigator.router.getStateForAction(
+    case 'Authentication':
+      return AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'Authentication' }),
         state,
       );
-  case 'Profile':
-    return AppNavigator.router.getStateForAction(
+    case 'Profile':
+      return AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'Profile' }),
         state,
       );
-  case 'DrawerOpen':
-    return HomeDrawerNavigator.getStateForAction(
+    case 'DrawerOpen':
+      return HomeDrawerNavigator.getStateForAction(
         NavigationActions.navigate({ routeName: 'DrawerOpen' }),
         state,
       );
-  case 'DrawerClose':
-    return HomeDrawerNavigator.getStateForAction(
+    case 'DrawerClose':
+      return HomeDrawerNavigator.getStateForAction(
         NavigationActions.navigate({ routeName: 'DrawerClose' }),
         state,
       );
-  default:
-    return AppNavigator.router.getStateForAction(action, state);
+    default:
+      return AppNavigator.router.getStateForAction(action, state);
   }
 };
 
 export const home = (state = { activeTabIndex: 1 }, action) => {
   switch (action.type) {
-  case Types.SWITCH_HOME_TAB:
-    return {
-      activeTabIndex: action.tabIndex,
-    };
-  default:
-    return state;
+    case Types.SWITCH_HOME_TAB:
+      return {
+        activeTabIndex: action.tabIndex,
+      };
+    default:
+      return state;
   }
 };

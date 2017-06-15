@@ -24,16 +24,17 @@ import OneSignal from 'react-native-onesignal';
 import PostList from '../components/post-list';
 import CategoryList from '../components/category-list';
 import * as navigationActions from '../actions/actions-navigation';
+import * as postActions from '../actions/actions-posts';
 
 const HomeContainer = props => {
-  const { navigate, home, dispatch } = props;
+  const { navigate, switchHomeTab, home } = props;
 
   const renderHomeContent = () => {
     switch (home.activeTabIndex) {
       case 1:
-        return <PostList {...props.posts} dispatch={props.dispatch} />;
+        return <PostList {...props} />;
       case 2:
-        return <CategoryList {...props.categories} dispatch={props.dispatch} />;
+        return <CategoryList {...props} />;
       case 3:
         return <View />;
       case 4:
@@ -66,25 +67,25 @@ const HomeContainer = props => {
         <FooterTab>
           <Button
             active={home.activeTabIndex === 1}
-            onPress={() => dispatch(switchHomeTab(1))}
+            onPress={() => switchHomeTab(1)}
           >
             <Icon name="home" />
           </Button>
           <Button
             active={home.activeTabIndex === 2}
-            onPress={() => dispatch(switchHomeTab(2))}
+            onPress={() => switchHomeTab(2)}
           >
             <Icon name="list" />
           </Button>
           <Button
             active={home.activeTabIndex === 3}
-            onPress={() => dispatch(switchHomeTab(3))}
+            onPress={() => switchHomeTab(3)}
           >
             <Icon active name="navigate" />
           </Button>
           <Button
             active={home.activeTabIndex === 4}
-            onPress={() => dispatch(switchHomeTab(4))}
+            onPress={() => switchHomeTab(4)}
           >
             <Icon name="person" />
           </Button>
@@ -110,6 +111,6 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(navigationActions, dispatch);
+  bindActionCreators({ ...postActions, ...navigationActions }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

@@ -3,7 +3,7 @@
  */
 'use strict';
 
-import Types from './types-misc';
+import Types from './types-config';
 
 /**
  * 

@@ -7,7 +7,7 @@ import { TextInput, TouchableOpacity, View } from 'react-native';
 import { Icon } from 'native-base';
 import { clearPosts, getPosts } from '../actions/actions-posts';
 import { switchHomeTab } from '../actions/actions-navigation';
-import { setViewMode } from '../actions/actions-misc';
+import { setViewMode } from '../actions/actions-config';
 
 export const PostMenuBar = props => {
   const { dispatch, viewMode } = props;

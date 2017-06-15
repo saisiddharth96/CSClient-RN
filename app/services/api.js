@@ -6,6 +6,11 @@
 
 import apisauce from 'apisauce';
 
+const Status = {
+  OK: 200,
+  ERROR_404: 404,
+};
+
 const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
   const api = apisauce.create({
     baseURL,
@@ -25,9 +30,7 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
    * POSTS
    **********************************/
   // List posts: Posts: http://v2.wp-api.org/reference/posts/
-  const listPosts = params => {
-    api.get('posts', { ...params });
-  };
+  const listPosts = params => api.get('posts', { ...params });
 
   // Retrieve a post: https://developer.wordpress.org/rest-api/reference/posts/#retrieve-a-post
   const retrievePost = (id, args) => {
@@ -78,3 +81,4 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
 };
 
 export default { create };
+export { Status };

@@ -25,26 +25,32 @@ export const post = (state = POST_INIT_STATE, action) => {
 
 const POSTS_INITIAL_STATE = {
   page: 1,
-  posts: [],
+  total: 0,
+  totalPages: 0,
+  list: [],
   status: 'loading',
-  viewMode: 'list',
+  viewMode: 'grid',
   args: null,
 };
 
 export const posts = (state = POSTS_INITIAL_STATE, action) => {
   switch (action.type) {
+    case Types.GET_POSTS:
+      return {
+        ...state,
+        status: 'loading',
+      };
     case Types.RECEIVE_POSTS:
       return {
         ...state,
         status: 'loaded',
         page: action.page,
-        posts: state.posts.concat(action.posts),
+        list: state.list.concat(action.posts),
         args: action.args,
       };
     case Types.CLEAR_POSTS:
       return {
         ...state,
-        status: 'loading',
         currentPage: 1,
         postItems: [],
       };
