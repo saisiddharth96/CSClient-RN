@@ -5,7 +5,7 @@
 import React, { PropTypes } from 'react';
 import { TextInput, TouchableOpacity, View } from 'react-native';
 import { Icon } from 'native-base';
-import { clearPosts, getPosts } from '../actions/actions-core';
+import { clearPosts, getPosts } from '../actions/actions-posts';
 import { switchHomeTab } from '../actions/actions-navigation';
 import { setViewMode } from '../actions/actions-misc';
 
@@ -13,9 +13,9 @@ export const PostMenuBar = props => {
   const { dispatch, viewMode } = props;
 
   const onSubmitSearch = keyword => {
-    dispatch(clearPosts());
-    dispatch(switchHomeTab(1));
-    dispatch(getPosts(1, 10, { s: keyword }));
+    //dispatch(clearPosts());
+    //dispatch(switchHomeTab(1));
+    //dispatch(getPosts(1, 10, { s: keyword }));
   };
 
   return (

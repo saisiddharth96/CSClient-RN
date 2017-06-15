@@ -8,7 +8,7 @@ import { NavigationActions } from 'react-navigation';
 import { Body, Icon, Left, ListItem, Text } from 'native-base';
 import { connect } from 'react-redux';
 import md5 from 'blueimp-md5';
-import { requestLogout } from '../actions/actions-user';
+import { requestLogout } from '../actions/actions-users';
 
 const CustomDrawerContent = props => {
   const { logout, user } = props;

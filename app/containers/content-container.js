@@ -11,7 +11,6 @@ import {
   Image,
   FlatList,
 } from 'react-native';
-import { Tab, Tabs } from 'native-base';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import HTMLView from 'react-native-htmlview';
@@ -27,7 +26,7 @@ import {
   Text,
   Spinner,
 } from 'native-base';
-import { getPost, clearPost } from '../actions/actions-core';
+import { getPost, clearPost } from '../actions/actions-posts';
 import ItemComment from '../components/items/item-comment';
 import CommentBox from '../components/comment-box';
 

@@ -2,7 +2,7 @@
 import React from 'react';
 import { Icon, Button } from 'native-base';
 import { View, Text, TextInput } from 'react-native';
-import API, { DataStatus } from '../services/API';
+import API from '../services/api';
 import Styles from './_styles/styles-comment-box';
 
 const api = API.create();

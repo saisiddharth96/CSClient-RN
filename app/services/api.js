@@ -5,7 +5,6 @@
 'use strict';
 
 import apisauce from 'apisauce';
-import I18n from 'csclient/I18n';
 
 const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
   const api = apisauce.create({
@@ -71,4 +70,11 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
   /**********************************
    * PAGES
    **********************************/
+
+  return {
+    listPosts,
+    retrievePost,
+  };
 };
+
+export default { create };

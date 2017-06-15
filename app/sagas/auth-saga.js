@@ -3,7 +3,7 @@
  */
 'use strict';
 import { call } from 'redux-saga/effects';
-import API, { DataStatus } from '../services/API';
+import API, { DataStatus } from '../services/api';
 import DataService from '../services/data-service';
 
 const api = API.create();

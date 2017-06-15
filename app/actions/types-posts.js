@@ -6,6 +6,8 @@ const Types = {
   CREATE_POST: 'CREATE_POST',
   CLEAR_POSTS: 'CLEAR_POSTS',
   CLEAR_POST: 'CLEAR_POST',
+  RECEIVE_POST: 'RECEIVE_POST',
+  RECEIVE_POSTS: 'RECEIVE_POSTS',
 };
 
 export default Types;

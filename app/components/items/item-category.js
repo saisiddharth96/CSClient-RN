@@ -5,7 +5,7 @@
 import React from 'react';
 import { TouchableHighlight, View, Text } from 'react-native';
 import { switchHomeTab } from '../../actions/actions-navigation';
-import { setPostsArgs } from '../../actions/actions-core';
+import { setPostsArgs } from '../../actions/actions-posts';
 
 /**
   "id": 574,

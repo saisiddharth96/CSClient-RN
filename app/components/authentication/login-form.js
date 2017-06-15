@@ -5,8 +5,8 @@ import { Button, Icon } from 'native-base';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import SpinKit from 'react-native-spinkit';
 import { NavigationActions } from 'react-navigation';
-import { generateAuthCookieSuccess } from '../../actions/actions-user';
-import API, { DataStatus } from '../../services/API';
+import { generateAuthCookieSuccess } from '../../actions/actions-users';
+import API, { DataStatus } from '../../services/api';
 import I18n from '../../localizations/I18n';
 
 const api = API.create();

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { connectStyle, Button, Icon } from 'native-base';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-import { requestLogin } from '../../actions/actions-user';
+import { requestLogin } from '../../actions/actions-users';
 import I18n from '../../localizations/I18n';
 
 const onSubmit = (values, dispatch) => {

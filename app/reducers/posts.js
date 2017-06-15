@@ -5,7 +5,25 @@
 
 import Types from '../actions/types-posts';
 
-const INITIAL_STATE = {
+const POST_INIT_STATE = {
+  id: 1,
+  title: null,
+  excerpt: null,
+};
+
+export const post = (state = POST_INIT_STATE, action) => {
+  switch (action.type) {
+    case Types.RECEIVE_POST:
+      return {
+        ...state,
+        ...action.post,
+      };
+    default:
+      return state;
+  }
+};
+
+const POSTS_INITIAL_STATE = {
   page: 1,
   posts: [],
   status: 'loading',
@@ -13,7 +31,7 @@ const INITIAL_STATE = {
   args: null,
 };
 
-export const posts = (state = INITIAL_STATE, action) => {
+export const posts = (state = POSTS_INITIAL_STATE, action) => {
   switch (action.type) {
     case Types.RECEIVE_POSTS:
       return {
@@ -29,11 +47,6 @@ export const posts = (state = INITIAL_STATE, action) => {
         status: 'loading',
         currentPage: 1,
         postItems: [],
-      };
-    case MiscTypes.SET_VIEW_MODE:
-      return {
-        ...state,
-        viewMode: action.viewMode,
       };
     default:
       return state;

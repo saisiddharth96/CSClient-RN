@@ -31,6 +31,12 @@ export function clearPost() {
   };
 }
 
+export function receivePost(post: Object) {
+  return {
+    post,
+  };
+}
+
 export function receivePosts(posts: Array) {
   return {
     posts,

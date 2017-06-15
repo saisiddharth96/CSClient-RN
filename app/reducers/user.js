@@ -1,5 +1,5 @@
 'use strict';
-import Types from '../actions/types-user';
+import Types from '../actions/types-users';
 
 const INITIAL_STATE = {
   id: null,

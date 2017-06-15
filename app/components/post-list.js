@@ -2,15 +2,15 @@
  * @flow
  */
 'use strict';
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import { View, FlatList } from 'react-native';
 import { Spinner, List } from 'native-base';
-import { getPosts, clearPosts } from '../actions/actions-core';
+import { getPosts, clearPosts } from '../actions/actions-posts';
 import { PostMenuBar } from './post-menu-bar';
 import { ItemPostCard } from './items/item-post-card';
 import { ItemPostGrid } from './items/item-post-grid';
 
-export default class PostList extends Component {
+export default class PostList extends PureComponent {
   static propTypes = {
     currentPage: PropTypes.number.isRequired,
     postItems: PropTypes.arrayOf(PropTypes.object),
@@ -25,8 +25,8 @@ export default class PostList extends Component {
 
   componentDidMount() {
     const { dispatch, currentPage, args } = this.props;
-    if (!args) return dispatch(getPosts(currentPage));
-    if (args.cat) return dispatch(getPosts(currentPage, { cat: args.cat }));
+    //if (!args) return dispatch(getPosts(currentPage));
+    //if (args.cat) return dispatch(getPosts(currentPage, { cat: args.cat }));
   }
 
   componentWillUnmount() {
@@ -58,16 +58,6 @@ export default class PostList extends Component {
         renderFooter={this.renderLoadingIndicator}
       />
     );
-    /*return (
-      <FlatList
-        data={posts}
-        keyExtractor={item => uuidV4()}
-        renderItem={({ item }) => this.renderListItem(item)}
-        onEndReached={this.onEndReached}
-        onEndReachedThreshold={1}
-        ListFooterComponent={this.renderLoadingIndicator}
-      />
-    );*/
   }
 
   renderPostGrid(posts) {

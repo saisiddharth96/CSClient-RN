@@ -2,7 +2,7 @@
  * @flow
  */
 'use strict';
-import Types from './types-user';
+import Types from './types-users';
 
 export function requestLogin(username, password) {
   return {

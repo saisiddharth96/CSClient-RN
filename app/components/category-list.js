@@ -2,7 +2,6 @@
 import React, { Component, PropTypes } from 'react';
 import { View } from 'react-native';
 import { Spinner, List } from 'native-base';
-import { getCategoryIndex } from '../actions/actions-core';
 import { CategorySearchBar } from './category-search-bar';
 import { ItemCategory } from './items/item-category';
 
@@ -14,7 +13,6 @@ export default class CategoryList extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(getCategoryIndex());
   }
 
   renderItem = item => {

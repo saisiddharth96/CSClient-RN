@@ -2,7 +2,7 @@
  * @flow
  */
 'use strict';
-import Types from '../actions/types-core';
+import Types from '../actions/types-categories';
 
 const INITIAL_STATE = {
   status: 'loading',
