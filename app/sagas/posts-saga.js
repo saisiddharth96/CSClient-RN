@@ -9,6 +9,7 @@ import API from '../services/api';
 const api = API.create();
 
 export function* getPosts(action) {
+  console.log(action);
   const { page, args } = action;
   try {
     const result = yield call(api.listPosts, { page });
@@ -17,7 +18,7 @@ export function* getPosts(action) {
         total: parseInt(result.headers['x-wp-total']),
         totalPages: parseInt(result.headers['x-wp-totalpages']),
       };
-      yield put(receivePosts(result.data));
+      yield put(receivePosts(result.data, page));
     } else {
       console.log('Error');
     }

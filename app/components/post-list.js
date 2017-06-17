@@ -5,7 +5,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { View, FlatList } from 'react-native';
 import { Spinner, List } from 'native-base';
-import { getPosts, clearPosts } from '../actions/actions-posts';
+// import { getPosts, clearPosts } from '../actions/actions-posts';
 import { PostMenuBar } from './post-menu-bar';
 import { ItemPostCard } from './items/item-post-card';
 import { ItemPostGrid } from './items/item-post-grid';
@@ -29,27 +29,27 @@ export default class PostList extends PureComponent {
   }
 
   componentWillUnmount() {
-    const { dispatch } = this.props;
-    dispatch(clearPosts());
+    const { clearPosts } = this.props;
+    clearPosts();
   }
 
   onEndReached = () => {
-    const { dispatch, status, currentPage, args } = this.props;
+    const { getPosts, args } = this.props;
+    const { status, page } = this.props.posts;
+    console.log(this.props.posts);
     if (status !== 'loading') {
-      if (!args) return dispatch(getPosts(currentPage + 1));
-      if (args.cat)
-        return dispatch(getPosts(currentPage + 1, { cat: args.cat }));
+      if (!args) return getPosts(page + 1);
     }
   };
 
   renderPostMenuBar = () => <PostMenuBar {...this.props} />;
   renderLoadingIndicator = () => <Spinner color="red" />;
 
-  renderPostList(posts) {
+  renderPostList(items) {
     const { navigate } = this.props;
     return (
       <List
-        dataArray={posts}
+        dataArray={items}
         renderRow={item => <ItemPostCard post={item} navigate={navigate} />}
         onEndReached={this.onEndReached}
         onEndReachedThreshold={1}

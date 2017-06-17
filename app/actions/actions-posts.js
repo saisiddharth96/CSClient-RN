@@ -37,10 +37,11 @@ export function receivePost(post: Object) {
   };
 }
 
-export function receivePosts(posts: Array, meta: Object) {
+export function receivePosts(list: Array, page: number, meta: Object) {
   return {
     type: Types.RECEIVE_POSTS,
-    posts,
+    list,
+    page,
     meta,
   };
 }

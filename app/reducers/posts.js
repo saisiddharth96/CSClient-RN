@@ -36,6 +36,7 @@ const POSTS_INITIAL_STATE = {
 export const posts = (state = POSTS_INITIAL_STATE, action) => {
   switch (action.type) {
     case Types.GET_POSTS:
+      console.log(action);
       return {
         ...state,
         status: 'loading',
@@ -45,7 +46,7 @@ export const posts = (state = POSTS_INITIAL_STATE, action) => {
         ...state,
         status: 'loaded',
         page: action.page,
-        list: state.list.concat(action.posts),
+        list: state.list.concat(action.list),
         args: action.args,
       };
     case Types.CLEAR_POSTS:
