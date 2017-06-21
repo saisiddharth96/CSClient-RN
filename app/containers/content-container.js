@@ -48,17 +48,22 @@ class ContentContainer extends Component {
     BackHandler.removeEventListener('hardwareBackPress', () => goBack());
   }
 
-  renderListItem = item => <ItemComment {...item} />;
+  renderCommentItem = item => <ItemComment {...item} />;
 
   renderContent = () => {
-    let { content, excerpt, comments } = this.props.post;
-
-    const itemNode = HTMLParser.parse(he.unescape(content));
-    const imageLink = itemNode.querySelector('img').attributes['data-lazy-src'];
+    let { content, excerpt } = this.props.post;
+    const { replies } = this.props.post._embedded;
+    console.log(content);
+    const itemNode = HTMLParser.parse(he.unescape(content.rendered));
+    console.log(itemNode);
+    const imageLink = itemNode.querySelector('img').attributes[
+      'data-orig-file'
+    ];
+    console.log(imageLink);
 
     let prefix =
       '<style>img{display: inline;height: auto;max-width: 100%;} p {font-family:"Tangerine", "Sans-serif",  "Serif" font-size: 48px} </style>';
-    content = prefix.concat(content);
+    content = prefix.concat(content.rendered);
 
     return (
       <Content style={{ backgroundColor: '#fff' }}>
@@ -75,24 +80,23 @@ class ContentContainer extends Component {
         </View>
         <HTMLView
           style={{ paddingHorizontal: 12, marginBottom: 10 }}
-          value={excerpt.trim()}
+          value={excerpt.rendered.trim()}
         />
 
         <FlatList
-          data={comments}
+          data={replies.length > 0 ? replies[0] : null}
           keyExtractor={item => item.id}
-          renderItem={({ item }) => this.renderListItem(item)}
+          renderItem={({ item }) => <View />}
         />
-
         <CommentBox />
-
       </Content>
     );
   };
 
   render() {
     const { goBack } = this.props;
-    const { id } = this.props.post;
+    const { title } = this.props.post;
+    console.log(this.props.post);
 
     return (
       <Container style={{ backgroundColor: '#fff' }}>
@@ -113,7 +117,7 @@ class ContentContainer extends Component {
         </Header>
         <StatusBar backgroundColor={'#fff'} />
 
-        {id !== null ? this.renderContent() : <Spinner color="red" />}
+        {title !== null ? this.renderContent() : <Spinner color="red" />}
 
       </Container>
     );

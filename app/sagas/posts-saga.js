@@ -3,13 +3,12 @@
  */
 'use strict';
 import { call, put } from 'redux-saga/effects';
-import { receivePosts } from '../actions/actions-posts';
+import { receivePosts, receivePost } from '../actions/actions-posts';
 import API from '../services/api';
 
 const api = API.create();
 
 export function* getPosts(action) {
-  console.log(action);
   const { page, args } = action;
   try {
     const result = yield call(api.listPosts, { page });
@@ -22,7 +21,18 @@ export function* getPosts(action) {
     } else {
       console.log('Error');
     }
-    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function* getPost(action) {
+  const { postId } = action;
+  try {
+    const result = yield call(api.retrievePost, postId);
+    if (result.ok) {
+      yield put(receivePost(result.data));
+    }
   } catch (error) {
     console.log(error);
   }

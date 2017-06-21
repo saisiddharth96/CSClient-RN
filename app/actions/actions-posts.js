@@ -33,6 +33,7 @@ export function clearPost() {
 
 export function receivePost(post: Object) {
   return {
+    type: Types.RECEIVE_POST,
     post,
   };
 }

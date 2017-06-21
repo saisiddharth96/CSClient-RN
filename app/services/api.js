@@ -33,7 +33,7 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
   const listPosts = params => api.get('posts', { ...params, _embed: 1 });
 
   // Retrieve a post: https://developer.wordpress.org/rest-api/reference/posts/#retrieve-a-post
-  const retrievePost = (id, args) => api.get('posts/' + id, { ...args });
+  const retrievePost = (id: number) => api.get('posts/' + id, { _embed: 1 });
 
   // Create post: https://developer.wordpress.org/rest-api/reference/posts/#create-a-post
   const createPost = args => api.post('posts', { ...args });
