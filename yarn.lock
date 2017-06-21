@@ -2151,9 +2151,9 @@ eslint-config-airbnb@^15.0.1:
   dependencies:
     eslint-config-airbnb-base "^11.2.0"
 
-eslint-config-prettier@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-2.1.1.tgz#ab3923fb704eebecab6960906b7d0d6e801cde58"
+eslint-config-prettier@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-2.2.0.tgz#ca47663852789a75c10feba673e802cc1eff085f"
   dependencies:
     get-stdin "^5.0.1"
 
@@ -4424,9 +4424,9 @@ react-native-circle-button@^1.0.8:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/react-native-circle-button/-/react-native-circle-button-1.0.8.tgz#0a82a54d4082a7fd4afea2ebffd806537447ef22"
 
-react-native-config@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.4.2.tgz#42ee30835c6aa293a91f4487c85a3e9f15204f56"
+react-native-config@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.5.0.tgz#109aaee511b81851b22e1fd3372d86c9d6c797d4"
 
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
@@ -4512,9 +4512,9 @@ react-native-parse-html@^2.2.3:
   dependencies:
     react-native-stream "^0.1.0"
 
-react-native-popup-dialog@^0.7.29:
-  version "0.7.29"
-  resolved "https://registry.yarnpkg.com/react-native-popup-dialog/-/react-native-popup-dialog-0.7.29.tgz#b430ab0ad7535e375a64325c954632276ada9e99"
+react-native-popup-dialog@^0.9.29:
+  version "0.9.29"
+  resolved "https://registry.yarnpkg.com/react-native-popup-dialog/-/react-native-popup-dialog-0.9.29.tgz#55b25653ac6d37c16982e26901a9bd20f0f1cf84"
   dependencies:
     babel-plugin-flow-react-proptypes "^2.0.0"
     babel-preset-es2016 "^6.22.0"
@@ -4836,9 +4836,9 @@ rechoir@^0.6.2:
   dependencies:
     resolve "^1.1.6"
 
-redux-form-saga@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/redux-form-saga/-/redux-form-saga-0.1.0.tgz#61981098b4adf825796a971a6d14694741f97194"
+redux-form-saga@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/redux-form-saga/-/redux-form-saga-0.1.1.tgz#28a94d801390823a5fa64756c1d6757f54ed29e2"
 
 redux-form@^6.8.0:
   version "6.8.0"
@@ -5578,7 +5578,7 @@ utils-merge@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.0.tgz#0294fb922bb9375153541c4f7096231f287c8af8"
 
-uuid@3.0.1, uuid@^3.0.0:
+uuid@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.0.1.tgz#6544bba2dfda8c1cf17e629a3a305e2bb1fee6c1"
 
@@ -5586,7 +5586,7 @@ uuid@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-2.0.3.tgz#67e2e863797215530dff318e5bf9dcebfd47b21a"
 
-uuid@^3.1.0:
+uuid@^3.0.0, uuid@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
 

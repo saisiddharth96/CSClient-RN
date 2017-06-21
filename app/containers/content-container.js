@@ -36,9 +36,9 @@ class ContentContainer extends Component {
   };
 
   componentDidMount() {
-    const { goBack, startGetPost } = this.props;
+    const { goBack, fetchPost } = this.props;
     const { postId } = this.props.navigation.state.params;
-    startGetPost(postId);
+    fetchPost(postId);
     BackHandler.addEventListener('hardwareBackPress', () => goBack());
   }
 
@@ -134,7 +134,7 @@ const mapDispatchToProps = dispatch => {
       Keyboard.dismiss();
       return dispatch(NavigationActions.back());
     },
-    startGetPost: postId => dispatch(getPost(postId)),
+    fetchPost: postId => dispatch(getPost(postId)),
     dispatch,
   };
 };

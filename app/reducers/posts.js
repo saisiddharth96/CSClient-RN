@@ -8,7 +8,8 @@ import Types from '../actions/types-posts';
 const POST_INIT_STATE = {
   id: 1,
   title: null,
-  excerpt: null,
+  excerpt: '',
+  content: null,
 };
 
 export const post = (state = POST_INIT_STATE, action) => {
