@@ -21,11 +21,12 @@ import {
   Image,
   Dimensions,
   Keyboard,
+  Text,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import FlipCard from 'react-native-flip-card';
-import ShakeEvent from 'react-native-shake-event';
+import ShakeEvent from 'react-native-shake';
 import LoginForm from '../components/authentication/login-form';
 import RegisterForm from '../components/authentication/register-form';
 import I18n from '../localizations/I18n';
@@ -70,6 +71,7 @@ class AuthContainer extends Component {
 
   render() {
     const { goBack } = this.props;
+    const { isFlipped } = this.state;
 
     return (
       <Container style={styles.container}>
@@ -106,7 +108,7 @@ class AuthContainer extends Component {
         </Header>
         <Content>
           <FlipCard
-            flip={false}
+            flip={isFlipped}
             friction={14}
             clickable={false}
             style={{ borderWidth: 0 }}
@@ -116,6 +118,19 @@ class AuthContainer extends Component {
             <LoginForm />
             <RegisterForm />
           </FlipCard>
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 12,
+              textAlign: 'center',
+              marginVertical: 16,
+            }}
+            onPress={() => this.setState({ isFlipped: !isFlipped })}
+          >
+            {'Wanna ' +
+              (isFlipped ? 'login' : 'register') +
+              '? \n Shake the device or tap here'}
+          </Text>
         </Content>
       </Container>
     );

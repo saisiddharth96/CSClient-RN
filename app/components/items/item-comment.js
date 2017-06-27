@@ -6,14 +6,15 @@ import HTMLView from 'react-native-htmlview';
 import moment from 'moment';
 
 const ItemComment = props => {
-  let { name, parent, date, content } = props;
-  const displayDate = moment(date).startOf('day').fromNow();
-  content = content.replace(/(\r\n|\n|\r)/gm, '').trim();
+  const { comment } = props;
+  console.log(comment);
+  const displayDate = moment(comment.date).startOf('day').fromNow();
+  const content = comment.content.rendered.replace(/(\r\n|\n|\r)/gm, '').trim();
 
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: 'https://lorempixel.com/100/100/' }}
+        source={{ uri: comment.author_avatar_urls['96'] }}
         style={styles.avatar}
       />
       <View
@@ -40,7 +41,7 @@ const ItemComment = props => {
             marginTop: 4,
           }}
         >
-          {name}
+          {comment.author_name}
         </Text>
         <Text style={{ marginLeft: 8, fontSize: 10, color: '#a0a0a0' }}>
           {displayDate}
@@ -72,10 +73,7 @@ const ItemComment = props => {
         >
           <TouchableOpacity activeOpacity={0.6}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Icon
-                style={{ color: '#ff2a63', fontSize: 22 }}
-                name="send"
-              />
+              <Icon style={{ color: '#ff2a63', fontSize: 22 }} name="send" />
               <Text style={{ marginLeft: 4, fontSize: 10, color: '#ff2a63' }}>
                 Reply
               </Text>

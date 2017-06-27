@@ -47,7 +47,7 @@ const HomeContainer = props => {
       <Header iosBarStyle={'light-content'}>
         <StatusBar backgroundColor="#d32f2f" barStyle="light-content" />
         <Left>
-          <Button title={''} transparent onPress={() => navigate('drawerOpen')}>
+          <Button title={''} transparent onPress={() => navigate('DrawerOpen')}>
             <Icon name="menu" />
           </Button>
         </Left>

@@ -133,16 +133,6 @@ class LoginForm extends Component {
             : loginLabel}
 
         </Button>
-        <Text
-          style={{
-            color: '#fff',
-            fontSize: 12,
-            textAlign: 'center',
-            marginVertical: 16,
-          }}
-        >
-          Wanna register? \N Shake the device or tap here
-        </Text>
       </View>
     );
   }

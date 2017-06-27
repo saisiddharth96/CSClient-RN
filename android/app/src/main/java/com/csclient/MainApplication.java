@@ -4,7 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
-import com.jadsonlourenco.RNShakeEvent.RNShakeEventPackage;
+import com.clipsub.RNShake.RNShakeEventPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.oblador.vectoricons.VectorIconsPackage;

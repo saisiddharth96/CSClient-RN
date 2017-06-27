@@ -18,7 +18,6 @@ import HTMLParser from 'fast-html-parser';
 import he from 'he';
 import {
   Container,
-  Content,
   Header,
   Left,
   Button,
@@ -26,6 +25,7 @@ import {
   Text,
   Spinner,
 } from 'native-base';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { getPost, clearPost } from '../actions/actions-posts';
 import ItemComment from '../components/items/item-comment';
 import CommentBox from '../components/comment-box';
@@ -48,25 +48,24 @@ class ContentContainer extends Component {
     BackHandler.removeEventListener('hardwareBackPress', () => goBack());
   }
 
-  renderCommentItem = item => <ItemComment {...item} />;
+  renderCommentItem = item => <ItemComment comment={item} />;
 
   renderContent = () => {
     let { content, excerpt } = this.props.post;
     const { replies } = this.props.post._embedded;
-    console.log(content);
+    console.log(this.props.post._embedded);
     const itemNode = HTMLParser.parse(he.unescape(content.rendered));
-    console.log(itemNode);
-    const imageLink = itemNode.querySelector('img').attributes[
-      'data-orig-file'
-    ];
-    console.log(imageLink);
+    const imageLink = itemNode.querySelector('img').attributes['src'];
 
     let prefix =
       '<style>img{display: inline;height: auto;max-width: 100%;} p {font-family:"Tangerine", "Sans-serif",  "Serif" font-size: 48px} </style>';
     content = prefix.concat(content.rendered);
 
     return (
-      <Content style={{ backgroundColor: '#fff' }}>
+      <KeyboardAwareScrollView
+        extraHeight={100}
+        style={{ backgroundColor: '#fff' }}
+      >
         <View style={{ marginVertical: 26 }}>
           <Image
             source={{ uri: imageLink }}
@@ -84,12 +83,12 @@ class ContentContainer extends Component {
         />
 
         <FlatList
-          data={replies.length > 0 ? replies[0] : null}
+          data={replies && replies.length > 0 ? replies[0] : null}
           keyExtractor={item => item.id}
-          renderItem={({ item }) => <View />}
+          renderItem={({ item }) => this.renderCommentItem(item)}
         />
         <CommentBox />
-      </Content>
+      </KeyboardAwareScrollView>
     );
   };
 

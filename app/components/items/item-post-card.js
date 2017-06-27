@@ -77,7 +77,7 @@ const ItemPostCard = props => {
         >
           <Icon name="chatbubbles" />
           <Text>
-            {I18n.t('comment', { count: replies ? replies.length : 0 })}
+            {I18n.t('comment', { count: replies ? replies[0].length : 0 })}
           </Text>
         </Button>
         <Button transparent small onPress={() => sharePost()}>
