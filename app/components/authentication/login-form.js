@@ -6,26 +6,25 @@ import { Field, reduxForm, SubmissionError } from 'redux-form';
 import SpinKit from 'react-native-spinkit';
 import { NavigationActions } from 'react-navigation';
 import { generateAuthCookieSuccess } from '../../actions/actions-users';
-import API, { DataStatus } from '../../services/api';
+import API from '../../services/api-auth';
 import I18n from '../../localizations/I18n';
 
 const api = API.create();
 
 const onSubmit = (values, dispatch) => {
   const { username, password } = values;
-  console.log(values);
   return api
     .generateAuthCookie(username, password)
     .then(response => {
-      if (response.data.status === DataStatus.OK) {
-        alert('Login success');
-        console.log(response);
+      console.log(response);
+      if (response.ok && response.data.status !== 'error') {
         const { cookie, cookie_name, user } = response.data;
-        dispatch(generateAuthCookieSuccess(cookie, cookie_name, user));
-        setTimeout(() => dispatch(NavigationActions.back()), 400);
-      } else if (response.data.status === DataStatus.ERROR) {
-        console.log(response);
+        // dispatch(generateAuthCookieSuccess(cookie, cookie_name, user));
+        setTimeout(() => dispatch(NavigationActions.back()), 300);
+      } else if (!response.ok) {
         throw new SubmissionError({ _error: 'Login failed!' });
+      } else {
+        throw new SubmissionError({ _error: 'Wrong username or password.' });
       }
     })
     .catch(error => {

@@ -29,21 +29,16 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
   /**********************************
    * POSTS
    **********************************/
-  // List posts: Posts: http://v2.wp-api.org/reference/posts/
-  const listPosts = params => api.get('posts', { ...params, _embed: 1 });
+  const listPosts = (args: Object) => api.get('posts', { ...args, _embed: 1 });
 
-  // Retrieve a post: https://developer.wordpress.org/rest-api/reference/posts/#retrieve-a-post
   const retrievePost = (id: number) => api.get('posts/' + id, { _embed: 1 });
 
-  // Create post: https://developer.wordpress.org/rest-api/reference/posts/#create-a-post
-  const createPost = args => api.post('posts', { ...args });
+  const createPost = (args: Object) => api.post('posts', { ...args });
 
-  // Update post: https://developer.wordpress.org/rest-api/reference/posts/#update-a-post
   const updatePost = (id, args) => {
     api.post('posts/' + id, { ...args });
   };
 
-  // Delete post: https://developer.wordpress.org/rest-api/reference/posts/#delete-a-post
   const deletePost = id => {
     api.delete('posts/' + id);
   };
@@ -51,18 +46,15 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
   /**********************************
    * POSTS Revisions
    **********************************/
-  // List post revisions: https://developer.wordpress.org/rest-api/reference/post-revisions/#list-post-revisions
-  const listPostRevisions = parentId => {
+  const listPostRevisions = (parentId: number) => {
     api.get('posts/' + parentId + '/revisions');
   };
 
-  // Retrieve single post revision: https://developer.wordpress.org/rest-api/reference/post-revisions/#retrieve-a-post-revision
-  const retrievePostRevision = (parentId, id) => {
+  const retrievePostRevision = (parentId: number, id: number) => {
     api.get('posts/' + parentId + '/revisions' + id);
   };
 
-  // Delete a post revision: https://developer.wordpress.org/rest-api/reference/post-revisions/#delete-a-post-revision
-  const deletePostRevision = (parentId, id) => {
+  const deletePostRevision = (parentId: number, id: number) => {
     api.delete('posts/' + parentId + '/revisions' + id);
   };
 
@@ -70,9 +62,38 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
    * PAGES
    **********************************/
 
+  /**********************************
+   * USERS
+   **********************************/
+
+  const listUsers = (args: Object) => api.get('users/', { ...args });
+
+  const retrieveUser = (id: Object) => api.get('users/' + id);
+
+  const createUser = (args: Object) => api.post('users/', { ...args });
+
+  const updateUser = (id: number, args: Object) =>
+    api.post('users/' + id, { ...args });
+
+  const deleteUser = (id: number, force: boolean, reassign: number) =>
+    api.delete('users/' + id, { force, reassign });
+
   return {
     listPosts,
     retrievePost,
+    createPost,
+    updatePost,
+    deletePost,
+
+    listPostRevisions,
+    retrievePostRevision,
+    deletePostRevision,
+
+    listUsers,
+    retrieveUser,
+    createUser,
+    updateUser,
+    deleteUser,
   };
 };
 

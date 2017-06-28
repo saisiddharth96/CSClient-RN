@@ -38,10 +38,74 @@ export function generateAuthCookieSuccess(
   };
 }
 
-export function validateAuthCookie(cookie) {
+export function listUsers(params) {
+  // Ref: https://developer.wordpress.org/rest-api/reference/users/#list-users
   return {
-    type: Types.VALIDATE_AUTH_COOKIE,
-    cookie,
+    type: Types.LIST_USERS,
+    params,
+  };
+}
+
+export function retrievedListUsers(users) {
+  return {
+    type: Types.RETRIEVED_LIST_USERS,
+    users,
+  };
+}
+
+export function retrieveUser(id) {
+  return {
+    type: Types.RETRIEVE_USER,
+    id,
+  };
+}
+
+export function retrievedUser(user) {
+  return {
+    type: Types.RETRIEVED_USER,
+    user,
+  };
+}
+
+export function createUser(params) {
+  return {
+    type: Types.CREATE_USER,
+    params,
+  };
+}
+
+export function createdUser(user) {
+  return {
+    type: Types.CREATED_USER,
+    user,
+  };
+}
+
+export function updateUser(params) {
+  return {
+    type: Types.UPDATE_USER,
+    params,
+  };
+}
+
+export function updatedUser(params) {
+  return {
+    type: Types.UPDATE_USER,
+    params,
+  };
+}
+
+export function deleteUser(id) {
+  return {
+    type: Types.DELETE_USER,
+    id,
+  };
+}
+
+export function deletedUser(result) {
+  return {
+    type: Types.DELETED_USER,
+    result,
   };
 }
 
