@@ -38,22 +38,29 @@ export function generateAuthCookieSuccess(
   };
 }
 
-export function listUsers(params) {
-  // Ref: https://developer.wordpress.org/rest-api/reference/users/#list-users
+export function saveUserData(user: Object) {
+  // With following shape: https://puu.sh/wxQdV.png
   return {
-    type: Types.LIST_USERS,
-    params,
+    type: Types.SAVE_USER_DATA,
+    user,
   };
 }
 
-export function retrievedListUsers(users) {
+export function listUsers(args: Object) {
+  return {
+    type: Types.LIST_USERS,
+    args,
+  };
+}
+
+export function retrievedListUsers(users: Array<any>) {
   return {
     type: Types.RETRIEVED_LIST_USERS,
     users,
   };
 }
 
-export function retrieveUser(id) {
+export function retrieveUser(id: number) {
   return {
     type: Types.RETRIEVE_USER,
     id,
@@ -67,10 +74,10 @@ export function retrievedUser(user) {
   };
 }
 
-export function createUser(params) {
+export function createUser(args) {
   return {
     type: Types.CREATE_USER,
-    params,
+    args,
   };
 }
 
@@ -81,10 +88,10 @@ export function createdUser(user) {
   };
 }
 
-export function updateUser(params) {
+export function updateUser(args) {
   return {
     type: Types.UPDATE_USER,
-    params,
+    args,
   };
 }
 

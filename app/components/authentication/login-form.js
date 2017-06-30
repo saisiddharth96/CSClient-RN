@@ -5,22 +5,32 @@ import { Button, Icon } from 'native-base';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import SpinKit from 'react-native-spinkit';
 import { NavigationActions } from 'react-navigation';
-import { generateAuthCookieSuccess } from '../../actions/actions-users';
-import API from '../../services/api-auth';
+import base64 from 'base-64';
+import { saveUserData } from '../../actions/actions-users';
+import APIv1 from '../../services/api-auth';
+import APIv2 from '../../services/api';
 import I18n from '../../localizations/I18n';
 
-const api = API.create();
+const apiv1 = APIv1.create();
+const apiv2 = APIv2.create();
 
 const onSubmit = (values, dispatch) => {
   const { username, password } = values;
-  return api
+  console.log(username, password);
+  console.log(base64.encode(username + ':' + password));
+  return apiv1
     .generateAuthCookie(username, password)
     .then(response => {
       console.log(response);
       if (response.ok && response.data.status !== 'error') {
-        const { cookie, cookie_name, user } = response.data;
-        // dispatch(generateAuthCookieSuccess(cookie, cookie_name, user));
-        setTimeout(() => dispatch(NavigationActions.back()), 300);
+        const { id } = response.data.user;
+        return apiv2
+          .retrieveUser(id, 'edit', username, password)
+          .then(d => {
+            const { data } = d;
+            dispatch(saveUserData(data));
+          })
+          .catch(e => console.log(e));
       } else if (!response.ok) {
         throw new SubmissionError({ _error: 'Login failed!' });
       } else {
@@ -130,7 +140,6 @@ class LoginForm extends Component {
           {submitting
             ? <SpinKit type="Wave" size={26} color={'#ffffff'} />
             : loginLabel}
-
         </Button>
       </View>
     );

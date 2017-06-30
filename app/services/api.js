@@ -5,6 +5,11 @@
 'use strict';
 
 import apisauce from 'apisauce';
+import base64 from 'base-64';
+
+XMLHttpRequest = GLOBAL.originalXMLHttpRequest
+  ? GLOBAL.originalXMLHttpRequest
+  : GLOBAL.XMLHttpRequest;
 
 const Status = {
   OK: 200,
@@ -15,7 +20,7 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
   const api = apisauce.create({
     baseURL,
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json; charset=UTF-8',
       Accept: 'application/json; charset=UTF-8',
       'Cache-Control': 'no-cache',
     },
@@ -68,7 +73,21 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
 
   const listUsers = (args: Object) => api.get('users/', { ...args });
 
-  const retrieveUser = (id: Object) => api.get('users/' + id);
+  const retrieveUser = (
+    id: number,
+    context: string,
+    username: string,
+    password: string,
+  ) =>
+    api.get(
+      'users/' + id + (context ? '?context=' + context : ''),
+      { context: 'edit' },
+      {
+        headers: {
+          Authorization: 'Basic ' + base64.encode(username + ':' + password),
+        },
+      },
+    );
 
   const createUser = (args: Object) => api.post('users/', { ...args });
 
