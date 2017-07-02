@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import { StatusBar, View, BackHandler } from 'react-native';
+import { StatusBar, View, BackHandler, Platform } from 'react-native';
 import {
   Button,
   Card,
@@ -18,9 +18,9 @@ import {
 } from 'native-base';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
+import moment from 'moment';
 
 class ProfileContainer extends Component {
-
   componentDidMount() {
     const { goBack } = this.props;
     BackHandler.addEventListener('hardwareBackPress', () => goBack());
@@ -33,6 +33,19 @@ class ProfileContainer extends Component {
 
   render() {
     const { goBack } = this.props;
+    const {
+      description,
+      slug,
+      name,
+      registered_date,
+      id,
+      avatar_urls,
+      email,
+    } = this.props.user;
+    const regDate = moment(registered_date).format('LL');
+    const avatarUrl = avatar_urls['96'];
+    console.log(this.props.user);
+
     return (
       <Container style={{ backgroundColor: '#fff' }}>
         <View style={styles.profileHeaderContainer}>
@@ -43,7 +56,7 @@ class ProfileContainer extends Component {
             style={{ backgroundColor: 'transparent', borderBottomWidth: 0 }}
           >
             <StatusBar
-              hidden
+              hidden={Platform.OS === 'ios' ? false : true}
               backgroundColor="transparent"
               barStyle="light-content"
               showHideTransition={'fade'}
@@ -61,7 +74,7 @@ class ProfileContainer extends Component {
               justifyContent: 'center',
             }}
           >
-            <Thumbnail large source={{ uri: 'https://cdn.awwni.me/w28n.jpg' }} />
+            <Thumbnail large source={{ uri: avatarUrl }} />
             <Text
               style={{
                 color: '#78909C',
@@ -69,9 +82,11 @@ class ProfileContainer extends Component {
                 backgroundColor: 'transparent',
               }}
             >
-              Sophia Emilion
+              {name}
             </Text>
-            <Text style={{ fontSize: 10, color: '#78909C' }}>@(Sophia-sama)</Text>
+            <Text style={{ fontSize: 10, color: '#78909C' }}>
+              {`@(${slug})`}
+            </Text>
             <Text
               style={{
                 fontSize: 10,
@@ -81,7 +96,7 @@ class ProfileContainer extends Component {
                 textAlign: 'center',
               }}
             >
-              Beyond the shadow you settled for, there's a miracle illuminated.
+              {description}
             </Text>
           </View>
         </View>
@@ -104,15 +119,29 @@ class ProfileContainer extends Component {
               <Icon active name="calendar" />
               <Text>Registered</Text>
               <Right>
-                <Text>29-10-2010</Text>
+                <Text>
+                  {regDate}
+                </Text>
               </Right>
             </CardItem>
 
             <CardItem>
-              <Icon active name="bulb" />
-              <Text>Color Scheme</Text>
+              <Icon active name="ios-card-outline" />
+              <Text>ID</Text>
               <Right>
-                <Text>Ocean</Text>
+                <Text>
+                  {id}
+                </Text>
+              </Right>
+            </CardItem>
+
+            <CardItem>
+              <Icon active name="ios-mail-open-outline" />
+              <Text>Email</Text>
+              <Right>
+                <Text style={{ fontSize: 12 }}>
+                  {email}
+                </Text>
               </Right>
             </CardItem>
           </Card>
@@ -126,7 +155,6 @@ class ProfileContainer extends Component {
               padding: 12,
             }}
           >
-
             <Grid>
               <Col>
                 <Button block rounded bordered style={{ marginHorizontal: 10 }}>
@@ -146,7 +174,6 @@ class ProfileContainer extends Component {
                 </Button>
               </Col>
             </Grid>
-
           </View>
         </Content>
       </Container>
@@ -161,9 +188,14 @@ const styles = {
   },
 };
 
-const mapStateToProps = state => ({
-  ...state,
-});
+const mapStateToProps = state => {
+  const { nav, common, user } = state;
+  return {
+    nav,
+    common,
+    user,
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   goBack: () => {

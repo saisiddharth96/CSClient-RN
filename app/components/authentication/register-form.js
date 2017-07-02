@@ -1,4 +1,9 @@
+/**
+ * @flow
+ */
+
 'use strict';
+
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { connectStyle, Button, Icon } from 'native-base';

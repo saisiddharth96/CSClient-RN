@@ -52,9 +52,7 @@ const HomeContainer = props => {
           </Button>
         </Left>
         <Body>
-          <Title>
-            Clip-sub
-          </Title>
+          <Title>Clip-sub</Title>
         </Body>
         <Right>
           <Button transparent onPress={() => OneSignal.setSubscription(true)}>

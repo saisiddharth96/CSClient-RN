@@ -1,11 +1,16 @@
+/**
+ * @flow
+ */
+
 'use strict';
+
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { Button, Icon } from 'native-base';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import SpinKit from 'react-native-spinkit';
-import { NavigationActions } from 'react-navigation';
 import base64 from 'base-64';
+import { reset } from '../../actions/actions-navigation';
 import { saveUserData } from '../../actions/actions-users';
 import APIv1 from '../../services/api-auth';
 import APIv2 from '../../services/api';
@@ -16,8 +21,6 @@ const apiv2 = APIv2.create();
 
 const onSubmit = (values, dispatch) => {
   const { username, password } = values;
-  console.log(username, password);
-  console.log(base64.encode(username + ':' + password));
   return apiv1
     .generateAuthCookie(username, password)
     .then(response => {
@@ -27,8 +30,10 @@ const onSubmit = (values, dispatch) => {
         return apiv2
           .retrieveUser(id, 'edit', username, password)
           .then(d => {
+            console.log(d.data);
             const { data } = d;
             dispatch(saveUserData(data));
+            dispatch(reset(['HomeDrawer']));
           })
           .catch(e => console.log(e));
       } else if (!response.ok) {

@@ -21,6 +21,17 @@ export function navigate(screenName, params) {
   });
 }
 
-export function goBack() {
-  return NavigationActions.goBack();
+export function reset(routeStack: Array) {
+  const newStack = [];
+  routeStack.forEach(item =>
+    newStack.push(NavigationActions.navigate({ routeName: item })),
+  );
+  return NavigationActions.reset({
+    index: 0,
+    actions: newStack,
+  });
+}
+
+export function goBack(screenKey) {
+  return NavigationActions.goBack(screenKey);
 }

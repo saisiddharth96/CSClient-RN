@@ -49,9 +49,7 @@ const CustomDrawerContent = props => {
           <Icon name="person" style={{ color: '#EF5350' }} />
         </Left>
         <Body>
-          <Text style={drawerStyle.itemText}>
-            Login / Register
-          </Text>
+          <Text style={drawerStyle.itemText}>Login / Register</Text>
         </Body>
       </ListItem>
     : <ListItem icon onPress={() => goToScreen('Profile')}>
@@ -59,9 +57,7 @@ const CustomDrawerContent = props => {
           <Icon name="person" style={{ color: '#EF5350' }} />
         </Left>
         <Body>
-          <Text style={drawerStyle.itemText}>
-            Profile
-          </Text>
+          <Text style={drawerStyle.itemText}>Profile</Text>
         </Body>
       </ListItem>;
 
@@ -94,7 +90,11 @@ const CustomDrawerContent = props => {
 
       {userItem}
 
-      <ListItem icon style={{ alignSelf: 'flex-end' }}>
+      <ListItem
+        icon
+        style={{ alignSelf: 'flex-end' }}
+        onPress={() => goToScreen('Preferences')}
+      >
         <Left>
           <Icon name="ios-construct-outline" style={{ color: '#EF5350' }} />
         </Left>
