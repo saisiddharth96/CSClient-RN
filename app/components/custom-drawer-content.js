@@ -43,7 +43,7 @@ const CustomDrawerContent = props => {
     dispatch(NavigationActions.navigate({ routeName: 'DrawerClose' }));
   };
 
-  const userItem = !props.user.id
+  const userItem = !user
     ? <ListItem icon onPress={() => goToScreen('Auth')}>
         <Left>
           <Icon name="person" style={{ color: '#EF5350' }} />
@@ -66,16 +66,23 @@ const CustomDrawerContent = props => {
       <View style={drawerStyle.drawerHeader}>
         <View style={drawerStyle.miniProfile}>
           <Image
-            source={{
-              uri: 'https://gravatar.com/avatar/' + md5(user.email) + '?s=200',
-            }}
+            source={
+              user
+                ? {
+                    uri:
+                      'https://gravatar.com/avatar/' +
+                      md5(user.email) +
+                      '?s=200',
+                  }
+                : require('../assets/default_avatar.png')
+            }
             style={{ width: 90, height: 90, borderRadius: 45, zIndex: 9 }}
           />
           <Text suppressHighlighting style={{ color: '#fff' }}>
-            {user.nickname ? user.nickname : ''}
+            {user ? user.nickname : ''}
           </Text>
           <Text style={{ fontSize: 10, color: '#fff' }}>
-            {user.email ? user.email : ''}
+            {user ? user.email : ''}
           </Text>
         </View>
       </View>
@@ -103,7 +110,7 @@ const CustomDrawerContent = props => {
         </Body>
       </ListItem>
 
-      {user.id !== null
+      {user && user.id !== null
         ? <ListItem icon onPress={() => onPressLogout()}>
             <Left>
               <Icon name="ios-exit-outline" style={{ color: '#EF5350' }} />

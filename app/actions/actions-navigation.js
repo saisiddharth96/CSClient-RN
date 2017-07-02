@@ -33,5 +33,5 @@ export function reset(routeStack: Array) {
 }
 
 export function goBack(screenKey) {
-  return NavigationActions.goBack(screenKey);
+  return NavigationActions.back(screenKey);
 }

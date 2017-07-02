@@ -32,13 +32,17 @@ const onSubmit = (values, dispatch) => {
           .then(d => {
             console.log(d.data);
             const { data } = d;
-            dispatch(saveUserData(data));
+            dispatch(saveUserData({ ...data, password }));
             dispatch(reset(['HomeDrawer']));
           })
           .catch(e => console.log(e));
       } else if (!response.ok) {
+        const { data } = d;
+        alert(data.message);
         throw new SubmissionError({ _error: 'Login failed!' });
       } else {
+        const { data } = d;
+        alert(data.message);
         throw new SubmissionError({ _error: 'Wrong username or password.' });
       }
     })

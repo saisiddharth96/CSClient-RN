@@ -1,7 +1,7 @@
 'use strict';
 import Types from '../actions/types-users';
 
-const INITIAL_STATE = {};
+const INITIAL_STATE = null;
 
 export const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {

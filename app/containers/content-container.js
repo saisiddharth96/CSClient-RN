@@ -29,6 +29,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { getPost, clearPost } from '../actions/actions-posts';
 import ItemComment from '../components/items/item-comment';
 import CommentBox from '../components/comment-box';
+import CommentBoxAuthenticated from '../components/comment-box-authenticated';
 
 class ContentContainer extends Component {
   static propTypes = {
@@ -52,8 +53,9 @@ class ContentContainer extends Component {
 
   renderContent = () => {
     let { content, excerpt } = this.props.post;
+    const { user } = this.props;
+    console.log(user);
     const { replies } = this.props.post._embedded;
-    console.log(this.props.post._embedded);
     const itemNode = HTMLParser.parse(he.unescape(content.rendered));
     const imageLink = itemNode.querySelector('img').attributes['src'];
 
@@ -87,7 +89,7 @@ class ContentContainer extends Component {
           keyExtractor={item => item.id}
           renderItem={({ item }) => this.renderCommentItem(item)}
         />
-        <CommentBox />
+        {user ? <CommentBoxAuthenticated /> : <CommentBox />}
       </KeyboardAwareScrollView>
     );
   };
@@ -124,10 +126,11 @@ class ContentContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  const { nav, post } = state;
+  const { nav, post, user } = state;
   return {
     nav,
     post,
+    user,
   };
 };
 

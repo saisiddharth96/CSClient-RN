@@ -8,17 +8,39 @@ import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { connectStyle, Button, Icon } from 'native-base';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-import { requestLogin } from '../../actions/actions-users';
+import SpinKit from 'react-native-spinkit';
+import { saveUserData } from '../../actions/actions-users';
+import { reset } from '../../actions/actions-navigation';
 import I18n from '../../localizations/I18n';
+import APIv2, { Status } from '../../services/api';
+
+const apiv2 = APIv2.create();
 
 const onSubmit = (values, dispatch) => {
-  const { username, password } = values;
-  dispatch(requestLogin(username, password));
+  const { username, password, email } = values;
+  console.log(values);
+  return apiv2
+    .createUser({ username, password, email })
+    .then(d => {
+      console.log(d);
+      if (d.status === Status.OK) {
+        const { data } = d;
+        dispatch(saveUserData({ ...data, password }));
+        dispatch(reset(['HomeDrawer']));
+      } else {
+        const { data } = d;
+        alert(data.message);
+        throw new SubmissionError({ _error: data.message });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      throw new SubmissionError({ _error: error });
+    });
 };
 
 const usernameField = ({ input, meta, ...inputProps }) => {
   const { invalid, touched } = meta;
-
   return (
     <View
       style={[
@@ -44,8 +66,14 @@ const usernameField = ({ input, meta, ...inputProps }) => {
 };
 
 const passwordField = ({ input, meta, ...inputProps }) => {
+  const { invalid, touched } = meta;
   return (
-    <View style={styles.inputWrapper}>
+    <View
+      style={[
+        styles.inputWrapper,
+        invalid && touched ? styles.inputWrapperError : null,
+      ]}
+    >
       <Icon name="lock" style={styles.icon} />
       <TextInput
         {...inputProps}
@@ -65,16 +93,24 @@ const passwordField = ({ input, meta, ...inputProps }) => {
 };
 
 const emailField = ({ input, type, meta, ...inputProps }) => {
+  const { invalid, touched } = meta;
   return (
-    <View style={styles.inputWrapper}>
+    <View
+      style={[
+        styles.inputWrapper,
+        invalid && touched ? styles.inputWrapperError : null,
+      ]}
+    >
       <Icon name="mail" style={styles.icon} />
       <TextInput
         {...inputProps}
         name={'email'}
+        keyboardType={'email-address'}
         onChangeText={input.onChange}
         value={input.value}
         onBlur={input.onBlur}
         selectionColor={'#ffefef'}
+        autoCapitalize={'none'}
         placeholder={I18n.t('register_email_placeholder')}
         placeholderTextColor={styles.placeholderTextColor}
         underlineColorAndroid={'transparent'}
@@ -111,6 +147,14 @@ class RegisterForm extends Component {
 
   render() {
     const { handleSubmit, submitting } = this.props;
+    const registerLabel = (
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <Icon active name="ios-person" style={{ color: '#fff' }} />
+        <Text style={{ color: '#fff' }}>
+          {I18n.t('register_button_label')}
+        </Text>
+      </View>
+    );
 
     return (
       <View style={[this.props.style, styles.formContainer]}>
@@ -125,12 +169,11 @@ class RegisterForm extends Component {
           light
           title={''}
           onPress={handleSubmit(onSubmit)}
-          submitting={submitting}
+          disabled={submitting}
         >
-          <Icon active name="ios-person" style={{ color: '#fff' }} />
-          <Text style={{ color: '#fff' }}>
-            {I18n.t('register_button_label')}
-          </Text>
+          {submitting
+            ? <SpinKit type="Wave" size={26} color={'#ffffff'} />
+            : registerLabel}
         </Button>
       </View>
     );

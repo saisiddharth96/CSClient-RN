@@ -111,7 +111,9 @@ class ProfileContainer extends Component {
               <Icon active name="person" />
               <Text>Nickname</Text>
               <Right>
-                <Text>Sophia-sama</Text>
+                <Text>
+                  {name}
+                </Text>
               </Right>
             </CardItem>
 

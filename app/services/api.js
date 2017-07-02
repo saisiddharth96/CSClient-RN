@@ -7,6 +7,8 @@
 import apisauce from 'apisauce';
 import base64 from 'base-64';
 
+const privilegeData = require('../utils/credentials.json');
+
 XMLHttpRequest = GLOBAL.originalXMLHttpRequest
   ? GLOBAL.originalXMLHttpRequest
   : GLOBAL.XMLHttpRequest;
@@ -14,6 +16,7 @@ XMLHttpRequest = GLOBAL.originalXMLHttpRequest
 const Status = {
   OK: 200,
   ERROR_404: 404,
+  ERROR_500: 500,
 };
 
 const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
@@ -38,14 +41,44 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
 
   const retrievePost = (id: number) => api.get('posts/' + id, { _embed: 1 });
 
-  const createPost = (args: Object) => api.post('posts', { ...args });
+  const createPost = (args: Object, username, password) =>
+    api.post(
+      'posts',
+      { ...args },
+      {
+        headers: {
+          Authorization: 'Basic ' + base64.encode(username + ':' + password),
+        },
+      },
+    );
 
-  const updatePost = (id, args) => {
-    api.post('posts/' + id, { ...args });
+  const updatePost = (id, args, username, password) => {
+    api.post(
+      'posts/' + id,
+      { ...args },
+      {
+        headers: {
+          Authorization: 'Basic ' + base64.encode(username + ':' + password),
+        },
+      },
+    );
   };
 
-  const deletePost = id => {
-    api.delete('posts/' + id);
+  const deletePost = (
+    id: number,
+    force: boolean,
+    username: string,
+    password: string,
+  ) => {
+    api.delete(
+      'posts/' + id,
+      { force },
+      {
+        headers: {
+          Authorization: 'Basic ' + base64.encode(username + ':' + password),
+        },
+      },
+    );
   };
 
   /**********************************
@@ -89,7 +122,20 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
       },
     );
 
-  const createUser = (args: Object) => api.post('users/', { ...args });
+  const createUser = (args: Object) =>
+    api.post(
+      'users/',
+      { ...args },
+      {
+        headers: {
+          Authorization:
+            'Basic ' +
+            base64.encode(
+              privilegeData.PRIVILEGED_USER + ':' + privilegeData.APP_PASSWORD,
+            ),
+        },
+      },
+    );
 
   const updateUser = (id: number, args: Object) =>
     api.post('users/' + id, { ...args });
