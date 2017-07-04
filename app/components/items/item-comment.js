@@ -7,7 +7,6 @@ import moment from 'moment';
 
 const ItemComment = props => {
   const { comment } = props;
-  console.log(comment);
   const displayDate = moment(comment.date).startOf('day').fromNow();
   const content = comment.content.rendered.replace(/(\r\n|\n|\r)/gm, '').trim();
 

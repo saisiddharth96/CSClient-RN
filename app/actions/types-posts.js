@@ -8,6 +8,7 @@ const Types = {
   CLEAR_POST: 'CLEAR_POST',
   RECEIVE_POST: 'RECEIVE_POST',
   RECEIVE_POSTS: 'RECEIVE_POSTS',
+  RECEIVE_COMMENT: 'RECEIVE_COMMENT',
 };
 
 export default Types;

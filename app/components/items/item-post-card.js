@@ -24,6 +24,7 @@ const ItemPostCard = props => {
   const { navigate } = props;
   const { id, content, title, excerpt, link } = props.post;
   const { author, replies } = props.post._embedded;
+  console.log(props.post);
   const sharePost = () => {
     const shareContent = {
       message: link,
@@ -47,7 +48,9 @@ const ItemPostCard = props => {
     <Card>
       <CardItem header>
         <Left>
-          <Text style={styles.title}>{he.unescape(title.rendered)}</Text>
+          <Text style={styles.title}>
+            {he.unescape(title.rendered)}
+          </Text>
         </Left>
       </CardItem>
       <TouchableOpacity>
@@ -82,7 +85,9 @@ const ItemPostCard = props => {
         </Button>
         <Button transparent small onPress={() => sharePost()}>
           <Icon name="md-share" />
-          <Text>{I18n.t('share')}</Text>
+          <Text>
+            {I18n.t('share')}
+          </Text>
         </Button>
       </CardItem>
     </Card>

@@ -46,3 +46,10 @@ export function receivePosts(list: Array, page: number, meta: Object) {
     meta,
   };
 }
+
+export function receiveComment(comment) {
+  return {
+    type: Types.RECEIVE_COMMENT,
+    comment,
+  };
+}

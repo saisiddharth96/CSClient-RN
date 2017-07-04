@@ -70,7 +70,7 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
     username: string,
     password: string,
   ) => {
-    api.delete(
+    return api.delete(
       'posts/' + id,
       { force },
       {
@@ -89,11 +89,51 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
   };
 
   const retrievePostRevision = (parentId: number, id: number) => {
-    api.get('posts/' + parentId + '/revisions' + id);
+    return api.get('posts/' + parentId + '/revisions' + id);
   };
 
   const deletePostRevision = (parentId: number, id: number) => {
-    api.delete('posts/' + parentId + '/revisions' + id);
+    return api.delete('posts/' + parentId + '/revisions' + id);
+  };
+
+  /**********************************
+   * COMMENTS
+   **********************************/
+
+  const createComment = (
+    post: number,
+    parent: number,
+    content: string,
+    authorData: Object,
+  ) => {
+    const { author_email, author_name, author_url } = authorData;
+    return api.post('comments/', {
+      post,
+      parent,
+      content,
+      author_email,
+      author_name,
+      author_url,
+    });
+  };
+
+  const createCommentWithAuthor = (
+    post: number,
+    parent: number,
+    content: string,
+    authorData: Object,
+  ) => {
+    // Author object should have: id, username, password.
+    const { author, username, password } = authorData;
+    return api.post(
+      'comments/',
+      { post, parent, content, author },
+      {
+        headers: {
+          Authorization: 'Basic ' + base64.encode(username + ':' + password),
+        },
+      },
+    );
   };
 
   /**********************************
@@ -149,6 +189,9 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
     createPost,
     updatePost,
     deletePost,
+
+    createComment,
+    createCommentWithAuthor,
 
     listPostRevisions,
     retrievePostRevision,

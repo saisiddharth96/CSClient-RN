@@ -10,6 +10,7 @@ const api = API.create();
 const onSubmit = (values, dispatch) => {
   const { nickname, email, comment } = values;
   console.log(values);
+  // api
   return;
 };
 
@@ -31,6 +32,7 @@ const commentField = ({ input, placeholder, meta, ...inputProps }) => {
 };
 
 const CommentBox = props => {
+  const { handleSubmit, submitting } = this.props;
   return (
     <View style={[props.style, Styles.formContainer]}>
       <View style={Styles.inputWrapper}>
@@ -69,11 +71,14 @@ const CommentBox = props => {
         rounded
         bordered
         outline
-        onPress={() => {}}
+        onPress={handleSubmit(onSubmit)}
+        disabled={submitting}
         title={''}
       >
         <Icon active name="ios-person" style={{ color: '#fff' }} />
-        <Text style={{ color: '#000' }}>{'Post your comment'}</Text>
+        <Text style={{ color: '#000' }}>
+          {'Post your comment'}
+        </Text>
       </Button>
     </View>
   );

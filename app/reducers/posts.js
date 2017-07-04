@@ -10,6 +10,7 @@ const POST_INIT_STATE = {
   title: null,
   excerpt: '',
   content: null,
+  _embedded: null,
 };
 
 export const post = (state = POST_INIT_STATE, action) => {
@@ -21,6 +22,18 @@ export const post = (state = POST_INIT_STATE, action) => {
       };
     case Types.CLEAR_POST:
       return POST_INIT_STATE;
+    case Types.RECEIVE_COMMENT:
+      if (state._embedded.replies) {
+        state._embedded.replies[0].unshift(action.comment);
+        console.log(state._embedded.replies);
+      } else {
+        state._embedded.replies = [[]];
+        state._embedded.replies[0].unshift(action.comment);
+        console.log(state._embedded.replies);
+      }
+      return {
+        ...state,
+      };
     default:
       return state;
   }

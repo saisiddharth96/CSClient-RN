@@ -1,30 +1,82 @@
 'use strict';
 import React from 'react';
 import { Icon, Button } from 'native-base';
-import { View, Text, Stylesheet, TextInput } from 'react-native';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
+import { View, Text, TextInput } from 'react-native';
+import { receiveComment } from '../actions/actions-posts';
+import API from '../services/api';
 import Styles from './_styles/styles-comment-box';
 
+const api = API.create();
+
+console.disableYellowBox = true;
+
+const onSubmit = (values, dispatch, { user, post, reset }) => {
+  const { content } = values;
+  const authorData = {
+    id: user.id,
+    username: user.username,
+    password: user.password,
+  };
+  return api
+    .createCommentWithAuthor(post.id, 0, content, authorData)
+    .then(result => {
+      const { data } = result;
+      console.log(result);
+      reset();
+      dispatch(receiveComment(data));
+      setTimeout(() => console.log(post), 2000);
+    })
+    .catch(error => console.log(error));
+};
+
+const validate = values => {
+  const errors = {};
+  if (!values.comment) {
+    errors.username = 'Required';
+  }
+  return errors;
+};
+
+const commentField = ({ input, placeholder, meta, ...inputProps }) => {
+  const { invalid, touched, submitting } = meta;
+  return (
+    <View
+      style={[
+        Styles.inputWrapper,
+        invalid && touched ? Styles.inputWrapperError : null,
+      ]}
+    >
+      <TextInput
+        {...inputProps}
+        onChangeText={input.onChange}
+        value={input.value}
+        multiline
+        onBlur={input.onBlur}
+        secureTextEntry
+        editable={!submitting}
+        placeholder={'Enter your comment'}
+        placeholderTextColor={'#63585b'}
+        underlineColorAndroid={'transparent'}
+        style={[Styles.input, Styles.inputArea]}
+      />
+    </View>
+  );
+};
+
 const CommentBoxAuthenticated = props => {
+  const { handleSubmit, submitting } = props;
   return (
     <View style={[props.style, Styles.formContainer]}>
-      <View style={Styles.inputWrapper}>
-        <TextInput
-          name={'comment'}
-          multiline
-          numberOfLines={3}
-          placeholder={'Enter your comment'}
-          placeholderTextColor={'#63585b'}
-          underlineColorAndroid={'transparent'}
-          style={[Styles.input, Styles.inputArea]}
-        />
-      </View>
+      <Field name={'content'} component={commentField} />
       <Button
         danger
         block
         rounded
         bordered
         outline
-        onPress={() => {}}
+        onPress={handleSubmit(onSubmit)}
+        disabled={submitting}
         title={''}
       >
         <Icon active name="ios-person" style={{ color: '#fff' }} />
@@ -36,4 +88,6 @@ const CommentBoxAuthenticated = props => {
   );
 };
 
-export default CommentBoxAuthenticated;
+export default reduxForm({ form: 'comment-authenticated', validate })(
+  CommentBoxAuthenticated,
+);

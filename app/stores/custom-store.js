@@ -22,7 +22,15 @@ export default function CustomStore(initialState) {
   persistStore(
     store,
     {
-      blacklist: ['nav', 'posts', 'categories', 'post', 'home', 'settings'],
+      blacklist: [
+        'nav',
+        'posts',
+        'categories',
+        'post',
+        'form',
+        'home',
+        'settings',
+      ],
       storage: AsyncStorage,
     },
     () => console.log('Persist completed'),

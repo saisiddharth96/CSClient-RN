@@ -10,6 +10,8 @@ import {
   BackHandler,
   Image,
   FlatList,
+  UIManager,
+  LayoutAnimation,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
@@ -31,16 +33,38 @@ import ItemComment from '../components/items/item-comment';
 import CommentBox from '../components/comment-box';
 import CommentBoxAuthenticated from '../components/comment-box-authenticated';
 
+UIManager.setLayoutAnimationEnabledExperimental &&
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+
 class ContentContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      commentCount: 0,
+    };
+  }
 
   componentDidMount() {
     const { goBack, fetchPost } = this.props;
     const { postId } = this.props.navigation.state.params;
     fetchPost(postId);
     BackHandler.addEventListener('hardwareBackPress', () => goBack());
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { post } = nextProps;
+    console.log(nextProps);
+    if (post._embedded.replies) {
+      this.setState({ commentCount: post._embedded.replies[0].length });
+    }
+  }
+
+  componentWillUpdate() {
+    LayoutAnimation.easeInEaseOut();
   }
 
   componentWillUnmount() {
@@ -58,7 +82,7 @@ class ContentContainer extends Component {
 
   renderContent = () => {
     let { content, excerpt } = this.props.post;
-    const { user } = this.props;
+    const { user, post } = this.props;
     console.log(user);
     const { replies } = this.props.post._embedded;
     const itemNode = HTMLParser.parse(he.unescape(content.rendered));
@@ -93,8 +117,11 @@ class ContentContainer extends Component {
           data={replies && replies.length > 0 ? replies[0] : null}
           keyExtractor={item => item.id}
           renderItem={({ item }) => this.renderCommentItem(item)}
+          extraData={this.state.commentCount}
         />
-        {user ? <CommentBoxAuthenticated /> : <CommentBox />}
+        {user
+          ? <CommentBoxAuthenticated post={post} user={user} />
+          : <CommentBox />}
       </KeyboardAwareScrollView>
     );
   };
