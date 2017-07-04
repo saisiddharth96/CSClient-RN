@@ -2,12 +2,15 @@
 
 Clip-sub Client app, powered by [React Native](https://facebook.github.io/react-native/). With cross-platform support (iOS and Android). Originally created for fansubs websites to create their own fancy, colorful and interactive app.
 
+The main aim of this project is to provide users (especially fansubs) a convenient framework to build their own apps. It integrates nicely with WordPress, using standard official Material Design on Android and Human UX Guideline on iOS.
+
 - [x] Fetching and posting posts.
-- [x] Reading comments.
-- [x] User registration / login.
-- [x] Administration.
+- [x] Reading comments / posting comments.
+- [x] User registration / authentication.
+- [x] Administration, managing pages / posts.
 - [x] Consistent push notifications using OneSignal.
 - [x] Fully-configurable theming system.
+- [x] Editing and uploading avatar (through Gravatar).
 
 ## Getting started
 
@@ -35,6 +38,10 @@ or Yarn:
 
 `yarn add`
 
+All native modules are already linked. You only have to install npm packages like above to start working. However if you get troubles with native modules, you can always unlink them whenever you like:
+
+`react-native unlink`
+
 ### Install necessary plugin on Wordpress back-end:
 
 With CSClient-RN, we use two main plugin on server side to provider the REST API:
@@ -43,9 +50,5 @@ With CSClient-RN, we use two main plugin on server side to provider the REST API
 - [JSON API User](https://wordpress.org/plugins/json-api-user/) for cookie authentication, user validation.
 - Wordpress REST API: Included with every Wordpress package from v4.7 onward.
 - [OneSignal](https://wordpress.org/plugins/onesignal-free-web-push-notifications/) for cross-platform push notification service.
-
-Command line for starting emulator example:
-
-`
-emulator -avd Galaxy_Nexus_API_25 -netdelay none -netspeed full
-`
+- [WP-Basic-Auth](https://wordpress.org/plugins/wp-basic-auth/) Using for user authentication after they have registered on your site.
+- [Application Passwords](https://wordpress.org/plugins/application-passwords/) for user-registration. With the design of WordPress API, there is no way to add an user without authenticating as a privileged user first (which I found weird). We also should not expose admin's password to anyone, so this is the best option for now.

@@ -34,7 +34,7 @@
     "react": "16.0.0-alpha.12",
     "react-native": "^0.45.1",
     "react-native-circle-button": "^1.0.8",
-    "react-native-code-push": "^3.0.0-beta",
+    "react-native-code-push": "^3.0.1-beta",
     "react-native-config": "^0.5.0",
     "react-native-draftjs-render": "^1.0.3",
     "react-native-flip-card": "^3.4.1",

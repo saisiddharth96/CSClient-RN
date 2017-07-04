@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BackHandler } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
@@ -30,6 +31,15 @@ class PreferencesContainer extends Component {
         items: [],
       },
     };
+  }
+
+  componentDidMount() {
+    const { goBack } = this.props;
+    BackHandler.addEventListener('hardwareBackPress', () => goBack());
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress');
   }
 
   onValueChange = (value: string) => {

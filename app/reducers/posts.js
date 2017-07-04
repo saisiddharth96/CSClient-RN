@@ -19,6 +19,8 @@ export const post = (state = POST_INIT_STATE, action) => {
         ...state,
         ...action.post,
       };
+    case Types.CLEAR_POST:
+      return POST_INIT_STATE;
     default:
       return state;
   }

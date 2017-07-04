@@ -49,6 +49,11 @@ class ContentContainer extends Component {
     BackHandler.removeEventListener('hardwareBackPress', () => goBack());
   }
 
+  onPressBack = () => {
+    const { dispatch } = this.props;
+    dispatch(clearPost());
+  };
+
   renderCommentItem = item => <ItemComment comment={item} />;
 
   renderContent = () => {
@@ -119,7 +124,6 @@ class ContentContainer extends Component {
         <StatusBar backgroundColor={'#fff'} />
 
         {title !== null ? this.renderContent() : <Spinner color="red" />}
-
       </Container>
     );
   }
