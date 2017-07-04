@@ -1,12 +1,15 @@
 /**
  * @flow
  */
+
 'use strict';
+
 import { StackNavigator } from 'react-navigation';
 import AuthScreen from '../containers/auth-container';
 import PreferencesScreen from '../containers/preferences-container';
 import ProfileScreen from '../containers/profile-container';
 import ContentScreen from '../containers/content-container';
+import EditorScreen from '../containers/editor-container';
 import HomeDrawerNavigator from './drawer-navigator';
 
 const routeConfig = {
@@ -15,10 +18,11 @@ const routeConfig = {
   Preferences: { screen: PreferencesScreen },
   Profile: { screen: ProfileScreen },
   Content: { screen: ContentScreen },
+  Editor: { screen: EditorScreen },
 };
 
 const stackNavigatorConfig = {
-  initialRouteName: 'HomeDrawer',
+  initialRouteName: 'Editor',
   mode: 'card',
   headerMode: 'none',
   navigationOptions: {
