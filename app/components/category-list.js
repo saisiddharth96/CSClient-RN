@@ -1,19 +1,36 @@
+/**
+ * @flow
+ */
+
 'use strict';
-import React, { Component, PropTypes } from 'react';
+
+import React, { PureComponent, PropTypes } from 'react';
 import { View } from 'react-native';
 import { Spinner, List } from 'native-base';
+import { getCategories } from '../actions/actions-categories';
 import { CategorySearchBar } from './category-search-bar';
 import { ItemCategory } from './items/item-category';
 
-export default class CategoryList extends Component {
+export default class CategoryList extends PureComponent {
   static propTypes = {
+    loading: PropTypes.bool.isRequired,
+    pagesLoaded: PropTypes.number.isRequired,
     categoryItems: PropTypes.arrayOf(PropTypes.object),
-    status: PropTypes.oneOf(['loading', 'error', 'loaded']),
   };
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, categories } = this.props;
+    const { pagesLoaded } = categories;
+    dispatch(getCategories(pagesLoaded + 1));
   }
+
+  onLoadMoreCategories = () => {
+    const { dispatch, categories } = this.props;
+    const { pagesLoaded, loading } = categories;
+    if (!loading) {
+      dispatch(getCategories(pagesLoaded + 1));
+    }
+  };
 
   renderItem = item => {
     const { dispatch } = this.props;
@@ -43,7 +60,9 @@ export default class CategoryList extends Component {
         renderRow={item => this.renderItem(item)}
         initialNumToRender={15}
         style={{ alignSelf: 'stretch' }}
-        renderHeader={this.renderCategorySearchBar}
+        onEndReached={this.onLoadMoreCategories}
+        onEndReachedThreshold={2}
+        renderHeader={() => <Spinner color="blue" />}
         renderFooter={() =>
           status === 'loaded' ? null : <Spinner color="red" />}
       />
@@ -59,7 +78,7 @@ export default class CategoryList extends Component {
           flex: 1,
           alignSelf: 'stretch',
           alignItems: 'center',
-          backgroundColor: '#fff',
+          backgroundColor: 'red',
         }}
       >
         {this.renderCategoryList(categoryItems)}

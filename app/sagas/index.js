@@ -6,6 +6,7 @@ import { takeLatest } from 'redux-saga/effects';
 import PostTypes from '../actions/types-posts';
 import UserTypes from '../actions/types-users';
 import { getPosts, getPost } from './posts-saga';
+import * from './categories-saga';
 import { login } from './auth-saga';
 
 function* rootSaga() {
