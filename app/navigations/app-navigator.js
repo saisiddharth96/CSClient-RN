@@ -22,7 +22,7 @@ const routeConfig = {
 };
 
 const stackNavigatorConfig = {
-  initialRouteName: 'HomeDrawer',
+  initialRouteName: 'Editor',
   mode: 'card',
   headerMode: 'none',
   navigationOptions: {

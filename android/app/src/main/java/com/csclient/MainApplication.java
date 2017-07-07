@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.github.alinz.reactnativewebviewbridge.WebViewBridgePackage;
 import com.clipsub.RNShake.RNShakeEventPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
@@ -32,6 +33,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new WebViewBridgePackage(),
             new RNShakeEventPackage(),
             new RNSpinkitPackage(),
             new ReactNativeOneSignalPackage(),

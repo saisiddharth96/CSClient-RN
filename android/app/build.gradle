@@ -153,6 +153,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-webview-bridge-updated')
     compile project(':react-native-shake')
     compile project(':react-native-spinkit')
     compile project(':react-native-onesignal')
