@@ -5,16 +5,14 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { Spinner, List } from 'native-base';
-import { getCategories } from '../actions/actions-categories';
 import { CategorySearchBar } from './category-search-bar';
 import { ItemCategory } from './items/item-category';
 
 export default class CategoryList extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       filteredCategories: [],
     };
@@ -22,37 +20,46 @@ export default class CategoryList extends Component {
 
   componentDidMount() {
     const { getCategories } = this.props;
-    getCategories();
+    const { list } = this.props.categories;
+    if (!list || list.length <= 0) {
+      getCategories();
+    }
   }
 
-  onLoadMoreCategories = () => {
-    const { dispatch, categories } = this.props;
-    const { pagesLoaded, loading } = categories;
-    if (!loading) {
-      dispatch(getCategories(pagesLoaded + 1));
-    }
+  onRedirect = () => {
+    const { getPosts, switchHomeTab, posts } = this.props;
+
+    getPosts(1, posts.args);
+    switchHomeTab(1);
+  };
+
+  onItemPress = (categoryId: number) => {
+    const { clearPosts, setPostsArgs } = this.props;
+
+    setPostsArgs({ categories: categoryId });
+    clearPosts();
+    setTimeout(() => {
+      this.onRedirect();
+    }, 400);
   };
 
   renderItem = item => {
-    const { clearPosts, getPosts, switchHomeTab } = this.props;
-
-    const onItemPress = () => {
-      clearPosts();
-      switchHomeTab(1);
-      getPosts(1);
-    };
     return (
       <ItemCategory
         id={item.id}
         title={item.title}
         postCount={item.post_count}
         parentId={item.parent}
-        onPress={onItemPress}
+        onPress={this.onItemPress}
       />
     );
   };
 
-  renderCategorySearchBar = () => <CategorySearchBar {...this.props} />;
+  renderCategorySearchBar = () =>
+    <CategorySearchBar
+      onChangeText={text => this.props.filterCategories(text)}
+      {...this.props}
+    />;
 
   renderLoadingIndicator = () => <Spinner />;
 
@@ -67,8 +74,6 @@ export default class CategoryList extends Component {
         renderRow={item => this.renderItem(item)}
         initialNumToRender={15}
         style={{ alignSelf: 'stretch' }}
-        onEndReached={this.onLoadMoreCategories}
-        onEndReachedThreshold={2}
         renderHeader={this.renderCategorySearchBar}
         renderFooter={() =>
           status === 'loaded' ? null : <Spinner color="red" />}
@@ -78,7 +83,6 @@ export default class CategoryList extends Component {
 
   render() {
     const { categories } = this.props;
-    console.log(categories);
 
     return (
       <View
@@ -88,7 +92,7 @@ export default class CategoryList extends Component {
           alignItems: 'center',
         }}
       >
-        {this.renderCategoryList(categories.list)}
+        {this.renderCategoryList(categories.listFiltered)}
       </View>
     );
   }

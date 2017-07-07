@@ -10,14 +10,13 @@ const api = API.create();
 
 export function* getPosts(action) {
   const { page, args } = action;
+  delete action.type;
   try {
-    const result = yield call(api.listPosts, { page });
+    const result = yield call(api.listPosts, { page, ...args });
     if (result.ok) {
-      const meta = {
-        total: parseInt(result.headers['x-wp-total']),
-        totalPages: parseInt(result.headers['x-wp-totalpages']),
-      };
-      yield put(receivePosts(result.data, page));
+      const total = parseInt(result.headers['x-wp-total']);
+      const totalPages = parseInt(result.headers['x-wp-totalpages']);
+      yield put(receivePosts(result.data, page, total, totalPages));
     } else {
       console.log('Error');
     }

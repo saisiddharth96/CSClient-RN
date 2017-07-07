@@ -4,11 +4,11 @@
 'use strict';
 import Types from './types-posts';
 
-export function getPosts(page, args) {
+export function getPosts(page: number, args: Object) {
   return {
     type: Types.GET_POSTS,
     page,
-    ...args,
+    args,
   };
 }
 
@@ -18,7 +18,7 @@ export function clearPosts() {
   };
 }
 
-export function getPost(postId) {
+export function getPost(postId: number) {
   return {
     type: Types.GET_POST,
     postId,
@@ -31,6 +31,13 @@ export function clearPost() {
   };
 }
 
+export function setPostsArgs(args: Object) {
+  return {
+    type: Types.SET_ARGS,
+    args,
+  };
+}
+
 export function receivePost(post: Object) {
   return {
     type: Types.RECEIVE_POST,
@@ -38,16 +45,22 @@ export function receivePost(post: Object) {
   };
 }
 
-export function receivePosts(list: Array, page: number, meta: Object) {
+export function receivePosts(
+  list: Array,
+  page: number,
+  total: number,
+  totalPages: number,
+) {
   return {
     type: Types.RECEIVE_POSTS,
     list,
     page,
-    meta,
+    total,
+    totalPages,
   };
 }
 
-export function receiveComment(comment) {
+export function receiveComment(comment: Object) {
   return {
     type: Types.RECEIVE_COMMENT,
     comment,

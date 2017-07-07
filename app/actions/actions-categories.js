@@ -20,3 +20,10 @@ export function receiveCategories(categories: Array<Object>, page: number) {
     page,
   };
 }
+
+export function filterCategories(keyword: string) {
+  return {
+    type: Types.FILTER_CATEGORIES,
+    keyword,
+  };
+}

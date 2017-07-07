@@ -2,7 +2,7 @@
  * @flow
  */
 'use strict';
-import React, { PureComponent, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { View, FlatList } from 'react-native';
 import { Spinner, List } from 'native-base';
 // import { getPosts, clearPosts } from '../actions/actions-posts';
@@ -10,7 +10,7 @@ import { PostMenuBar } from './post-menu-bar';
 import { ItemPostCard } from './items/item-post-card';
 import { ItemPostGrid } from './items/item-post-grid';
 
-export default class PostList extends PureComponent {
+export default class PostList extends Component {
   static propTypes = {
     postItems: PropTypes.arrayOf(PropTypes.object),
     status: PropTypes.oneOf(['loading', 'error', 'loaded']),
@@ -24,8 +24,8 @@ export default class PostList extends PureComponent {
 
   componentDidMount() {
     const { getPosts, posts } = this.props;
-    const { page } = posts;
-    getPosts(page);
+    const { page, args } = posts;
+    getPosts(page, args);
   }
 
   componentWillUnmount() {
@@ -34,11 +34,11 @@ export default class PostList extends PureComponent {
   }
 
   onEndReached = () => {
-    const { getPosts, args } = this.props;
-    const { status, page } = this.props.posts;
-    console.log(this.props.posts);
-    if (status !== 'loading') {
-      if (!args) return getPosts(page + 1);
+    const { getPosts, posts } = this.props;
+    const { loading, page, totalPages, args } = posts;
+    if (!loading && page < totalPages) {
+      console.log(posts);
+      return getPosts(page + 1, args);
     }
   };
 

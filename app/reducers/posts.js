@@ -52,25 +52,31 @@ const POSTS_INITIAL_STATE = {
 export const posts = (state = POSTS_INITIAL_STATE, action) => {
   switch (action.type) {
     case Types.GET_POSTS:
-      console.log(action);
       return {
         ...state,
-        status: 'loading',
+        loading: true,
       };
     case Types.RECEIVE_POSTS:
       return {
         ...state,
         loading: false,
         page: action.page,
+        total: action.total,
+        totalPages: action.totalPages,
         list: state.list.concat(action.list),
-        args: action.args,
       };
     case Types.CLEAR_POSTS:
       return {
         ...state,
         loading: true,
-        currentPage: 1,
-        postItems: [],
+        page: 1,
+        list: [],
+      };
+    case Types.SET_ARGS:
+      console.log(action);
+      return {
+        ...state,
+        args: action.args,
       };
     default:
       return state;

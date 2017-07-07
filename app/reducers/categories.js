@@ -3,11 +3,15 @@
  */
 
 'use strict';
+
+import _ from 'lodash';
+import Fuse from 'fuse.js';
 import Types from '../actions/types-categories';
 
 const INITIAL_STATE = {
-  loading: false,
+  loading: true,
   list: [],
+  listFiltered: [],
 };
 
 export const categories = (state = INITIAL_STATE, action) => {
@@ -22,6 +26,23 @@ export const categories = (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         list: action.categories,
+        listFiltered: action.categories,
+      };
+    case Types.FILTER_CATEGORIES:
+      const options = {
+        shouldSort: true,
+        threshold: 0.6,
+        location: 0,
+        distance: 100,
+        maxPatternLength: 32,
+        minMatchCharLength: 1,
+        keys: ['title'],
+      };
+      const fuse = new Fuse(state.list, options);
+      const result = fuse.search(action.keyword);
+      return {
+        ...state,
+        listFiltered: action.keyword ? result : state.list,
       };
     default:
       return state;

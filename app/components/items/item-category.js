@@ -16,14 +16,17 @@ import { TouchableHighlight, View, Text } from 'react-native';
   "post_count": 2
  */
 const ItemCategory = props => {
-  const { title, onPress } = props;
+  const { id, title, onPress } = props;
+  const onItemPress = () => {
+    onPress(id);
+  };
 
   return (
     <TouchableHighlight
       activeOpacity={0.3}
       underlayColor={'#f4f8ff'}
       style={styles.itemContainer}
-      onPress={onPress}
+      onPress={onItemPress}
     >
       <View elevation={3} style={styles.item}>
         <Text style={styles.text}>

@@ -41,8 +41,7 @@ const onSubmit = (values, dispatch) => {
         alert(data.message);
         throw new SubmissionError({ _error: 'Login failed!' });
       } else {
-        const { data } = d;
-        alert(data.message);
+        alert('Wrong username or password.');
         throw new SubmissionError({ _error: 'Wrong username or password.' });
       }
     })

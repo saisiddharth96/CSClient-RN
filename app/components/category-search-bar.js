@@ -6,7 +6,7 @@ import React, { PropTypes } from 'react';
 import { TextInput, TouchableOpacity, View, Keyboard } from 'react-native';
 import { Icon } from 'native-base';
 
-export const CategorySearchBar = props => (
+export const CategorySearchBar = props =>
   <View elevation={1} style={styles.container}>
     <View style={styles.searchBoxWrapper}>
       <Icon name="search" style={styles.searchBoxIcon} />
@@ -14,6 +14,7 @@ export const CategorySearchBar = props => (
         underlineColorAndroid="transparent"
         returnKeyType={'search'}
         multiline={false}
+        onChangeText={props.onChangeText}
         style={styles.searchBoxInput}
       />
       <TouchableOpacity onPress={() => alert('clear')}>
@@ -26,8 +27,7 @@ export const CategorySearchBar = props => (
     >
       <Icon name="arrow-forward" style={styles.iconOutside} />
     </TouchableOpacity>
-  </View>
-);
+  </View>;
 
 CategorySearchBar.propTypes = {
   onChangeText: PropTypes.func,

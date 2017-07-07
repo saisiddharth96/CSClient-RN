@@ -40,7 +40,12 @@ const ItemPostCard = props => {
   };
 
   const itemNode = HTMLParser.parse(he.unescape(content.rendered));
-  const imageLink = itemNode.querySelector('img').attributes['data-orig-file'];
+  let imageLink = '';
+  try {
+    imageLink = itemNode.querySelector('img').attributes['data-orig-file'];
+  } catch (e) {
+    imageLink = '';
+  }
   // By default, it parses the first image in the post.
 
   return (
