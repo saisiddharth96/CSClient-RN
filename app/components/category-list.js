@@ -4,24 +4,25 @@
 
 'use strict';
 
-import React, { PureComponent, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Spinner, List } from 'native-base';
 import { getCategories } from '../actions/actions-categories';
 import { CategorySearchBar } from './category-search-bar';
 import { ItemCategory } from './items/item-category';
 
-export default class CategoryList extends PureComponent {
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    pagesLoaded: PropTypes.number.isRequired,
-    categoryItems: PropTypes.arrayOf(PropTypes.object),
-  };
+export default class CategoryList extends Component {
+  constructor(props) {
+    super(props);
+    console.log(props);
+    this.state = {
+      filteredCategories: [],
+    };
+  }
 
   componentDidMount() {
-    const { dispatch, categories } = this.props;
-    const { pagesLoaded } = categories;
-    dispatch(getCategories(pagesLoaded + 1));
+    const { getCategories } = this.props;
+    getCategories();
   }
 
   onLoadMoreCategories = () => {
@@ -33,14 +34,20 @@ export default class CategoryList extends PureComponent {
   };
 
   renderItem = item => {
-    const { dispatch } = this.props;
+    const { clearPosts, getPosts, switchHomeTab } = this.props;
+
+    const onItemPress = () => {
+      clearPosts();
+      switchHomeTab(1);
+      getPosts(1);
+    };
     return (
       <ItemCategory
         id={item.id}
         title={item.title}
         postCount={item.post_count}
         parentId={item.parent}
-        dispatch={dispatch}
+        onPress={onItemPress}
       />
     );
   };
@@ -62,7 +69,7 @@ export default class CategoryList extends PureComponent {
         style={{ alignSelf: 'stretch' }}
         onEndReached={this.onLoadMoreCategories}
         onEndReachedThreshold={2}
-        renderHeader={() => <Spinner color="blue" />}
+        renderHeader={this.renderCategorySearchBar}
         renderFooter={() =>
           status === 'loaded' ? null : <Spinner color="red" />}
       />
@@ -70,7 +77,8 @@ export default class CategoryList extends PureComponent {
   }
 
   render() {
-    const { categoryItems } = this.props;
+    const { categories } = this.props;
+    console.log(categories);
 
     return (
       <View
@@ -78,10 +86,9 @@ export default class CategoryList extends PureComponent {
           flex: 1,
           alignSelf: 'stretch',
           alignItems: 'center',
-          backgroundColor: 'red',
         }}
       >
-        {this.renderCategoryList(categoryItems)}
+        {this.renderCategoryList(categories.list)}
       </View>
     );
   }

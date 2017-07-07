@@ -7,8 +7,7 @@ import Types from '../actions/types-categories';
 
 const INITIAL_STATE = {
   loading: false,
-  pagesLoaded: 0,
-  categoryItems: [],
+  list: [],
 };
 
 export const categories = (state = INITIAL_STATE, action) => {
@@ -18,12 +17,11 @@ export const categories = (state = INITIAL_STATE, action) => {
         ...state,
         loading: true,
       };
-    case Types.RECEIVE_CATEGORY_INDEX:
+    case Types.RECEIVE_CATEGORIES:
       return {
         ...state,
         loading: false,
-        pagesLoaded: action.page,
-        categoryItems: action.categories,
+        list: action.categories,
       };
     default:
       return state;

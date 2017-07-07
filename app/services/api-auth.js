@@ -32,9 +32,12 @@ const create = (baseURL = 'https://clip-sub.com/api/') => {
   const generateAuthCookie = (username, password) =>
     api.get('user/generate_auth_cookie/', { username, password });
 
+  const getCategoryIndex = () => api.get('get_category_index/');
+
   return {
     getNonce,
     generateAuthCookie,
+    getCategoryIndex,
   };
 };
 

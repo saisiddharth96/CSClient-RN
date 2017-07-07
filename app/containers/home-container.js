@@ -25,6 +25,7 @@ import PostList from '../components/post-list';
 import CategoryList from '../components/category-list';
 import * as navigationActions from '../actions/actions-navigation';
 import * as postActions from '../actions/actions-posts';
+import * as categoryActions from '../actions/actions-categories';
 
 const HomeContainer = props => {
   const { navigate, switchHomeTab, home } = props;
@@ -109,6 +110,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ ...postActions, ...navigationActions }, dispatch);
+  bindActionCreators(
+    { ...postActions, ...categoryActions, ...navigationActions },
+    dispatch,
+  );
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

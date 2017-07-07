@@ -1,11 +1,11 @@
 /**
  * @flow
  */
+
 'use strict';
+
 import React from 'react';
 import { TouchableHighlight, View, Text } from 'react-native';
-import { switchHomeTab } from '../../actions/actions-navigation';
-import { setPostsArgs } from '../../actions/actions-posts';
 
 /**
   "id": 574,
@@ -16,22 +16,19 @@ import { setPostsArgs } from '../../actions/actions-posts';
   "post_count": 2
  */
 const ItemCategory = props => {
-  const { id, title, dispatch } = props;
-
-  const onPressCategory = (id: number) => {
-    dispatch(setPostsArgs({ cat: id }));
-    dispatch(switchHomeTab(1));
-  };
+  const { title, onPress } = props;
 
   return (
     <TouchableHighlight
       activeOpacity={0.3}
       underlayColor={'#f4f8ff'}
       style={styles.itemContainer}
-      onPress={() => onPressCategory(id)}
+      onPress={onPress}
     >
       <View elevation={3} style={styles.item}>
-        <Text style={styles.text}>{title}</Text>
+        <Text style={styles.text}>
+          {title}
+        </Text>
       </View>
     </TouchableHighlight>
   );

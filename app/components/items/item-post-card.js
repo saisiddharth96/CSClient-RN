@@ -24,7 +24,6 @@ const ItemPostCard = props => {
   const { navigate } = props;
   const { id, content, title, excerpt, link } = props.post;
   const { author, replies } = props.post._embedded;
-  console.log(props.post);
   const sharePost = () => {
     const shareContent = {
       message: link,

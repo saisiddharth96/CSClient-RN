@@ -44,7 +44,7 @@ const POSTS_INITIAL_STATE = {
   total: 0,
   totalPages: 0,
   list: [],
-  status: 'loading',
+  loading: true,
   viewMode: 'grid',
   args: null,
 };
@@ -60,7 +60,7 @@ export const posts = (state = POSTS_INITIAL_STATE, action) => {
     case Types.RECEIVE_POSTS:
       return {
         ...state,
-        status: 'loaded',
+        loading: false,
         page: action.page,
         list: state.list.concat(action.list),
         args: action.args,
@@ -68,6 +68,7 @@ export const posts = (state = POSTS_INITIAL_STATE, action) => {
     case Types.CLEAR_POSTS:
       return {
         ...state,
+        loading: true,
         currentPage: 1,
         postItems: [],
       };
