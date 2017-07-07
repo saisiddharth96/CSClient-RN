@@ -1,7 +1,9 @@
 /**
  * @flow
  */
+
 'use strict';
+
 import { call } from 'redux-saga/effects';
 import API, { DataStatus } from '../services/api-auth';
 import DataService from '../services/data-service';

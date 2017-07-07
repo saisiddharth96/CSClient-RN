@@ -5,7 +5,7 @@
 'use strict';
 
 import React, { PureComponent } from 'react';
-import { View, StatusBar } from 'react-native';
+import { View, StatusBar, Text } from 'react-native';
 import {
   Container,
   Header,
@@ -14,20 +14,52 @@ import {
   Icon,
   Body,
   Title,
-  Right,
 } from 'native-base';
 import {
   RichTextEditor,
   RichTextToolbar,
 } from 'react-native-zss-rich-text-editor';
-// import RNDraftJSRender from 'react-native-draftjs-render';
-// import contentState from 'DraftJs/contentState';
+import { connect } from 'react-redux';
+import DialogManager, { SlideAnimation } from 'react-native-dialog-component';
 import GravatarAPI from '../services/api-gravatar';
+import { fetchAnimeInfo } from '../actions/actions-anilist';
 
-export default class EditorContainer extends PureComponent {
+class EditorContainer extends PureComponent {
   componentDidMount() {
     GravatarAPI.test('doraemonfanclub@gmail.com', 'phamvanquan');
   }
+
+  onPressAutoFetch = () => {
+    const { dispatch } = this.props;
+    DialogManager.show(
+      {
+        title: 'Pourquoi Facebook ?',
+        width: '90%',
+        dialogStyle: {
+          borderRadius: 6,
+          paddingTop: 12,
+          paddingBottom: 40,
+          paddingHorizontal: 18,
+        },
+        titleAlign: 'center',
+        animationDuration: 200,
+        dialogAnimation: new SlideAnimation({ slideFrom: 'bottom' }),
+        children: (
+          <View>
+            <Text
+              style={{ textAlign: 'center', fontSize: 12, color: '#5a5f66' }}
+            >
+              {'whyFacebook'}
+            </Text>
+          </View>
+        ),
+      },
+      () => {
+        console.log('callback - show');
+      },
+    );
+    dispatch(fetchAnimeInfo('https://anilist.co/anime/20594'));
+  };
 
   render() {
     return (
@@ -50,6 +82,11 @@ export default class EditorContainer extends PureComponent {
           </Body>
         </Header>
         <View style={{ flex: 1, marginTop: 24, backgroundColor: '#fff' }}>
+          <Button
+            onPress={this.onPressAutoFetch}
+            title="Learn More"
+            color="#841584"
+          />
           <RichTextEditor
             ref={r => (this.richtext = r)}
             initialTitleHTML={'Title!!'}
@@ -67,3 +104,18 @@ export default class EditorContainer extends PureComponent {
     );
   }
 }
+
+const mapStateToProps = state => {
+  const { nav, common, post } = state;
+  return {
+    nav,
+    common,
+    post,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  dispatch,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditorContainer);
