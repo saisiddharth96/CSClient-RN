@@ -41,9 +41,10 @@ export function getCommentsHome(page: number) {
   };
 }
 
-export function receiveCommentsHome(comments: Array<Object>) {
+export function receiveCommentsHome(comments: Array<Object>, page: number) {
   return {
     type: Types.RECEIVE_COMMENTS_HOME,
     comments,
+    page,
   };
 }

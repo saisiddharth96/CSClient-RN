@@ -23,9 +23,11 @@ import { bindActionCreators } from 'redux';
 import OneSignal from 'react-native-onesignal';
 import PostList from '../components/post-list';
 import CategoryList from '../components/category-list';
+import CommentList from '../components/comment-list-home';
 import * as navigationActions from '../actions/actions-navigation';
 import * as postActions from '../actions/actions-posts';
 import * as categoryActions from '../actions/actions-categories';
+import * as commentActions from '../actions/actions-comments';
 
 const HomeContainer = props => {
   const { navigate, switchHomeTab, home } = props;
@@ -39,7 +41,7 @@ const HomeContainer = props => {
       case 3:
         return <View />;
       case 4:
-        return <View />;
+        return <CommentList {...props} />;
     }
   };
 
@@ -101,17 +103,23 @@ const HomeContainer = props => {
  * The result of mapStateToProps must be a plain object, which will be merged into component's props.
  */
 const mapStateToProps = state => {
-  const { posts, categories, home } = state;
+  const { posts, categories, comments, home } = state;
   return {
     home,
     posts,
     categories,
+    comments,
   };
 };
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    { ...postActions, ...categoryActions, ...navigationActions },
+    {
+      ...postActions,
+      ...categoryActions,
+      ...commentActions,
+      ...navigationActions,
+    },
     dispatch,
   );
 

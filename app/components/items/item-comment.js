@@ -1,4 +1,9 @@
+/**
+ * @flow
+ */
+
 'use strict';
+
 import React from 'react';
 import { Icon } from 'native-base';
 import { View, Image, Text, TouchableOpacity } from 'react-native';

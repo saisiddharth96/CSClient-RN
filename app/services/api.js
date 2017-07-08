@@ -4,8 +4,8 @@
 
 'use strict';
 
-import apisauce from 'apisauce';
 import base64 from 'base-64';
+import apisauce from 'apisauce';
 
 const privilegeData = require('../utils/credentials.json');
 
@@ -136,6 +136,9 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
     );
   };
 
+  const getCommentsHome = (page: number) =>
+    api.get('comments/?per_page=20&page=' + page + '&_embed');
+
   /**********************************
    * PAGES
    **********************************/
@@ -192,6 +195,7 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
 
     createComment,
     createCommentWithAuthor,
+    getCommentsHome,
 
     listPostRevisions,
     retrievePostRevision,
