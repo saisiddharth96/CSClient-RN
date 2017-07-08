@@ -2,7 +2,9 @@
  * @flow
  * Includes actions for comments and backtracking.
  */
+
 'use strict';
+
 import Types from './types-comments';
 
 export function submitComment(
@@ -25,9 +27,23 @@ export function getComments(postId: number) {
   };
 }
 
-export function submittedComment(comment) {
+export function submittedComment(comment: Object) {
   return {
     type: Types.SUBMITTED_COMMENT,
     comment,
+  };
+}
+
+export function getCommentsHome(page: number) {
+  return {
+    type: Types.GET_COMMENTS_HOME,
+    page,
+  };
+}
+
+export function receiveCommentsHome(comments: Array<Object>) {
+  return {
+    type: Types.RECEIVE_COMMENTS_HOME,
+    comments,
   };
 }

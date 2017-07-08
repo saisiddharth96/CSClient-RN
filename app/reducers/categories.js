@@ -4,7 +4,6 @@
 
 'use strict';
 
-import _ from 'lodash';
 import Fuse from 'fuse.js';
 import Types from '../actions/types-categories';
 

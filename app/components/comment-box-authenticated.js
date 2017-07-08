@@ -53,7 +53,6 @@ const commentField = ({ input, placeholder, meta, ...inputProps }) => {
         value={input.value}
         multiline
         onBlur={input.onBlur}
-        secureTextEntry
         editable={!submitting}
         placeholder={'Enter your comment'}
         placeholderTextColor={'#63585b'}
