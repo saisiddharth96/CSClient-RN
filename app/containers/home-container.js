@@ -25,7 +25,7 @@ import PostList from '../components/post-list';
 import CategoryList from '../components/category-list';
 import CommentList from '../components/comment-list-home';
 import * as navigationActions from '../actions/actions-navigation';
-import * as postActions from '../actions/actions-posts';
+import * as postActions from '../actions/actions-content';
 import * as categoryActions from '../actions/actions-categories';
 import * as commentActions from '../actions/actions-comments';
 

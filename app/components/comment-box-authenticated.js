@@ -3,7 +3,7 @@ import React from 'react';
 import { Icon, Button } from 'native-base';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { View, Text, TextInput } from 'react-native';
-import { receiveComment } from '../actions/actions-posts';
+import { receiveComment } from '../actions/actions-content';
 import API from '../services/api';
 import Styles from './_styles/styles-comment-box';
 

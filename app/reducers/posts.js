@@ -3,7 +3,7 @@
  */
 'use strict';
 
-import Types from '../actions/types-posts';
+import Types from '../actions/types-content';
 
 const POST_INIT_STATE = {
   id: 1,

@@ -5,7 +5,7 @@
 import React, { PropTypes } from 'react';
 import { TextInput, TouchableOpacity, View } from 'react-native';
 import { Icon } from 'native-base';
-import { clearPosts, getPosts } from '../actions/actions-posts';
+import { clearPosts, getPosts } from '../actions/actions-content';
 import { switchHomeTab } from '../actions/actions-navigation';
 import { setViewMode } from '../actions/actions-config';
 

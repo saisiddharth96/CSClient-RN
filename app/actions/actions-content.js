@@ -4,7 +4,7 @@
 
 'use strict';
 
-import Types from './types-posts';
+import Types from './types-content';
 
 export function getPosts(page: number, args: Object) {
   return {
