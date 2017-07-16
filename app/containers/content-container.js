@@ -29,7 +29,6 @@ import {
 } from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { getPost, clearPost } from '../actions/actions-content';
-import { getPage, clearPage } from '../actions/actions-pages';
 import ItemComment from '../components/items/item-comment';
 import CommentBox from '../components/comment-box';
 import CommentBoxAuthenticated from '../components/comment-box-authenticated';
@@ -50,13 +49,10 @@ class ContentContainer extends Component {
   }
 
   componentDidMount() {
-    const { goBack, fetchPost, fetchPage } = this.props;
+    const { goBack, fetchPost } = this.props;
     const { postId, isPage } = this.props.navigation.state.params;
-    if (isPage) {
-      fetchPage(postId);
-    } else {
-      fetchPost(postId);
-    }
+    console.log(isPage);
+    fetchPost(postId, isPage);
     BackHandler.addEventListener('hardwareBackPress', () => goBack());
   }
 
@@ -130,7 +126,7 @@ class ContentContainer extends Component {
         />
         {user
           ? <CommentBoxAuthenticated post={post} user={user} />
-          : <CommentBox />}
+          : <CommentBox post={post} />}
       </KeyboardAwareScrollView>
     );
   };
@@ -166,11 +162,10 @@ class ContentContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  const { nav, post, page, user } = state;
+  const { nav, post, user } = state;
   return {
     nav,
     post,
-    page,
     user,
   };
 };
@@ -181,8 +176,7 @@ const mapDispatchToProps = dispatch => {
       Keyboard.dismiss();
       return dispatch(NavigationActions.back());
     },
-    fetchPost: postId => dispatch(getPost(postId)),
-    fetchPage: pageId => dispatch(getPage(pageId)),
+    fetchPost: (postId, isPage) => dispatch(getPost(postId, isPage)),
     dispatch,
   };
 };

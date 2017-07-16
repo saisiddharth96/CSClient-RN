@@ -28,11 +28,19 @@ export function* getPosts(action) {
 }
 
 export function* getPost(action) {
-  const { postId } = action;
+  const { postId, isPage } = action;
+  console.log(isPage);
   try {
-    const result = yield call(api.retrievePost, postId);
-    if (result.ok) {
-      yield put(receivePost(result.data));
+    if (!isPage) {
+      const result = yield call(api.retrievePost, postId);
+      if (result.ok) {
+        yield put(receivePost(result.data));
+      }
+    } else {
+      const result = yield call(api.retrievePage, postId);
+      if (result.ok) {
+        yield put(receivePost(result.data));
+      }
     }
   } catch (error) {
     console.log(error);

@@ -1,6 +1,7 @@
 'use strict';
 import React from 'react';
 import { Icon, Button } from 'native-base';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { View, Text, TextInput } from 'react-native';
 import API from '../services/api';
 import Styles from './_styles/styles-comment-box';
@@ -12,6 +13,14 @@ const onSubmit = (values, dispatch) => {
   console.log(values);
   // api
   return;
+};
+
+const validate = values => {
+  const errors = {};
+  if (!values.comment) {
+    errors.username = 'Required';
+  }
+  return errors;
 };
 
 const commentField = ({ input, placeholder, meta, ...inputProps }) => {
@@ -32,7 +41,7 @@ const commentField = ({ input, placeholder, meta, ...inputProps }) => {
 };
 
 const CommentBox = props => {
-  const { handleSubmit, submitting } = this.props;
+  const { handleSubmit, submitting } = props;
   return (
     <View style={[props.style, Styles.formContainer]}>
       <View style={Styles.inputWrapper}>
@@ -84,4 +93,6 @@ const CommentBox = props => {
   );
 };
 
-export default CommentBox;
+export default reduxForm({ form: 'comment-box', validate })(
+  CommentBox,
+);

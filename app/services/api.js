@@ -143,7 +143,8 @@ const create = (baseURL = 'https://clip-sub.com/wp-json/wp/v2/') => {
    * PAGES
    **********************************/
 
-  const retrievePage = (pageId: number) => api.get('pages/' + pageId);
+  const retrievePage = (pageId: number) =>
+    api.get('pages/' + pageId, { _embed: 1 });
 
   /**********************************
    * USERS

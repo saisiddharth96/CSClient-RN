@@ -20,10 +20,11 @@ export function clearPosts() {
   };
 }
 
-export function getPost(postId: number) {
+export function getPost(postId: number, isPage: boolean) {
   return {
     type: Types.GET_POST,
     postId,
+    isPage,
   };
 }
 

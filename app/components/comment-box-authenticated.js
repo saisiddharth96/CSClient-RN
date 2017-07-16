@@ -87,6 +87,6 @@ const CommentBoxAuthenticated = props => {
   );
 };
 
-export default reduxForm({ form: 'comment-authenticated', validate })(
+export default reduxForm({ form: 'comment-box-authenticated', validate })(
   CommentBoxAuthenticated,
 );
