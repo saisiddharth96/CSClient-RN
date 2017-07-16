@@ -58,8 +58,12 @@ class ContentContainer extends Component {
   componentWillReceiveProps(nextProps) {
     const { post } = nextProps;
     console.log(nextProps);
-    if (post._embedded.replies) {
-      this.setState({ commentCount: post._embedded.replies[0].length });
+    try {
+      if (post._embedded.replies) {
+        this.setState({ commentCount: post._embedded.replies[0].length });
+      }
+    } catch (e) {
+      // Code...
     }
   }
 

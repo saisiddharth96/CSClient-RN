@@ -1,7 +1,9 @@
 /**
  * @flow
  */
+
 'use strict';
+
 import Types from './types-posts';
 
 export function getPosts(page: number, args: Object) {

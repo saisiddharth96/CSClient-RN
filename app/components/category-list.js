@@ -73,7 +73,7 @@ export default class CategoryList extends Component {
         pageSize={20}
         renderRow={item => this.renderItem(item)}
         initialNumToRender={15}
-        style={{ alignSelf: 'stretch' }}
+        style={{ alignSelf: 'stretch', backgroundColor: '#fff' }}
         renderHeader={this.renderCategorySearchBar}
         renderFooter={() =>
           status === 'loaded' ? null : <Spinner color="red" />}

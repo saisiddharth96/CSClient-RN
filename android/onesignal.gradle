@@ -1,6 +1,6 @@
 ext {
-    onesignal_app_id = 'APP_ID'
-    onesignal_app_id_debug = 'APP_ID_DEBUG'
-    onesignal_google_project_number = 'PJ_NUMBER'
-    google_server_key = 'SERVER_KEY'
+    onesignal_app_id = '65ec9abc-430a-4de2-bd07-316d78367100'
+    onesignal_app_id_debug = 'e942dbed-2f45-4ada-a749-dbf96650fc72'
+    onesignal_google_project_number = '669113511325'
+    google_server_key = 'AIzaSyDQxytgP4rUdSNPI88lHw_pya1ZZgu2iDM'
 }

@@ -3,7 +3,7 @@
  */
 'use strict';
 import React, { PropTypes } from 'react';
-import { TextInput, TouchableOpacity, View, Keyboard } from 'react-native';
+import { TextInput, View, Keyboard } from 'react-native';
 import { Icon } from 'native-base';
 
 export const CategorySearchBar = props =>
@@ -17,16 +17,7 @@ export const CategorySearchBar = props =>
         onChangeText={props.onChangeText}
         style={styles.searchBoxInput}
       />
-      <TouchableOpacity onPress={() => alert('clear')}>
-        <Icon name="ios-close-circle" style={styles.searchBoxIcon} />
-      </TouchableOpacity>
     </View>
-    <TouchableOpacity
-      onPress={() => Keyboard.dismiss()}
-      style={styles.iconWrapper}
-    >
-      <Icon name="arrow-forward" style={styles.iconOutside} />
-    </TouchableOpacity>
   </View>;
 
 CategorySearchBar.propTypes = {

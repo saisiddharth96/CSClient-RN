@@ -5,35 +5,23 @@
 'use strict';
 
 import React, { PureComponent } from 'react';
-import {
-  View,
-  FlatList,
-  Text,
-  Image,
-  TouchableOpacity,
-  TouchableNativeFeedback,
-  Platform,
-} from 'react-native';
+import { View, FlatList, Text, Image, TouchableOpacity } from 'react-native';
 import he from 'he';
 import moment from 'moment/min/moment-with-locales.min';
 
-const Touchable =
-  Platform.OS === 'ios' ? TouchableOpacity : TouchableNativeFeedback;
-
 export default class CommentList extends PureComponent {
   componentDidMount() {
-    console.log(this.props);
     const { getCommentsHome } = this.props;
     getCommentsHome(1);
   }
 
   renderCommentItem = (item, index) => {
-    console.log(item);
     const { navigate } = this.props;
+    const isPage = item._links.up[0].post_type === 'page';
     return (
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => navigate('Content', { postId: item.post })}
+        onPress={() => navigate('Content', { postId: item.post, isPage })}
       >
         <View
           style={{
@@ -87,7 +75,6 @@ export default class CommentList extends PureComponent {
 
   render() {
     const { comments } = this.props;
-    console.log(comments);
 
     return (
       <View style={{ flex: 1 }}>

@@ -1,7 +1,9 @@
 /**
  * @flow
  */
+
 'use strict';
+
 import { call, put } from 'redux-saga/effects';
 import { receivePosts, receivePost } from '../actions/actions-posts';
 import API from '../services/api';

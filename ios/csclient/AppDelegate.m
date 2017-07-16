@@ -14,10 +14,14 @@
 #import <React/RCTRootView.h>
 
 @implementation AppDelegate
+@synthesize oneSignal = _oneSignal;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   NSURL *jsCodeLocation;
+  self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
+                                                        appId:@"65ec9abc-430a-4de2-bd07-316d78367100"
+                          settings:@{kOSSettingsKeyAutoPrompt: @false}];
 
   
 #ifdef DEBUG

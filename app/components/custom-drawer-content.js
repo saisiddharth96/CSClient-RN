@@ -100,7 +100,7 @@ const CustomDrawerContent = props => {
       <ListItem
         icon
         style={{ alignSelf: 'flex-end' }}
-        onPress={() => goToScreen('Preferences')}
+        onPress={() => goToScreen('Preference')}
       >
         <Left>
           <Icon name="ios-construct-outline" style={{ color: '#EF5350' }} />
