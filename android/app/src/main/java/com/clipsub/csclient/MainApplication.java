@@ -1,4 +1,4 @@
-package com.csclient;
+package com.clipsub.csclient;
 
 import android.app.Application;
 import android.util.Log;

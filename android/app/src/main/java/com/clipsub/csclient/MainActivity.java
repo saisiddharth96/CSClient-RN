@@ -1,4 +1,4 @@
-package com.csclient;
+package com.clipsub.csclient;
 
 import com.facebook.react.ReactActivity;
 

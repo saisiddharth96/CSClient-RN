@@ -94,10 +94,10 @@ android {
     buildToolsVersion "26.0.0"
 
     defaultConfig {
-        applicationId "com.csclient"
+        applicationId "com.clipsub.csclient"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 4
+        versionCode 6
         versionName "2.0"
         manifestPlaceholders = [manifestApplicationId          : "${applicationId}",
                                 onesignal_app_id               : rootProject.ext.onesignal_app_id,
