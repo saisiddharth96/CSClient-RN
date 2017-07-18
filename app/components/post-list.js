@@ -1,7 +1,9 @@
 /**
  * @flow
  */
+
 'use strict';
+
 import React, { Component, PropTypes } from 'react';
 import { View, FlatList } from 'react-native';
 import { Spinner, List } from 'native-base';

@@ -23,13 +23,13 @@ const onSubmit = (values, dispatch) => {
     .createUser({ username, password, email })
     .then(d => {
       console.log(d);
-      if (d.status === Status.OK) {
+      if (d.status === Status.CREATED) {
         const { data } = d;
         dispatch(saveUserData({ ...data, password }));
         dispatch(reset(['HomeDrawer']));
       } else {
         const { data } = d;
-        alert(data.message);
+        alert(data.message || 'Error');
         throw new SubmissionError({ _error: data.message });
       }
     })

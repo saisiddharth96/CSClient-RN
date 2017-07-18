@@ -15,6 +15,7 @@ XMLHttpRequest = GLOBAL.originalXMLHttpRequest
 
 const Status = {
   OK: 200,
+  CREATED: 201,
   ERROR_404: 404,
   ERROR_500: 500,
 };

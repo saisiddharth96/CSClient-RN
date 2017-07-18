@@ -32,8 +32,8 @@ const onSubmit = (values, dispatch, { user, post, reset }) => {
 
 const validate = values => {
   const errors = {};
-  if (!values.comment) {
-    errors.username = 'Required';
+  if (!values.content) {
+    errors.content = 'Required';
   }
   return errors;
 };

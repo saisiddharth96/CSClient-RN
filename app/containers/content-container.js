@@ -51,7 +51,6 @@ class ContentContainer extends Component {
   componentDidMount() {
     const { goBack, fetchPost } = this.props;
     const { postId, isPage } = this.props.navigation.state.params;
-    console.log(isPage);
     fetchPost(postId, isPage);
     BackHandler.addEventListener('hardwareBackPress', () => goBack());
   }
