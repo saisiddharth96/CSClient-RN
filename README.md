@@ -44,7 +44,7 @@ All native modules are already linked. You only have to install npm packages lik
 
 ### Install necessary plugin on Wordpress back-end:
 
-With CSClient-RN, we use two main plugin on server side to provider the REST API:
+With CSClient-RN, we use two main plugins on server side to provide the REST API:
 
 - [JSON API](https://wordpress.org/plugins/json-api/) for cookie validation, nonce generator.
 - [JSON API User](https://wordpress.org/plugins/json-api-user/) for cookie authentication, user validation.
