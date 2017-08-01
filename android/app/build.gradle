@@ -97,8 +97,8 @@ android {
         applicationId "com.clipsub.csclient"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 6
-        versionName "2.0"
+        versionCode 7
+        versionName "2.1"
         manifestPlaceholders = [manifestApplicationId          : "${applicationId}",
                                 onesignal_app_id               : rootProject.ext.onesignal_app_id,
                                 onesignal_google_project_number: rootProject.ext.onesignal_google_project_number]
