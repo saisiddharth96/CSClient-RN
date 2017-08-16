@@ -10,6 +10,7 @@ import { Button, Icon } from 'native-base';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import SpinKit from 'react-native-spinkit';
 import base64 from 'base-64';
+import BottomSheet from 'react-native-bottomsheet';
 import { reset } from '../../actions/actions-navigation';
 import { saveUserData } from '../../actions/actions-users';
 import APIv1 from '../../services/api-auth';

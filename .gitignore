@@ -56,4 +56,3 @@ fastlane/screenshots
 
 .tmp/
 docs/
-app/utils/*

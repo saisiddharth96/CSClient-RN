@@ -1,4 +1,6 @@
 rootProject.name = 'csclient'
+include ':react-native-bottomsheet'
+project(':react-native-bottomsheet').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-bottomsheet/android')
 include ':react-native-webview-bridge-updated'
 project(':react-native-webview-bridge-updated').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-webview-bridge-updated/android')
 include ':react-native-shake'
@@ -11,7 +13,5 @@ include ':react-native-vector-icons'
 project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
 include ':react-native-i18n'
 project(':react-native-i18n').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-i18n/android')
-include ':react-native-config'
-project(':react-native-config').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-config/android')
 
 include ':app'
