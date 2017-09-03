@@ -1,6 +1,7 @@
 /**
  * @flow
  */
+
 'use strict';
 
 import Types from '../actions/types-content';

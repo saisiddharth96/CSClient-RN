@@ -1,4 +1,9 @@
+/**
+ * @flow
+ */
+
 'use strict';
+
 import Types from '../actions/types-users';
 
 const INITIAL_STATE = null;

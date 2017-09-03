@@ -14,6 +14,17 @@ const INITIAL_STATE = {
 };
 
 export const categories = (state = INITIAL_STATE, action) => {
+  const options = {
+    shouldSort: true,
+    threshold: 0.6,
+    location: 0,
+    distance: 100,
+    maxPatternLength: 32,
+    minMatchCharLength: 1,
+    keys: ['title'],
+  };
+  const fuse = new Fuse(state.list, options);
+  const result = fuse.search(action.keyword);
   switch (action.type) {
     case Types.GET_CATEGORIES:
       return {
@@ -28,17 +39,6 @@ export const categories = (state = INITIAL_STATE, action) => {
         listFiltered: action.categories,
       };
     case Types.FILTER_CATEGORIES:
-      const options = {
-        shouldSort: true,
-        threshold: 0.6,
-        location: 0,
-        distance: 100,
-        maxPatternLength: 32,
-        minMatchCharLength: 1,
-        keys: ['title'],
-      };
-      const fuse = new Fuse(state.list, options);
-      const result = fuse.search(action.keyword);
       return {
         ...state,
         listFiltered: action.keyword ? result : state.list,

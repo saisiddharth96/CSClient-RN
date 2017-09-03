@@ -48,9 +48,7 @@ const ItemPostGrid = props => {
             name="person"
             style={{ fontSize: 14, color: '#1976D2' }}
           />
-          <Text style={styles.authorName}>
-            {author.name}
-          </Text>
+          <Text style={styles.authorName}>{author.name}</Text>
         </View>
       </TouchableOpacity>
       <View style={styles.separator} />

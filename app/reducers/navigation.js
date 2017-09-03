@@ -1,7 +1,9 @@
 /**
  * @flow
  */
+
 'use strict';
+
 import { NavigationActions } from 'react-navigation';
 import AppNavigator from '../navigations/app-navigator';
 import HomeDrawerNavigator from '../navigations/drawer-navigator';
