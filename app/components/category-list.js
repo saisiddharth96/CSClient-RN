@@ -5,7 +5,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { View, FlatList } from 'react-native';
+import { View } from 'react-native';
 import { Spinner, List } from 'native-base';
 import { CategorySearchBar } from './category-search-bar';
 import { ItemCategory } from './items/item-category';
@@ -55,11 +55,12 @@ export default class CategoryList extends Component {
     );
   };
 
-  renderCategorySearchBar = () =>
+  renderCategorySearchBar = () => (
     <CategorySearchBar
       onChangeText={text => this.props.filterCategories(text)}
       {...this.props}
-    />;
+    />
+  );
 
   renderLoadingIndicator = () => <Spinner />;
 

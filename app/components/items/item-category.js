@@ -5,7 +5,7 @@
 'use strict';
 
 import React from 'react';
-import { TouchableHighlight, View, Text } from 'react-native';
+import { TouchableHighlight, View, Text, StyleSheet } from 'react-native';
 
 /**
   "id": 574,
@@ -29,9 +29,7 @@ const ItemCategory = props => {
       onPress={onItemPress}
     >
       <View elevation={3} style={styles.item}>
-        <Text style={styles.text}>
-          {title}
-        </Text>
+        <Text style={styles.text}>{title}</Text>
       </View>
     </TouchableHighlight>
   );
@@ -39,7 +37,7 @@ const ItemCategory = props => {
 
 export { ItemCategory };
 
-const styles = {
+const styles = StyleSheet.create({
   itemContainer: {
     padding: 10,
     borderBottomWidth: 0.6,
@@ -56,4 +54,4 @@ const styles = {
   text: {
     color: '#676767',
   },
-};
+});

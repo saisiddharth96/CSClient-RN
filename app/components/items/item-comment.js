@@ -6,13 +6,15 @@
 
 import React from 'react';
 import { Icon } from 'native-base';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
+import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import HTMLView from 'react-native-htmlview';
 import moment from 'moment';
 
 const ItemComment = props => {
   const { comment } = props;
-  const displayDate = moment(comment.date).startOf('day').fromNow();
+  const displayDate = moment(comment.date)
+    .startOf('day')
+    .fromNow();
   const content = comment.content.rendered.replace(/(\r\n|\n|\r)/gm, '').trim();
 
   return (
@@ -21,32 +23,8 @@ const ItemComment = props => {
         source={{ uri: comment.author_avatar_urls['96'] }}
         style={styles.avatar}
       />
-      <View
-        style={{
-          flex: 1,
-          borderRadius: 7,
-          backgroundColor: '#fff',
-          margin: 8,
-          borderColor: '#ffd8d8',
-          borderWidth: 0.2,
-          shadowOffset: { width: 0, height: 0 },
-          shadowRadius: 6,
-          shadowColor: '#EF5350',
-          shadowOpacity: 0.2,
-          overflow: 'visible',
-          elevation: 2,
-        }}
-      >
-        <Text
-          style={{
-            backgroundColor: 'transparent',
-            color: '#ff2a63',
-            marginLeft: 6,
-            marginTop: 4,
-          }}
-        >
-          {comment.author_name}
-        </Text>
+      <View style={styles.contentContainer}>
+        <Text style={styles.authorName}>{comment.author_name}</Text>
         <Text style={{ marginLeft: 8, fontSize: 10, color: '#a0a0a0' }}>
           {displayDate}
         </Text>
@@ -91,7 +69,7 @@ const ItemComment = props => {
 
 export default ItemComment;
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
@@ -107,10 +85,30 @@ const styles = {
     marginLeft: 6,
     padding: 10,
   },
+  contentContainer: {
+    flex: 1,
+    borderRadius: 7,
+    backgroundColor: '#fff',
+    margin: 8,
+    borderColor: '#ffd8d8',
+    borderWidth: 0.2,
+    shadowOffset: { width: 0, height: 0 },
+    shadowRadius: 6,
+    shadowColor: '#EF5350',
+    shadowOpacity: 0.2,
+    overflow: 'visible',
+    elevation: 2,
+  },
+  authorName: {
+    backgroundColor: 'transparent',
+    color: '#ff2a63',
+    marginLeft: 6,
+    marginTop: 4,
+  },
   commentCSS: {
     p: {
       fontWeight: '100',
       color: '#492d34',
     },
   },
-};
+});

@@ -23,7 +23,6 @@ export default class CSClient extends Component {
 
   onReceived = notification => {
     console.log('Notification received: ', notification);
-    const raw = `"{"google.sent_time":1499497952081,"notificationId":-872292301,"title":"Clip-sub","from":"669113511325","alert":"Test Post","google.message_id":"0:1499497952100989%cf017e08f9fd7ecd","custom":"{\"u\":\"http:\\\/\\\/doko.aniviet.com\\\/blog\\\/test-post\\\/\",\"i\":\"e99700ff-077b-4dbf-bc02-fe676d4e8918\"}"}"`
   };
 
   onOpened = openResult => {

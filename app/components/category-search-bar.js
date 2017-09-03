@@ -1,12 +1,14 @@
 /**
  * @flow
  */
+
 'use strict';
+
 import React, { PropTypes } from 'react';
-import { TextInput, View, Keyboard } from 'react-native';
+import { TextInput, View, StyleSheet } from 'react-native';
 import { Icon } from 'native-base';
 
-export const CategorySearchBar = props =>
+export const CategorySearchBar = props => (
   <View elevation={1} style={styles.container}>
     <View style={styles.searchBoxWrapper}>
       <Icon name="search" style={styles.searchBoxIcon} />
@@ -18,13 +20,14 @@ export const CategorySearchBar = props =>
         style={styles.searchBoxInput}
       />
     </View>
-  </View>;
+  </View>
+);
 
 CategorySearchBar.propTypes = {
   onChangeText: PropTypes.func,
 };
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     zIndex: 0,
     alignItems: 'center',
@@ -61,11 +64,4 @@ const styles = {
     marginHorizontal: 10,
     color: '#ff6060',
   },
-  iconWrapper: {
-    paddingHorizontal: 10,
-  },
-  iconOutside: {
-    color: '#ff6060',
-    fontSize: 24,
-  },
-};
+});

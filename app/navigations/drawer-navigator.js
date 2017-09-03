@@ -1,7 +1,9 @@
 /**
  * @flow
  */
+
 'use strict';
+
 import { DrawerNavigator } from 'react-navigation';
 import HomeContainer from '../containers/home-container';
 import CustomDrawerContent from '../components/custom-drawer-content';
