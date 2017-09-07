@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Icon } from 'native-base';
-import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Image, Text, TouchableOpacity } from 'react-native';
 import HTMLView from 'react-native-htmlview';
 import moment from 'moment';
 
@@ -69,7 +69,7 @@ const ItemComment = props => {
 
 export default ItemComment;
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     flex: 1,
     flexDirection: 'row',
@@ -111,4 +111,4 @@ const styles = StyleSheet.create({
       color: '#492d34',
     },
   },
-});
+};

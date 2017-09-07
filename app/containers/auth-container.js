@@ -1,7 +1,9 @@
 /**
  * @flow
  */
+
 'use strict';
+
 import React, { Component, PropTypes } from 'react';
 import {
   Body,
@@ -40,7 +42,11 @@ class AuthContainer extends Component {
 
   static navigationOptions = {
     title: 'Login Screen',
-    headerLeft: <Button title={''} transparent><Icon name="menu" /></Button>,
+    headerLeft: (
+      <Button title={''} transparent>
+        <Icon name="menu" />
+      </Button>
+    ),
   };
 
   constructor(props) {
@@ -100,18 +106,17 @@ class AuthContainer extends Component {
             </Button>
           </Left>
           <Body>
-            <Title>
-              {I18n.t('login_header_title')}
-            </Title>
+            <Title>{I18n.t('login_header_title')}</Title>
           </Body>
           <Right />
         </Header>
         <Content>
           <FlipCard
             flip={isFlipped}
-            friction={14}
+            friction={8}
             clickable={false}
             style={{ borderWidth: 0 }}
+            perspective={250}
             flipHorizontal
             flipVertical={false}
           >

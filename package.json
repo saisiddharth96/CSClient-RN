@@ -45,7 +45,7 @@
     "react-native-code-push": "^5.0.0-beta",
     "react-native-config": "^0.6.0",
     "react-native-dialog-component": "^0.2.15",
-    "react-native-draftjs-render": "^1.0.3",
+    "react-native-draftjs-render": "^2.0.2",
     "react-native-flip-card": "^3.5.0",
     "react-native-html-parser": "^0.0.5",
     "react-native-htmlview": "^0.12.0",

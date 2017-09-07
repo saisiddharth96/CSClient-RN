@@ -1,7 +1,9 @@
 /**
  * @flow
  */
+
 'use strict';
+
 import React, { Component, PropTypes } from 'react';
 import {
   Keyboard,
@@ -123,9 +125,11 @@ class ContentContainer extends Component {
           renderItem={({ item }) => this.renderCommentItem(item)}
           extraData={this.state.commentCount}
         />
-        {user
-          ? <CommentBoxAuthenticated post={post} user={user} />
-          : <CommentBox post={post} />}
+        {user ? (
+          <CommentBoxAuthenticated post={post} user={user} />
+        ) : (
+          <CommentBox post={post} />
+        )}
       </KeyboardAwareScrollView>
     );
   };
